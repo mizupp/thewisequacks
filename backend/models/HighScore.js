@@ -27,7 +27,8 @@ static create(scores) {
     {
         try {
             const db = await init();
-            const data = await db.collection('highscores').insertMany(scores);
+            const data = await db.collection('highscores').insertMany(scores, (err, res) => {
+                if (err) throw err;});
             resolve("Scores added")
         }catch(error){
             reject(error);

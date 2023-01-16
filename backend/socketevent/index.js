@@ -31,6 +31,14 @@ function socketinitialise(socket){
         io.to(room).emit('update opponent completion', user)
     })
 
+    //game message feature
+    socket.on('chat', (data) => {
+        io.sockets.emit('chat', data);
+    })
+
+    socket.on('typing', (data) => {
+        socket.broadcast.emit('typing', data);
+    })
 }
 
 module.exports = {socketinitialise};
