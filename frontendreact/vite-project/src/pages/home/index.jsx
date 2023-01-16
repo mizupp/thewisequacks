@@ -4,6 +4,7 @@ import MyModal from "../../components/ModalButton"
 import Instructions from "../../components/Instructions"
 import HighScoreList from "../../components/HighScoresList"
 import Createnewgame from "../../components/createnewgame"
+import Timerbar from "../../components/Timerbar"
 
 import { Link } from "react-router-dom"
 
@@ -13,7 +14,7 @@ const HomePage = () => {
 
 	const handleJoinOpen = () => {
 		// socket.emit('join game', ({username, room}));
-		socket.emit('leave', "now" )
+		socket.emit('join game', user )
 		console.log("disconnected");
 	}
 
@@ -27,6 +28,8 @@ const HomePage = () => {
 			<input type="text"  placeholder="Enter your name"/>
 			<button onClick={handleJoinOpen} className="btn">Join Game</button>		
 			<Createnewgame />	
+			<Timerbar />	
+
 			</div>
 	</>
 	
