@@ -19,16 +19,20 @@ const HighScoreList = () => {
 
     return (
         <table>
-            <tr>
-                <th>Player Name</th>
-                <th>Score</th>
-            </tr>
-            {data.map((item) => (
-                <tr key={item.id}>
-                    <td>{item.name}</td>
-                    <td>{item.score}</td>
+            <thead>
+                <tr>
+                    <th>Player Name</th>
+                    <th>Score</th>
                 </tr>
-            ))}
+            </thead>
+            <tbody>
+                {data.map((item) => (
+                    <tr key={item.id}>
+                        <td>{item.name}</td>
+                        <td>{item.score}</td>
+                    </tr>
+                ))}
+            </tbody>
         </table>
     )
 }
