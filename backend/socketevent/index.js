@@ -4,7 +4,7 @@ const { io } = require('../initialiseServer');
 function initialise(socket){
     console.log('user connected');
 
-    socket.on('disconnect', ()=>console.log('user disconnected'));
+    socket.on('leave', ()=>console.log('user disconnected'));
 
 
     socket.on('create game', ({room, category, difficulty, host, questions}) => {
