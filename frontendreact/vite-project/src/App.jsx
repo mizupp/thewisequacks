@@ -5,12 +5,11 @@ import './App.css'
 import Layout from './components/layout'
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { HomePage, Game, Winner } from './pages'
-import MyModal from './components/ModalButton';
+
 import {io} from "socket.io-client";
 import { changeState, updateScore, storeSocket } from './actions'
 
 const ENDPOINT = "http://localhost:3000";
-
 
 
 function App() {

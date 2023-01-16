@@ -1,0 +1,34 @@
+import axios from "axios";
+import React, {useEffect, useState} from "react";
+import QuestionCrd from "../QuestionCard";
+
+const GameGallery = () => {
+    const [easy, setEasy] = useState(null)
+    const [medium, setMedium] = useState(null)
+    const [hard, setHard] = useState(null)
+    
+    useEffect(() => {
+        const getAllQuestions = async () => axios.all([
+            axios.get('https://the-trivia-api.com/api/questions?limit=20&difficulty=easy'),
+            axios.get('https://the-trivia-api.com/api/questions?limit=20&difficulty=medium'),
+            axios.get('https://the-trivia-api.com/api/questions?limit=20&difficulty=hard')
+        ])
+
+        getAllQuestions()
+            .then(axios.spread(({data: easyRes}, {data: medRes}, {data: hardRes}) => {
+                setEasy(easyRes)
+                setMedium(medRes)
+                setHard(hardRes)
+            }))
+    }, [])
+
+    return (
+        <div className=" grid grid-cols-1 grid-rows-3" >
+            <div className="grid grid-cols-6">{easy && easy.slice(-6).map((q) => <QuestionCrd QuestionData={q} Winner={false} />)}</div>
+            <div className="grid sm:grid-cols-6">{medium && medium.slice(-6).map((q) => <QuestionCrd QuestionData={q} Winner={"false"} />)}</div>
+            <div className="grid sm:grid-cols-6">{hard && hard.slice(-6).map((q) => <QuestionCrd QuestionData={q} Winner={false} />)}</div>
+        </div>
+    )
+}
+
+export default GameGallery
