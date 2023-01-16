@@ -1,5 +1,6 @@
 const { init } = require('../db/init');
 
+
 class HighScore {
     constructor(name, category, difficulty, score){
         this.name = name;
@@ -8,61 +9,57 @@ class HighScore {
         this.score = score;
     }
 
-static all(){
-    return new Promise (async (resolve, reject) => {
-        try {
-            const db = await init();
-            const data = await db.collection('highscores').find().toArray();
-            resolve(data)
-        } catch (error) {
-           console.log(error);
-           reject("Could not get high scores") 
-        }
-    })
+    static create(name, category, difficulty, score){
+        return new Promise (async (resolve,reject) => {
+            try {
+                const db = await init();
+                await db.collection('highscores').insertOne({name, category, difficulty, score});
+                let newHighScore = new HighScore(name, category, difficulty, score);
+                resolve(newHighScore);
+            } catch (error){
+                reject(error);
+            }
+        })
+    }
 
-}
+    static all(){
+        return new Promise (async (resolve,reject) => {
+            try {
+                const db = await init();
+                const data = await db.collection('highscores').find().toArray();
+                resolve(data);
+            } catch (error){
+                reject(error);
+            }
+        })
+    }
 
-static create(scores) {
-    return new Promise (async (resolve, reject) => 
-    {
-        try {
-            const db = await init();
-            const data = await db.collection('highscores').insertMany(scores, (err, res) => {
-                if (err) throw err;});
-            resolve("Scores added")
-        }catch(error){
-            reject(error);
-        }
-    })
-}
-
-static getByFilter (category, difficulty){
-    return new Promise( async (resolve, reject) => {
-        try{
-            const db = await init();
-            const data = await db.collection('highscores').find({ category: {$eq: category}}, {difficulty: {$eq: difficulty}}).toArray();
-            const sortedData = data.sort((a,b) => Number(b.score) - Number(a.score));
+    static getByCategoryAndDifficulty(cat, dif){
+        return new Promise (async (resolve,reject) => {
+            try {
+                const db = await init();
+                const data = await db.collection('highscores').find({ $and: [ {category: {$eq: cat}}, {difficulty: {$eq: dif}} ]}).toArray();
+                const sortedData = data.sort((a,b) => Number(b.score) - Number(a.score));
                 resolve(sortedData);
-        }catch(error){
-            reject(error);
-        }
-    })
-}
+            } catch (error){
+                reject(error);
+            }
+        })
+    }
 
-static checkUser(username) {
-    return new Promise (async (resolve, reject) => {
-        try {
-            const db = await init();
-            const data = await db.collection("highscores").find({name: {$eq: username}}).toArray();
-            const doesUserExist = data.length === 0 ? false: true;
-            const message = doesUserExist ? "username taken" : "username does not exist"
-        }
-        catch (error){
-            reject(error);
-        }
-    })
-}
-
+    static checkUsername(username){
+        return new Promise (async (resolve,reject) => {
+            try {
+                const db = await init();
+                const data = await db.collection('highscores').find({name: {$eq: username}}).toArray();
+                const doesUserExist = data.length === 0 ? false : true;
+                const message = doesUserExist ? 'username taken' : 'username does not exist'
+                resolve(message);
+            } catch (error){
+                reject(error);
+            }
+        })
+    }
 
 }
 

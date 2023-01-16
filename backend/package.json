@@ -10,7 +10,8 @@
     "test": "jest",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "db": "node ./db/seeds.js"
   },
   "keywords": [],
   "author": "",

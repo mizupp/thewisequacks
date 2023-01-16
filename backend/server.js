@@ -1,6 +1,7 @@
 const express = require('express');
-const cors = require('cors');
 const { app, io, server } = require('./initialiseServer');
+
+const cors = require('cors');
 const { initialise } = require('./socketevent');
 
 app.use(cors());
@@ -10,9 +11,10 @@ const highScoreRoutes = require('./controller/highScore');
 app.use('/highscores', highScoreRoutes);
 
 app.get('/', (req, res) => {
-    res.json("Welcome to the Early Bird Backend")
+    res.json('Early Bird')
 });
 
 io.on("connection", socket => initialise(socket));
 
 module.exports = { server };
+

@@ -2,42 +2,43 @@ const express = require('express');
 const router = express.Router();
 const HighScore = require('../models/HighScore');
 
-//get all the scores
+// get all high scores
 router.get('/', async (req, res)=>{
-    try{
+    try {
         const scores = await HighScore.all();
         res.status(200).json(scores);
-    }catch (error){
-        console.log(error);
-        res.status(400);
+    } catch (error) {
+        console.log(error); 
+        res.status(400)
     }
 });
 
-//create
-router.post('/', async (req, res) => {
+// post a new high score, body needs to contain name, category, difficulty, score
+router.post('/', async (req,res) => {
     try {
-        const scores = req.body.scores;
-        HighScore.create(scores);
-        res.status(201).json(scores);
+        const {name, category, difficulty, score} = req.body;
+        const data = await HighScore.create(name, category, difficulty, score);
+        console.log(data);
+        res.status(201).json(data);
     } catch (error) {
-        console.log(error);
-        res.status(422).json({error})
+       console.log(error); 
+       res.status(400)
     }
-})
+});
 
-//filter the category and difficulty; determine highscore in each filter
-router.get("/:category/:difficulty", async (req, res) => {
+// get scores by category and difficulty
+router.get('/:category/:difficulty', async (req, res)=>{
     const {category, difficulty} = req.params;
-    try{
-        const scores = await HighScore.getByFilter(category, difficulty);
+    try {
+        const scores = await HighScore.getByCategoryAndDifficulty(category, difficulty);
         res.status(200).json(scores);
-    }catch (error){
-        console.log(error);
-        res.status(400);
+    } catch (error) {
+        console.log(error); 
+        res.status(400)
     }
-})
+});
 
-// check username already exists in the database
+//checks if this username is already in the database
 router.get('/:username', async (req,res)=>{
     try {
         const message = await HighScore.checkUsername(req.params.username);
@@ -47,4 +48,4 @@ router.get('/:username', async (req,res)=>{
     }
 });
 
-module.exports =  router;
+module.exports =  router ;
