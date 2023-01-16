@@ -1,12 +1,14 @@
-import React from "react"
 
-import MyModal from "../../components/Modal"
+import React, {useState} from "react"
+import { useSelector } from "react-redux"
+import MyModal from "../../components/ModalButton"
 import Instructions from "../../components/Instructions"
 import HighScoreList from "../../components/HighScoresList"
+import Createnewgame from "../../components/createnewgame"
+
 import { Link } from "react-router-dom"
 
 const HomePage = () => {
-	
 	const [instructionsOpen, setInstructionsOpen] = React.useState(false);
 	const [highScoreListOpen, setHighScoreListOpen] = React.useState(false);
 
@@ -17,7 +19,16 @@ const HomePage = () => {
 	const openHighScoreListModal = () => {
 		setHighScoreListOpen(true);
 	}
-	
+
+	const socket = useSelector(state => state.socket)
+	const [username, setUsername] = useState("");
+
+	const handleJoinOpen = () => {
+		// socket.emit('join game', ({username, room}));
+		socket.emit('leave', "now" )
+		console.log("disconnected");
+	}
+
 	return (
 	<>
 		<h1 className="text-4xl">Home Page</h1>
@@ -36,7 +47,10 @@ const HomePage = () => {
 
 			<MyModal onClose={() => setInstructionsOpen(false)} Component={<Instructions/>} setOpen={instructionsOpen} />
 			<MyModal onClose={() => setHighScoreListOpen(false)} Component={<HighScoreList/>} setOpen={highScoreListOpen} />
-		</div>
+			<input type="text"  placeholder="Enter your name"/>
+			<button onClick={handleJoinOpen} className="btn">Join Game</button>		
+			<Createnewgame />	
+			</div>
 	</>
 	
 		
