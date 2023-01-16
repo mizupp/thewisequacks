@@ -1,36 +1,28 @@
-// import { Dialog, Transition } from '@headlessui/react'
 import React, { Fragment, useState } from 'react'
-
 import "./styles.css";
 
-const MyModal = ({Component, ButtonText}) => {
-  let [isOpen, setIsOpen] = useState(false)
-
+const MyModal = ({Component, setOpen, onClose, dismissable=true, host=false}) => {
   function closeModal() {
-    setIsOpen(false)
+    onClose()
   }
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
   return (
     <>
     <div>
-        <button
-          type="button"
-          onClick={() => openModal()}>
-          {ButtonText}
-        </button>
-        {isOpen && (
-            <div className='modal' onClick={closeModal}>
+        {setOpen && (
+            <div className='modal' onClick={dismissable ? closeModal : null}>
                 <div className='modal-content' onClick={e => e.stopPropagation()}>
                     <div className="modal-body">
                         {Component}
                     </div>
-                    <div className='modal-footer'>
+                    {
+                        host ? <div className='modal-footer'>
+                        <button onClick={closeModal}>START GAME!!!</button>
+                    </div>
+                    :
+                    dismissable && <div className='modal-footer'>
                         <button onClick={closeModal}>Close</button>
                     </div>
+                    }
                 </div>
             </div>
         )}
@@ -38,5 +30,4 @@ const MyModal = ({Component, ButtonText}) => {
     </>
   )
 }
-
 export default MyModal;
