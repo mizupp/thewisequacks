@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, {useEffect, useState} from "react";
-import QuestionCrd from "../QuestionCard";
+import QuestionCard from "../QuestionCard";
 
 const GameGallery = () => {
     const [easy, setEasy] = useState(null)
@@ -24,9 +24,9 @@ const GameGallery = () => {
 
     return (
         <div className=" grid grid-cols-1 grid-rows-3" >
-            <div className="grid grid-cols-6">{easy && easy.slice(-6).map((q) => <QuestionCrd QuestionData={q} Winner={false} />)}</div>
-            <div className="grid sm:grid-cols-6">{medium && medium.slice(-6).map((q) => <QuestionCrd QuestionData={q} Winner={"false"} />)}</div>
-            <div className="grid sm:grid-cols-6">{hard && hard.slice(-6).map((q) => <QuestionCrd QuestionData={q} Winner={false} />)}</div>
+            <div className="grid grid-cols-6">{easy && easy.slice(-6).map((q) => <QuestionCard key={q.id} QuestionData={q} Winner={false} />)}</div>
+            <div className="grid sm:grid-cols-6">{medium && medium.slice(-6).map((q) => <QuestionCard key={q.id}  QuestionData={q} Winner={"false"} />)}</div>
+            <div className="grid sm:grid-cols-6">{hard && hard.slice(-6).map((q) => <QuestionCard key={q.id}  QuestionData={q} Winner={false} />)}</div>
         </div>
     )
 }

@@ -1,7 +1,7 @@
 
 import React, {useState} from "react"
 import { useSelector } from "react-redux"
-// import MyModal from "../../components/ModalButton"
+
 import MyModal from "../../components/Modal"
 
 import Instructions from "../../components/Instructions"
