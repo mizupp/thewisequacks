@@ -23,10 +23,10 @@ const GameGallery = () => {
     }, [])
 
     return (
-        <div className=" grid grid-cols-1 grid-rows-3" >
-            <div className="grid grid-cols-6">{easy && easy.slice(-6).map((q) => <QuestionCard key={q.id} QuestionData={q} Winner={false} />)}</div>
-            <div className="grid sm:grid-cols-6">{medium && medium.slice(-6).map((q) => <QuestionCard key={q.id}  QuestionData={q} Winner={"false"} />)}</div>
-            <div className="grid sm:grid-cols-6">{hard && hard.slice(-6).map((q) => <QuestionCard key={q.id}  QuestionData={q} Winner={false} />)}</div>
+        <div className="p-2 grid grid-cols-1 grid-rows-3" >
+            <div className="grid gap-2 grid-cols-6">{easy && easy.slice(-6).map((q) => <QuestionCard key={q.id} QuestionData={q} Winner={false} />)}</div>
+            <div className="grid gap-2 grid-cols-6">{medium && medium.slice(-6).map((q) => <QuestionCard key={q.id}  QuestionData={q} Winner={false} />)}</div>
+            <div className="grid gap-2 grid-cols-6">{hard && hard.slice(-6).map((q) => <QuestionCard key={q.id}  QuestionData={q} Winner={false} />)}</div>
         </div>
     )
 }

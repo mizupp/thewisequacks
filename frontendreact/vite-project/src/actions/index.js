@@ -1,3 +1,5 @@
+import { Socket } from "socket.io-client"
+
 const storeSocket = (socket) => {
     return {
         type: 'STORE_SOCKET',
@@ -74,7 +76,7 @@ const setQuizAsComplete = (user) => {
     }
 }
 
-const getState = () => {
+const getState = (socket) => {
     socket.on('change state', (state) => changeState(state))
 }
 

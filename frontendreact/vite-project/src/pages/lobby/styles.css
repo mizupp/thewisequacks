@@ -1,8 +1,9 @@
 .lobby-container{
     display: grid;
-    grid-template-areas: "avatar players"
-                         "avatar players"
-                         "avatar waiting";
+    grid-template-areas: "avatar avatar players"
+                         "avatar avatar players"
+                         "avatar avatar players"
+                         "avatar avatar waiting";
 
     justify-items: center;
 }
@@ -15,7 +16,7 @@
 .PlayerLobbyList {
     grid-area: players;
     height: 100%;
-    width: 80%;
+    width: 100%;
 }
 
 .WaitingRoom {

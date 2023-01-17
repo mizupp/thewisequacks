@@ -5,17 +5,17 @@ const PlayerListLobby = ({users}) => {
     // console.log(users)
 
     return (
-        <div className="w-full h-full">
-            <table className="table-fixed border-separate border-spacing-x-4">
+        <div className="w-full h-full flex justify-center items-start m-0">
+            <table className="table-fixed w-28 sm:w-52 md:w-96">
                 <thead>
                     <tr>
-                        <th rowSpan="2">Player</th>
+                        <th colSpan="2">Player</th>
                     </tr>
                 </thead>
                 <tbody>
                     {users.map((user, index) => (
-                         <tr className={`${index%2===0 ? 'bg-white' : 'bg-gray-200'}`} key={index}>
-                            <td><img className="rounded-full h-4/5 w-4/5" src={user.avatar}/></td>
+                         <tr className={`${index%2===1 ? 'bg-white' : 'bg-gray-200'}`} key={index}>
+                            <td><img className="rounded-full h-10 w-10" src={user.avatar}/></td>
                             <td>{user.name}</td>
                         </tr>
                     ))}

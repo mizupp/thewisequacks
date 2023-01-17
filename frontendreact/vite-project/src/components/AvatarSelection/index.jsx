@@ -31,9 +31,9 @@ const AvatarSelection = () => {
 
     return (
 
-        <div className='flex flex-col items-center justify-stretch gap-4 w-full h-full bg-gray-800 rounded p-4 border-2 border-solid border-black'>
+        <div className='flex flex-col items-center justify-stretch gap-4 w-full h-full bg-gray-800 rounded-lg p-4 border-2 border-solid border-black drop-shadow-lg'>
             <div>Player choose your avatar:</div>
-            <div className='grid grid-cols-3 gap-4 text-6xl'>
+            <div className='grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-6xl'>
                 {avatars.map((a, i) => <img src={a} id={a} key={i} className={`h-24 w-24 ${ a == selectedAvatar ? 'opacity-20' : 'opacity-100'}`} onClick={() => onSelect(a)}/>)}
             </div>
         </div>

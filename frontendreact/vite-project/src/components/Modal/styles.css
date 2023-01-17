@@ -21,3 +21,10 @@
     justify-content: space-around;
     position: relative;
 }
+
+.modal-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}

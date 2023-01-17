@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { storeSocket, changeState, storeUser, addUser, updateScore, setCompleted } from "../../actions";
 import axios from "axios";
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom"; 
 
 const StartGame = () => {
-
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const socket = useSelector((state) => state.socket);
     const [username, setName] = useState("");
     const [room, setRoom] = useState("")
+
+    const data = useSelector(state => state.gameState);
 
     const handleCreate = () => {
         const playerInfo = {
@@ -21,6 +24,7 @@ const StartGame = () => {
         console.log(playerInfo)
         socket.emit('create game', playerInfo);
         dispatch(addUser(playerInfo))
+        navigate('/lobby')
     }
 
     const handleJoin = () => {
@@ -32,6 +36,7 @@ const StartGame = () => {
         }
         socket.emit('join game', {room, playerInfo})
        dispatch(addUser(playerInfo))
+       navigate('/lobby')
     }
 
     return(
@@ -40,7 +45,8 @@ const StartGame = () => {
             <input type="text" name="room" value={room} placeholder="room code" onChange={(e) => setRoom(e.target.value)}/>
             <br />
             <button onClick={handleJoin}>Join game</button>
-            <button onClick={handleCreate}>Create game</button>
+                        
+            <Link onClick={handleCreate} to="/lobby" className="btn btn-primary">Create game</Link>
         </div>
     )
 }

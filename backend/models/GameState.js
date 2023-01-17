@@ -4,9 +4,9 @@ class GameState{
         // this.host = host;
         this.users = [
             {
-                userId: 0,
-                name: host,
-                isHost: false,
+                // userId: 0,
+                // name: host,
+                // isHost: false,
                 score: 0,
                 hasCompletedQuiz: false
             }
@@ -27,10 +27,18 @@ class GameState{
             }
         })
         }
-    
-    static getIndex(room) {
-        const gameIndex = games.findIndex((g) => g.room === room);
-        return gameIndex;
+
+    updatePlayer(playerInfo) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const user = this.users.findIndex((p) => p.userId === playerInfo.userId);
+                this.users[user] = playerInfo
+                resolve("Player Updated")
+            } catch (error) {
+                console.log(error);
+                reject("Could not update player")
+            }
+        })
     }
     }
 

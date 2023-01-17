@@ -30,7 +30,7 @@ const QComp = ({data, onClose}) => {
 
     return (
         <>
-            {timeLeft <= 15 && timeLeft >=5 ? <h1 className="text-5xl font-bold text-gray-800 absolute top-10 left-10">{timeLeft - 5}</h1> : null}
+            {timeLeft <= 15 && timeLeft >=5 ? <h1 className="text-5xl font-bold text-gray-800 absolute top-5 left-10">{timeLeft - 5}</h1> : null}
             <h2 className='text-xl'>{data.question}</h2>
             {timeLeft <= 15 ? null : <h1 className="text-[10rem] font-bold text-gray-800">{timeLeft - 15}</h1>}
             <div className='flex flex-col'>
