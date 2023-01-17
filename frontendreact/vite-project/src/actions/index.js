@@ -49,6 +49,44 @@ const setIcon = (icon) => {
     }
 }
 
+const startGame = () => {
+    return {
+        type: 'START_GAME',
+    }
+}
+
+const incrementQuestionNumber = () => {
+    return {
+        type: 'INCREMENT_QUESTION'
+    }
+}
+
+const resetQuestionNumber = () => {
+    return {
+        type: "REST_QUESTION_NUMBER"
+    }
+}
+
+const setQuizAsComplete = (user) => {
+    return {
+        type: "COMPLETE_QUIZ",
+        payload: user
+    }
+}
+
+const getState = () => {
+    socket.on('change state', (state) => changeState(state))
+}
 
 
-export { storeSocket, changeState, storeUser, addUser, updateScore, setCompleted, setIcon }
+const updateUser = () => {
+    socket.emit('update user', {
+        playerInfo: user,
+    })
+}
+
+
+
+
+
+export {  storeSocket, changeState, storeUser, addUser, updateScore, setCompleted, setIcon, startGame, incrementQuestionNumber, resetQuestionNumber,  setQuizAsComplete, getState, updateUser }

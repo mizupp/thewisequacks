@@ -1,6 +1,6 @@
 const initState = {
     gameState: {},
-    user: "",
+    user: {},
     icon: "",
     socket: {}
 }
@@ -13,6 +13,23 @@ const gameReducer = (state=initState, action) =>{
             return{...state, gameState: action.payload};
         case "STORE_USER":
             return{...state, user: action.payload};
+        case "START_GAME":
+            return {
+                ...state,
+                gameState: {
+                    ...state.gameState,
+                    isGameStarted: true
+                }
+            }
+        case 'INCREMENT_QUESTION':
+            let newQuestionNumber = state.gameState.questionNumber + 1;
+            return {
+                    ...state,
+                    gameState: 
+                    {...state.gameState, 
+                        questionNumber: newQuestionNumber
+                    }
+            }
         case "UPDATE_SCORE":
             let newUsers = [...state.gameState.users];
             let userIdx = newUsers.findIndex(item => item.name === action.user);
@@ -36,6 +53,12 @@ const gameReducer = (state=initState, action) =>{
                 return{
                     ...state, gameState: {...state.gameState, users: newUsersArr}
                 }
+            case "RESET_QUESTION_NUMBER":
+                return{
+                    ...state, gameState: {
+                        ...state.gameState, questionNumber: 1
+                        }
+                    }
         default:
             return state; 
     }

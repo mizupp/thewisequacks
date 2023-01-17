@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux"
 import reactLogo from './assets/react.svg'
 import './App.css'
 import Layout from './components/layout'
+import ChatLayout from './components/ChatLayout'
 import Chat from './components/Chat';
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { HomePage, Game, Winner, Lobby } from './pages'
@@ -62,16 +63,16 @@ function App() {
 
   return (
     <div className='h-screen flex flex-col justify-between'>
-    <Routes>
-      <Route exact path='/' element={<Layout />}>
-        <Route index element={<HomePage />} />
-        <Route path="game" element={<Game />} />
-        <Route path="lobby" element={<Lobby />} />
-        <Route path="winner" element={<Winner />} />
-      </Route>
-    </Routes>
-
-    {/* <Chat/> */}
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route element={<ChatLayout />}>
+            <Route path="game" element={<Game />} />
+            <Route path="lobby" element={<Lobby />} />
+            <Route path="winner" element={<Winner />} />
+          </Route>
+        </Route>
+      </Routes>    
     </div>
   )
 }

@@ -6,9 +6,9 @@ import MyModal from "../../components/Modal"
 
 import Instructions from "../../components/Instructions"
 import HighScoreList from "../../components/HighScoresList"
-import Createnewgame from "../../components/createnewgame"
 import Timerbar from "../../components/Timerbar"
-
+import StartGame from "../../components/startGame"
+// import JoinGame from "../../components/startGame"
 
 import { Link } from "react-router-dom"
 
@@ -35,7 +35,10 @@ const HomePage = () => {
 
 	return (
 	<>
-	<Timerbar />	
+	{/* <JoinGame /> */}
+
+	<StartGame />
+	{/* <Timerbar />	 */}
 		<h1 className="text-4xl">Home Page</h1>
 		<div>
 			<button
@@ -50,15 +53,12 @@ const HomePage = () => {
 			High Score
 			</button>
 
-			<button type="button">Create Game</button>
-
-			<button type="button"> Join Room </button>
 
 			<MyModal onClose={() => setInstructionsOpen(false)} Component={<Instructions/>} setOpen={instructionsOpen} />
 			<MyModal onClose={() => setHighScoreListOpen(false)} Component={<HighScoreList/>} setOpen={highScoreListOpen} />
-			<input type="text"  placeholder="Enter your name"/>
-			<button onClick={handleJoinOpen} className="btn">Join Game</button>		
-			<Createnewgame />	
+			
+					
+				
 			
 
 			</div>

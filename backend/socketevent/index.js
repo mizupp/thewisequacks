@@ -2,15 +2,19 @@ const { GameState } = require('../models/GameState')
 const { io } = require('../initialiseServer');
 
 function initialise(socket){
-
-    console.log('user connected');
+    const games = []
+    console.log('user joined global lobby', socket.id);
     socket.on('leave', ()=>console.log('user disconnected'));
 
     // 1) you join for first time- auto host
-    socket.on('create game', ({room, playerInfo}) => {
-        console.log(`game created with the code ${room}`);
-        const state = new GameState(host, room, questions);
+    socket.on('create game', (playerInfo) => {
+        console.log(playerInfo)
+        const room = "randomId";
+        const state = new GameState(room);
+        state.addPlayer(playerInfo)
+        games.push(state)
         socket.join(room);
+        console.log(`Game created ${playerInfo.name} is now the host`)
         io.to(room).emit('change state', state); //this sends to everyone in room including sender
     })
 
@@ -20,10 +24,11 @@ function initialise(socket){
 
      // 2) you join as another use - you  are not the host but you can become host of own game room or join original host
     socket.on('join game', ({room, playerInfo}) => {
-        console.log(`${username} joined with the code ${room}`);
+        console.log(`${playerInfo.name} joined with the code ${room}`);
         state.addPlayer(playerInfo)
         socket.join(room);
-        socket.to(room).emit('user joining waiting room', username);
+        console.log(`Game with ${playerInfo.name} at ${room}`)
+        socket.to(room).emit('change state', state);
     })
 
     socket.on('send state to players', (state)=>{

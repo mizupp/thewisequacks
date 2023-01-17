@@ -1,0 +1,6 @@
+.lobby-container{
+    display: grid;
+    grid-template-areas: "avatar players"
+                         "avatar players"
+                         "avatar Buttons";
+}

@@ -1,6 +1,8 @@
 import React from 'react'
 import Header from '../header'
 import Footer from '../footer'
+import MyModal from '../Modal'
+import Chat from '../Chat'
 import {Outlet} from 'react-router-dom'
 
 const Layout = () => {
