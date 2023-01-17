@@ -1,7 +1,7 @@
 import React from "react";
 import MyModal from "../Modal";
 
-const QuestionCrd = ({QuestionData, Winner=false}) => {
+const QuestionCard = ({QuestionData, Winner=false}) => {
 
     const [show, setShow] = React.useState(false);
 
@@ -36,4 +36,4 @@ const QComp = ({data, onClose}) => {
     )
 }
 
-export default QuestionCrd
+export default QuestionCard

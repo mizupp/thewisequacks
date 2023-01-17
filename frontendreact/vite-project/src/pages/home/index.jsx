@@ -1,11 +1,14 @@
 
 import React, {useState} from "react"
 import { useSelector } from "react-redux"
-import MyModal from "../../components/ModalButton"
+// import MyModal from "../../components/ModalButton"
+import MyModal from "../../components/Modal"
+
 import Instructions from "../../components/Instructions"
 import HighScoreList from "../../components/HighScoresList"
 import Createnewgame from "../../components/createnewgame"
 import Timerbar from "../../components/Timerbar"
+
 
 import { Link } from "react-router-dom"
 
@@ -32,6 +35,7 @@ const HomePage = () => {
 
 	return (
 	<>
+	<Timerbar />	
 		<h1 className="text-4xl">Home Page</h1>
 		<div>
 			<button
@@ -51,7 +55,7 @@ const HomePage = () => {
 			<input type="text"  placeholder="Enter your name"/>
 			<button onClick={handleJoinOpen} className="btn">Join Game</button>		
 			<Createnewgame />	
-			<Timerbar />	
+			
 
 			</div>
 	</>

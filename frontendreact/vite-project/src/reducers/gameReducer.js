@@ -1,6 +1,7 @@
 const initState = {
     gameState: {},
     user: "",
+    icon: "",
     socket: {}
 }
 
@@ -20,6 +21,8 @@ const gameReducer = (state=initState, action) =>{
                 ...state,
                 gameState: {...state.gameState, users: newUsers}
             }
+            case "SET_ICON":
+                return{...state, icon: action.payload}
             case "ADD_USER":
             let newUsersList = [...state.gameState.users];
             newUsersList.push({name: action.payload, score: 0, hasCompletedQuiz: false})

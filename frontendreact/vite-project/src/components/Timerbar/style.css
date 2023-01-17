@@ -1,0 +1,36 @@
+.Timer {
+    visibility: visible;
+
+}
+
+.round-time-bar{
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    /* background-color: red; */
+}
+
+.h2{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+
+}
+
+.timerCounter{
+    width: 100%;
+    color: red;
+}
+
+.TL{
+    margin: 0;
+    padding: 0;
+}
+svg {
+    height: 100%;
+}
+
+
+.hide {
+    display: none;
+}

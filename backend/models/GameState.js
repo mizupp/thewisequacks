@@ -3,13 +3,13 @@ class GameState{
         this.roomName = roomName;
         this.host = host;
         this.users = [
-            // {
-            //     userId: 0,
-            //     name: host,
-            //     isHost: false,
-            //     score: 0,
-            //     hasCompletedQuiz: false
-            // }
+            {
+                userId: 0,
+                name: host,
+                isHost: false,
+                score: 0,
+                hasCompletedQuiz: false
+            }
         ];
         this.questionNumber = 1;
         this.questions = questions;

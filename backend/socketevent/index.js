@@ -2,6 +2,7 @@ const { GameState } = require('../models/GameState')
 const { io } = require('../initialiseServer');
 
 function initialise(socket){
+
     console.log('user connected');
     socket.on('leave', ()=>console.log('user disconnected'));
 
@@ -42,6 +43,35 @@ function initialise(socket){
     socket.on('typing', (data) => {
         socket.broadcast.emit('typing', data);
     })   
+
+
+    //chat
+    socket.on('chat-message', ({ room, message })=> {
+        console.log('i wanna go home ');
+         if(room) {
+            console.log (message)
+                io.to(room).emit('new-message', {user: socket.data, msg: message})
+         }
+         else{
+            console.log (room);
+            io.emit('new-message', {user: socket.data, msg: message})
+         }
+            //     
+        
+    });
+
+    // socket.on('connection', (socket) => {
+    //     console.log('bun you fam')
+    //     socket.on('chat-message', ({ room, message }) => {
+    //         io.sockets.emit('new-message', {user: data, msg: message})
+
+    //         // if(room)
+    //         //     io.to(room).emit('new-message', {user: data, msg: message})
+                
+    //         // else
+    //         //     io.emit('new-message', {user: data, msg: message})
+    //     })
+    // })
 }
 
 module.exports = { initialise };
