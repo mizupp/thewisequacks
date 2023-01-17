@@ -4,9 +4,9 @@ class GameState{
         // this.host = host;
         this.users = [
             {
-                // userId: 0,
-                // name: host,
-                // isHost: false,
+                userId: 0,
+                name: host,
+                isHost: false,
                 score: 0,
                 hasCompletedQuiz: false
             }
@@ -27,6 +27,11 @@ class GameState{
             }
         })
         }
+    
+    static getIndex(room) {
+        const gameIndex = games.findIndex((g) => g.room === room);
+        return gameIndex;
+    }
     }
 
 

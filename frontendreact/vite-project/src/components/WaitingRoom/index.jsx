@@ -25,16 +25,18 @@ const WaitingRoom = () => {
 
     return (
         <>
-        <div className="waiting-message">
-            <h1>This is {data.host}'s room </h1>
-            <h2>Please wait for other players...</h2>
+        <div>
+            <div className="waiting-message">
+                <h1>This is {data.host}'s room </h1>
+                <h2>Please wait for other players...</h2>
+            </div>
+            <p>Share room name to friends:</p>
+            <div>
+                <span>{data.roomName}</span>
+            </div>
+            <button onClick={handleButtonClick} className="btn start-game">START GAME</button>
+            {data.isGameStarted && <Navigate to='/game' />}
         </div>
-
-        <p>Share room name to friends:</p>
-        <div><span>{data.roomName}</span></div>
-
-        <button onClick={handleButtonClick} className="btn start-game">START GAME</button>
-        {data.isGameStarted && <Navigate to='/game' />}
         </>
 
     );

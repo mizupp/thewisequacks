@@ -2,5 +2,23 @@
     display: grid;
     grid-template-areas: "avatar players"
                          "avatar players"
-                         "avatar Buttons";
+                         "avatar waiting";
+
+    justify-items: center;
+}
+
+.AvatarSelection {
+    grid-area: avatar;
+    height: 100%;
+}
+
+.PlayerLobbyList {
+    grid-area: players;
+    height: 100%;
+    width: 80%;
+}
+
+.WaitingRoom {
+    grid-area: waiting;
+    height:100%;
 }

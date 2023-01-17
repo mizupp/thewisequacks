@@ -1,35 +1,62 @@
 const { GameState } = require('../models/GameState')
 const { io } = require('../initialiseServer');
 
+const games = []
+
+
+
+function updateGame(room, state) {
+    const gameNo = games.findIndex((g) => g.room === room);
+    games[gameNo] = state;
+ }
+
+function codeGenerator() {
+    const chars = "acdefhiklmnoqrstuvwxyz0123456789".split("");
+    let result = "";
+    for (let i = 0; i < 6; i++) {
+      const x = Math.floor(Math.random() * chars.length);
+      result += chars[x];
+    }
+    return result;
+  }
+
+
+  
 function initialise(socket){
-    const games = []
-    console.log('user joined global lobby', socket.id);
+
+    
+    
     socket.on('leave', ()=>console.log('user disconnected'));
 
-    // 1) you join for first time- auto host
+
+    // listen for new game creation
     socket.on('create game', (playerInfo) => {
         console.log(playerInfo)
-        const room = "randomId";
+        const room = codeGenerator();
         const state = new GameState(room);
         state.addPlayer(playerInfo)
         games.push(state)
         socket.join(room);
-        console.log(`Game created ${playerInfo.name} is now the host`)
+        console.log(`Game created host: ${playerInfo.name} room: ${room}`)
         io.to(room).emit('change state', state); //this sends to everyone in room including sender
     })
 
-    // socket.adapter.on('create-room',  room) => {
-    //     console.log("Created room", room)
-    // })
-
-     // 2) you join as another use - you  are not the host but you can become host of own game room or join original host
+    // listen for game join
     socket.on('join game', ({room, playerInfo}) => {
-        console.log(`${playerInfo.name} joined with the code ${room}`);
-        state.addPlayer(playerInfo)
+        games[GameState.getIndex(room)].addPlayer(playerInfo)
         socket.join(room);
-        console.log(`Game with ${playerInfo.name} at ${room}`)
+         console.log(`${playerInfo.name} joined with the code ${room}`);
         socket.to(room).emit('change state', state);
+        // socket.to(room).emit('user joining waiting room', playerInfo.name);
     })
+
+    // updates player information
+    socket.on('update player', ({playerInfo, room}) => {
+        // get room gamestate
+        //update server gamestate
+        //send new game state
+    })
+
 
     socket.on('send state to players', (state)=>{
         io.to(state.roomName).emit('change state', state);

@@ -80,9 +80,7 @@ const getState = () => {
 
 
 const updateUser = () => {
-    socket.emit('update user', {
-        playerInfo: user,
-    })
+    socket.emit('update user', (playerInfo, room))
 }
 
 
