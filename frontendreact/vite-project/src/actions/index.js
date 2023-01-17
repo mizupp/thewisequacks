@@ -41,4 +41,14 @@ const setCompleted = (user) =>{
     }
 }
 
-export { storeSocket, changeState, storeUser, addUser, updateScore, setCompleted }
+
+const setIcon = (icon) => {
+    return{
+        type: "SET_ICON",
+        payload: icon
+    }
+}
+
+
+
+export { storeSocket, changeState, storeUser, addUser, updateScore, setCompleted, setIcon }

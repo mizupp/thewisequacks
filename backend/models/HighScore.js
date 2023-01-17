@@ -2,10 +2,8 @@ const { init } = require('../db/init');
 
 
 class HighScore {
-    constructor(name, category, difficulty, score){
+    constructor(name, score){
         this.name = name;
-        this.category = category;
-        this.difficulty = difficulty;
         this.score = score;
     }
 
@@ -13,8 +11,8 @@ class HighScore {
         return new Promise (async (resolve,reject) => {
             try {
                 const db = await init();
-                await db.collection('highscores').insertOne({name, category, difficulty, score});
-                let newHighScore = new HighScore(name, category, difficulty, score);
+                await db.collection('highscores').insertOne({name, score});
+                let newHighScore = new HighScore(name, score);
                 resolve(newHighScore);
             } catch (error){
                 reject(error);

@@ -1,10 +1,14 @@
 
 import React, {useState} from "react"
 import { useSelector } from "react-redux"
+
 import MyModal from "../../components/Modal"
+
 import Instructions from "../../components/Instructions"
 import HighScoreList from "../../components/HighScoresList"
 import Createnewgame from "../../components/createnewgame"
+import Timerbar from "../../components/Timerbar"
+
 
 import { Link } from "react-router-dom"
 
@@ -25,12 +29,13 @@ const HomePage = () => {
 
 	const handleJoinOpen = () => {
 		// socket.emit('join game', ({username, room}));
-		socket.emit('leave', "now" )
+		socket.emit('join game', user )
 		console.log("disconnected");
 	}
 
 	return (
 	<>
+	<Timerbar />	
 		<h1 className="text-4xl">Home Page</h1>
 		<div>
 			<button
@@ -50,6 +55,8 @@ const HomePage = () => {
 			<input type="text"  placeholder="Enter your name"/>
 			<button onClick={handleJoinOpen} className="btn">Join Game</button>		
 			<Createnewgame />	
+			
+
 			</div>
 	</>
 	

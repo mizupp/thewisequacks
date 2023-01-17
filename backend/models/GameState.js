@@ -1,12 +1,12 @@
 class GameState{
     constructor(category, difficulty, host, roomName, questions){
         this.roomName = roomName;
-        this.category = category;
-        this.difficulty = difficulty;
         this.host = host;
         this.users = [
             {
+                userId: 0,
                 name: host,
+                isHost: false,
                 score: 0,
                 hasCompletedQuiz: false
             }
@@ -15,6 +15,22 @@ class GameState{
         this.questions = questions;
         this.isGameStarted = false;
     }
-}
+
+     addPlayer(playerInfo) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                if (this.users.length === 0 ) {
+                    playerInfo.isHost = true;
+                } 
+                this.users.push(playerInfo)
+                resolve("Player Joined")
+            } catch (error) {
+                console.log(error);
+                reject("Player could not join")
+            }
+        })
+        }
+    }
+
 
 module.exports = { GameState };

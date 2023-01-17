@@ -1,9 +1,16 @@
 import React from 'react';
+import {useState, useEffect} from 'react';
+import axios from 'axios';
 
-const URL = "";
+const URL = "http//:localhost:3000/highscores";
 
 const HighScoreList = () => {
-    // const data = await axios.get(URL);
+     const [scores, setScores] = useState(null);
+     
+    useEffect(() => {async () => {const data = await axios.get(URL);
+        setScores(data);}
+    }, [])
+
     const data = [
         {
             id: 1,
@@ -26,8 +33,8 @@ const HighScoreList = () => {
                 </tr>
             </thead>
             <tbody>
-                {data.map((item) => (
-                    <tr key={item.id}>
+                {scores && scores.map((item) => (
+                    <tr key={item._id}>
                         <td>{item.name}</td>
                         <td>{item.score}</td>
                     </tr>

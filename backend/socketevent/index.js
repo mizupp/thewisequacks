@@ -2,21 +2,22 @@ const { GameState } = require('../models/GameState')
 const { io } = require('../initialiseServer');
 
 function initialise(socket){
-    console.log('user connected');
 
+    console.log('user connected');
     socket.on('leave', ()=>console.log('user disconnected'));
 
-
-    socket.on('create game', ({room, category, difficulty, host, questions}) => {
+    // 1) you join for first time- auto host
+    socket.on('create game', ({room, host, questions}) => {
         console.log(`game created with the code ${room}`);
-        const state = new GameState(category, difficulty, host, room, questions);
+        const state = new GameState(host, room, questions);
         socket.join(room);
         io.to(room).emit('change state', state); //this sends to everyone in room including sender
     })
 
-
-    socket.on('join game', ({room, username}) => {
+     // 2) you join as another use - you  are not the host but you can become host of own game room or join original host
+    socket.on('join game', ({room, playerInfo}) => {
         console.log(`${username} joined with the code ${room}`);
+        state.addPlayer(playerInfo)
         socket.join(room);
         socket.to(room).emit('user joining waiting room', username);
     })
@@ -42,6 +43,35 @@ function initialise(socket){
     socket.on('typing', (data) => {
         socket.broadcast.emit('typing', data);
     })   
+
+
+    //chat
+    socket.on('chat-message', ({ room, message })=> {
+        console.log('i wanna go home ');
+         if(room) {
+            console.log (message)
+                io.to(room).emit('new-message', {user: socket.data, msg: message})
+         }
+         else{
+            console.log (room);
+            io.emit('new-message', {user: socket.data, msg: message})
+         }
+            //     
+        
+    });
+
+    // socket.on('connection', (socket) => {
+    //     console.log('bun you fam')
+    //     socket.on('chat-message', ({ room, message }) => {
+    //         io.sockets.emit('new-message', {user: data, msg: message})
+
+    //         // if(room)
+    //         //     io.to(room).emit('new-message', {user: data, msg: message})
+                
+    //         // else
+    //         //     io.emit('new-message', {user: data, msg: message})
+    //     })
+    // })
 }
 
 module.exports = { initialise };
