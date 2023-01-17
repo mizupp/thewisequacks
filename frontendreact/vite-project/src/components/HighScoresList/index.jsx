@@ -2,27 +2,20 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 
-const URL = "http//:localhost:3000/highscores";
+const URL = "http://localhost:3000/highscores";
 
 const HighScoreList = () => {
      const [scores, setScores] = useState(null);
      
-    useEffect(() => {async () => {const data = await axios.get(URL);
-        setScores(data);}
-    }, [])
+     async function getScores() {
+        const {data} = await axios.get(URL);
+        console.log(data);
+        setScores(data);
+    }
 
-    const data = [
-        {
-            id: 1,
-            name: "John",
-            score: 100
-        },
-        {
-            id: 2,
-            name: "Jane",
-            score: 200
-        }
-    ];
+    useEffect(() => {
+        getScores(); 
+    }, [])  
 
     return (
         <table>

@@ -7,12 +7,16 @@ function initialise(socket){
     socket.on('leave', ()=>console.log('user disconnected'));
 
     // 1) you join for first time- auto host
-    socket.on('create game', ({room, host, questions}) => {
+    socket.on('create game', ({room, playerInfo}) => {
         console.log(`game created with the code ${room}`);
         const state = new GameState(host, room, questions);
         socket.join(room);
         io.to(room).emit('change state', state); //this sends to everyone in room including sender
     })
+
+    // socket.adapter.on('create-room',  room) => {
+    //     console.log("Created room", room)
+    // })
 
      // 2) you join as another use - you  are not the host but you can become host of own game room or join original host
     socket.on('join game', ({room, playerInfo}) => {
@@ -49,16 +53,16 @@ function initialise(socket){
     socket.on('chat-message', ({ room, message })=> {
         console.log('i wanna go home ');
          if(room) {
-            console.log (message)
-                io.to(room).emit('new-message', {user: socket.data, msg: message})
+            console.log (message + room)
+                io.emit('new-message', {user: socket.id, msg: message})
          }
          else{
             console.log (room);
-            io.emit('new-message', {user: socket.data, msg: message})
+            io.emit('new-message', {user: socket.id, msg: message})
          }
-            //     
-        
     });
+
+
 
     // socket.on('connection', (socket) => {
     //     console.log('bun you fam')

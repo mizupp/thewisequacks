@@ -50,6 +50,10 @@ const HomePage = () => {
 			High Score
 			</button>
 
+			<button type="button">Create Game</button>
+
+			<button type="button"> Join Room </button>
+
 			<MyModal onClose={() => setInstructionsOpen(false)} Component={<Instructions/>} setOpen={instructionsOpen} />
 			<MyModal onClose={() => setHighScoreListOpen(false)} Component={<HighScoreList/>} setOpen={highScoreListOpen} />
 			<input type="text"  placeholder="Enter your name"/>
