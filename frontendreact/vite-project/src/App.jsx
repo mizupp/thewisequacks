@@ -71,7 +71,7 @@ function App() {
       </Route>
     </Routes>
 
-    <Chat/>
+    {/* <Chat/> */}
     </div>
   )
 }
