@@ -4,8 +4,6 @@ const { io } = require("../initialiseServer")
 const games = []
 const rooms = []
 
-// socket.join(rooms);
-
 function getIndex(room) {
 	const gameIndex = games.findIndex((g) => g.room === room)
 	return gameIndex
@@ -27,19 +25,36 @@ function codeGenerator() {
 }
 
 function initialise(socket) {
-	socket.on("leave", () => console.log("user disconnected"))
+	socket.on("disconnecting", () => {
+		const iterator = socket.rooms.values()
+		const id = (iterator.next().value)
+		const roomName = (iterator.next().value)
+
+		if (roomName) {
+			const state = games[getIndex(roomName)]
+			state.removePlayer(id)
+			socket.to(roomName).emit('change state', state)
+			console.log('Player left room')
+		}
+	
+	})
 
 	// listen for new game creation
 	socket.on("create game", (playerInfo) => {
-		console.log(playerInfo)
-		const room = codeGenerator()
-		const state = new GameState(room)
-		state.addPlayer(playerInfo)
-		games.push(state)
-		socket.join(room)
-		rooms.push(room)
-		console.log(`Game created host: ${playerInfo.name} room: ${room}`)
-		io.to(room).emit("change state", state) //this sends to everyone in room including sender
+		try {
+			const room = codeGenerator()
+			const state = new GameState(room)
+			state.addPlayer(playerInfo)
+			games.push(state)
+			socket.join(room)
+			rooms.push(room)
+			console.log(`Game created host: ${playerInfo.name} room: ${room}`)
+			io.to(room).emit("change state", state) //this sends to everyone in room including sender
+		} catch (error) {
+			const errorMsg = "Could not create game"
+			console.log(error)
+			socket.to(socket.id).emit('send error', errorMsg)
+		}
 	})
 
 	// listen for game join
@@ -47,13 +62,17 @@ function initialise(socket) {
 		//match??
 		//includes
 		if (rooms.includes(room)) {
-			const state = games[getIndex(room)].addPlayer(playerInfo)
+			const state = games[getIndex(room)]
+			state.addPlayer(playerInfo)
 			socket.join(room)
+			
 			io.to(room).emit("change state", state)
-
+			
 			console.log(`${playerInfo.name} joined with the code ${room}`)
 		} else {
-			console.log("Room does not exist")
+			const errorMsg = "Room does not exist"
+			console.log(errorMsg)
+			socket.to(socket.id).emit('send error', errorMsg)
 		}
 	})
 
@@ -66,10 +85,6 @@ function initialise(socket) {
 		state.updatePlayer(playerInfo)
 		//send new game state
 		socket.to(room).emit("change state", state)
-	})
-
-	socket.on("send state to players", (state) => {
-		io.to(state.roomName).emit("change state", state)
 	})
 
 	socket.on("update player score", ({ room, user, score }) => {
