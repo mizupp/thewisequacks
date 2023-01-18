@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 #root {
   margin: 0 auto;
 
@@ -8,6 +10,7 @@
   /* background-color: rgba(7, 30, 145, 0.126); */
   /* border: 2px solid rgb(34, 1, 1) !important;
   box-sizing: border-box !important; */
+  font-family: 'Press Start 2P', cursive;
 
 }
 body{

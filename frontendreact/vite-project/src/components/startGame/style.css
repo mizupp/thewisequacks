@@ -5,6 +5,7 @@
     width: 600px;
     align-self: center;
     gap: 10px;
+    margin: -40px 20px;
 }
 .joinbtn{
     background-color: #08610a; 
@@ -17,6 +18,8 @@
     font-size: 16px;
     width: 300px;
     align-self: center;
+    border: 4px dashed rgb(211, 214, 0);
+    animation: border-dance 4s infinite linear;
 }
 
 .createbtn{
@@ -30,7 +33,21 @@
     font-size: 16px;
     width: 300px;
     align-self: center;
+    border: 4px dashed rgb(211, 214, 0);
+    animation: border-dance 4s infinite linear;
 }
+
+@keyframes border-dance {
+    0% {
+        border: 3px dashed rgb(211, 214, 0);
+        }
+    50% {
+        border: 7px dashed rgb(233, 229, 229);    
+    }
+    100% {
+        border: 3px dashed rgb(211, 214, 0);    }
+  }
+
 /* 
 .joinbtn{
     border: none;
@@ -70,20 +87,22 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
+    
 }
 .usernameinput{
     /* width:400px; */
-    height:45px;
+    height:80px;
     background:#010a38;
     border:4px solid #676ed1;
     border-radius:4px;
     font-size:18px;
     padding-left:20px;
     color: #ffffff;
+    animation: border-dance 4s infinite linear;
 }
-
+/* 
 .joincreate {
-	background-color: #4caf50; /* Green */
+	background-color: #4caf50; 
 	border: none;
 	color: white;
 	padding: 50px 100px;
@@ -103,4 +122,4 @@
 	box-sizing: border-box;
 	padding: 50px 100px;
 	margin: 100px 100px;
-}
+} */
