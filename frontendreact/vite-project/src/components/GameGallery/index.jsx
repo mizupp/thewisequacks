@@ -56,8 +56,9 @@ const GameGallery = () => {
 					easy
 						.slice(-6)
 						.map((q) => (
-							<QuestionCard key={q.id} QuestionData={q} Winner={false} />
+							<QuestionCard key={q.id} QuestionData={q} Winner={false}  />
 						))}
+						{ console.log(easy) }
 			</div>
 			<div className="grid grid-cols-6">
 				{medium &&
