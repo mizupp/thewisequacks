@@ -8,9 +8,11 @@ import Instructions from "../../components/Instructions"
 import HighScoreList from "../../components/HighScoresList"
 import Timerbar from "../../components/Timerbar"
 import StartGame from "../../components/startGame"
+
 // import JoinGame from "../../components/startGame"
 
 import { Link } from "react-router-dom"
+import "./style.css";
 
 const HomePage = () => {
 	const [instructionsOpen, setInstructionsOpen] = React.useState(false);
@@ -36,31 +38,19 @@ const HomePage = () => {
 	return (
 	<>
 	{/* <JoinGame /> */}
-
 	<StartGame />
-	{/* <Timerbar />	 */}
-		<h1 className="text-4xl">Home Page</h1>
 		<div>
-			<button
-			type="button"
+			<button 
+			type="button" className="instruction"
 			onClick={openInstructionsModal}>
 			Instructions
 			</button>
-
-			<button
-			type="button"
+			<button type="button" className="instruction"
 			onClick={openHighScoreListModal}>
 			High Score
 			</button>
-
-
 			<MyModal onClose={() => setInstructionsOpen(false)} Component={<Instructions/>} setOpen={instructionsOpen} />
 			<MyModal onClose={() => setHighScoreListOpen(false)} Component={<HighScoreList/>} setOpen={highScoreListOpen} />
-			
-					
-				
-			
-
 			</div>
 	</>
 	

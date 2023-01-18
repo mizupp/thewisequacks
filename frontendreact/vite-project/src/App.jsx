@@ -9,7 +9,7 @@ import Chat from './components/Chat';
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { HomePage, Game, Winner, Lobby } from './pages'
 
-
+import './back.styl';
 
 import {io} from "socket.io-client";
 import { changeState, updateScore, storeSocket } from './actions'
@@ -62,6 +62,12 @@ function App() {
 
 
   return (
+    <>
+  
+
+
+    {/* <div className='h-screen flex flex-col justify-between'> */}
+
     <div className='h-screen flex flex-col justify-between'>
       <Routes>
         <Route path='/' element={<Layout />}>
@@ -74,6 +80,8 @@ function App() {
         </Route>
       </Routes>    
     </div>
+  
+    </>
   )
 }
 

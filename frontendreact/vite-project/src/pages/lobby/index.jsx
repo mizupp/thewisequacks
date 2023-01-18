@@ -48,7 +48,7 @@ const Lobby = () => {
 				<PlayerListLobby users={users} />
 			</div>
 			<div className="WaitingRoom">
-				<WaitingRoom />
+				{/* <WaitingRoom /> */}
 			</div>
 			{/* <PlayerCard className=""/> */}
 		</div>
