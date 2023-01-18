@@ -1,5 +1,4 @@
-
-import React, {useState} from "react"
+import React, { useState } from "react"
 import { useSelector } from "react-redux"
 
 import MyModal from "../../components/Modal"
@@ -15,27 +14,28 @@ import { Link } from "react-router-dom"
 import "./style.css";
 
 const HomePage = () => {
-	const [instructionsOpen, setInstructionsOpen] = React.useState(false);
-	const [highScoreListOpen, setHighScoreListOpen] = React.useState(false);
+	const [instructionsOpen, setInstructionsOpen] = React.useState(false)
+	const [highScoreListOpen, setHighScoreListOpen] = React.useState(false)
 
 	const openInstructionsModal = () => {
-		setInstructionsOpen(true);
+		setInstructionsOpen(true)
 	}
 
 	const openHighScoreListModal = () => {
-		setHighScoreListOpen(true);
+		setHighScoreListOpen(true)
 	}
 
-	const socket = useSelector(state => state.socket)
-	const [username, setUsername] = useState("");
+	const socket = useSelector((state) => state.socket)
+	const [username, setUsername] = useState("")
 
 	const handleJoinOpen = () => {
 		// socket.emit('join game', ({username, room}));
-		socket.emit('join game', user )
-		console.log("disconnected");
+		socket.emit("join game", user)
+		console.log("disconnected")
 	}
 
 	return (
+<<<<<<< HEAD
 	<>
 	{/* <JoinGame /> */}
 	<StartGame />
@@ -51,10 +51,35 @@ const HomePage = () => {
 			</button>
 			<MyModal onClose={() => setInstructionsOpen(false)} Component={<Instructions/>} setOpen={instructionsOpen} />
 			<MyModal onClose={() => setHighScoreListOpen(false)} Component={<HighScoreList/>} setOpen={highScoreListOpen} />
+=======
+		<div className="flex flex-col items-center">
+			{/* <JoinGame /> */}
+
+			<StartGame />
+			{/* <Timerbar />	 */}
+			<h1 className="text-4xl">Home Page</h1>
+			<div>
+				<button type="button" onClick={openInstructionsModal}>
+					Instructions
+				</button>
+
+				<button type="button" onClick={openHighScoreListModal}>
+					High Score
+				</button>
+
+				<MyModal
+					onClose={() => setInstructionsOpen(false)}
+					Component={<Instructions />}
+					setOpen={instructionsOpen}
+				/>
+				<MyModal
+					onClose={() => setHighScoreListOpen(false)}
+					Component={<HighScoreList />}
+					setOpen={highScoreListOpen}
+				/>
+>>>>>>> eb608c32bbbc0cec3722e95b5bd7f57c30904c51
 			</div>
-	</>
-	
-		
+		</div>
 	)
 }
 
