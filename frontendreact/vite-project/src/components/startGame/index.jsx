@@ -1,11 +1,16 @@
-
-
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from "react-redux";
-import { storeSocket, changeState, storeUser, updateLocalUser, updateScore, setCompleted } from "../../actions";
-import axios from "axios";
-import { useNavigate } from 'react-router-dom';
-import { Link } from "react-router-dom"; 
+import React, { useState } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import {
+	storeSocket,
+	changeState,
+	storeUser,
+	updateLocalUser,
+	updateScore,
+	setCompleted,
+} from "../../actions"
+import axios from "axios"
+import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 // =======
 // import React, { useState } from "react"
 // import { useSelector, useDispatch } from "react-redux"
@@ -38,13 +43,12 @@ const StartGame = () => {
 			name: username,
 			isHost: true,
 			score: 0,
-			icon: ""
+			icon: "",
 		}
 		console.log(playerInfo)
 		socket.emit("create game", playerInfo)
 		dispatch(updateLocalUser(playerInfo))
-		navigate('/lobby')
-
+		navigate("/lobby")
 	}
 
 	const handleJoin = () => {
@@ -53,16 +57,15 @@ const StartGame = () => {
 			name: username,
 			isHost: false,
 			score: 0,
-			icon: ""
+			icon: "",
 		}
 		socket.emit("join game", { room, playerInfo })
 		dispatch(updateLocalUser(playerInfo))
-		navigate('/lobby')
-
+		navigate("/lobby")
 	}
 
 	return (
-		<div className="start-game">
+		<div role="StartGame" className="start-game">
 			<input
 				className="usernameinput"
 				type="text"

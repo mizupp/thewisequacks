@@ -1,20 +1,18 @@
-const express = require('express');
-const { app, io, server } = require('./initialiseServer');
+const express = require("express")
+const { app, io, server } = require("./initialiseServer")
+const highScoreRoutes = require("./controller/highScore")
+const cors = require("cors")
+const { initialise } = require("./socketevent")
 
-const cors = require('cors');
-const { initialise } = require('./socketevent');
+app.use(cors())
+app.use(express.json())
 
-app.use(cors());
-app.use(express.json());
+app.use("/highscores", highScoreRoutes)
 
-const highScoreRoutes = require('./controller/highScore');
-app.use('/highscores', highScoreRoutes);
+app.get("/", (req, res) => {
+	res.json("Early Bird")
+})
 
-app.get('/', (req, res) => {
-    res.json('Early Bird')
-});
+io.on("connection", (socket) => initialise(socket))
 
-io.on("connection", socket => initialise(socket));
-
-module.exports = { server };
-
+module.exports = { server, app }
