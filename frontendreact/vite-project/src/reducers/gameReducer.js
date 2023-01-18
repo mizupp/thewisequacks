@@ -3,15 +3,22 @@ const initState = {
 	user: {},
 	icon: "",
 	socket: {},
-	error: null
+	error: null,
 }
+
+/* 
+users: {
+	
+}
+
+*/
 
 const gameReducer = (state = initState, action) => {
 	switch (action.type) {
-        case "LOAD_DATA":
-            return {...state, ...action.payload}
-        case "CLEAR_DATA":
-            return initState
+		case "LOAD_DATA":
+			return { ...state, ...action.payload }
+		case "CLEAR_DATA":
+			return initState
 		case "STORE_SOCKET":
 			return { ...state, socket: action.payload }
 		case "CHANGE_GAME_STATE":
@@ -53,7 +60,7 @@ const gameReducer = (state = initState, action) => {
 		case "SET_ERROR":
 			return {
 				...state,
-				error: action.payload
+				error: action.payload,
 			}
 		default:
 			return state

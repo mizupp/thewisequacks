@@ -1,10 +1,16 @@
-
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from "react-redux";
-import { storeSocket, changeState, storeUser, addUser, updateScore, setCompleted } from "../../actions";
-import axios from "axios";
-import { useNavigate } from 'react-router-dom';
-import { Link } from "react-router-dom"; 
+import React, { useState } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import {
+	storeSocket,
+	changeState,
+	storeUser,
+	// addUser
+	updateScore,
+	setCompleted,
+} from "../../actions"
+import axios from "axios"
+import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 import "./style.css"
 const StartGame = () => {
@@ -26,7 +32,7 @@ const StartGame = () => {
 		console.log(playerInfo)
 		socket.emit("create game", playerInfo)
 		dispatch(addUser(playerInfo))
-		navigate('/lobby')
+		navigate("/lobby")
 	}
 
 	const handleJoin = () => {
@@ -38,52 +44,67 @@ const StartGame = () => {
 		}
 		socket.emit("join game", { room, playerInfo })
 		dispatch(addUser(playerInfo))
-		navigate('/lobby')
+		navigate("/lobby")
 	}
 
+	return (
+		<div className="start-game">
+			<input
+				className="usernameinput"
+				type="text"
+				name="username"
+				value={username}
+				placeholder="name"
+				onChange={(e) => setName(e.target.value)}
+			/>
+			<input
+				className="usernameinput"
+				type="text"
+				name="room"
+				value={room}
+				placeholder="room code"
+				onChange={(e) => setRoom(e.target.value)}
+			/>
+			<div className="joinbtns">
+				<button className="joinbtn" onClick={handleJoin}>
+					Join game
+				</button>
+				<Link onClick={handleCreate} to="/lobby" className="createbtn">
+					Create game
+				</Link>
+			</div>
+		</div>
+	)
+	// =======
+	// 	return (
+	// 		<div className="flex flex-col">
+	// 			<input
+	// 				className="enterName"
+	// 				type="text"
+	// 				name="username"
+	// 				value={username}
+	// 				placeholder="name"
+	// 				onChange={(e) => setName(e.target.value)}
+	// 			/>
+	// 			<input
+	// 				type="text"
+	// 				name="room"
+	// 				value={room}
+	// 				placeholder="room code"
+	// 				onChange={(e) => setRoom(e.target.value)}
+	// 			/>
 
-    return(
-        
-        <div className="start-game">
-            <input className="usernameinput" type="text" name="username" value={username} placeholder="name" onChange={(e) => setName(e.target.value)}/>
-            <input className="usernameinput" type="text" name="room" value={room} placeholder="room code" onChange={(e) => setRoom(e.target.value)}/>
-        <div className="joinbtns">    
-            <button className="joinbtn" onClick={handleJoin}>Join game</button>     
-            <Link onClick={handleCreate} to="/lobby" className="createbtn">Create game</Link>
-            </div>
-        </div>
-    )
-// =======
-// 	return (
-// 		<div className="flex flex-col">
-// 			<input
-// 				className="enterName"
-// 				type="text"
-// 				name="username"
-// 				value={username}
-// 				placeholder="name"
-// 				onChange={(e) => setName(e.target.value)}
-// 			/>
-// 			<input
-// 				type="text"
-// 				name="room"
-// 				value={room}
-// 				placeholder="room code"
-// 				onChange={(e) => setRoom(e.target.value)}
-// 			/>
+	// 			<div>
+	// 				<button className="joincreate" onClick={handleJoin}>
+	// 					Join game
+	// 				</button>
 
-// 			<div>
-// 				<button className="joincreate" onClick={handleJoin}>
-// 					Join game
-// 				</button>
-
-// 				<button className="joincreate" onClick={handleCreate}>
-// 					Create game
-// 				</button>
-// 			</div>
-// 		</div>
-// 	)
-
+	// 				<button className="joincreate" onClick={handleCreate}>
+	// 					Create game
+	// 				</button>
+	// 			</div>
+	// 		</div>
+	// 	)
 }
 
 export default StartGame
