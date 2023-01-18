@@ -22,6 +22,7 @@ const GameGallery = () => {
 			])
 
 
+
     // return (
     //     <div className="p-2 grid grid-cols-1 grid-rows-3 gap-2" >
     //         <div className="grid gap-2 grid-cols-6">{easy && easy.slice(-6).map((q) => <QuestionCard key={q.id} QuestionData={q} Winner={false} />)}</div>
@@ -38,6 +39,14 @@ const GameGallery = () => {
 			})
 		)
 	}, [])
+
+
+	const handleForm = async (e) => {
+		e.preventDefault();
+		
+	}
+
+	
 
 	return (
 		<div className="p-2 grid grid-cols-1 grid-rows-3 ">

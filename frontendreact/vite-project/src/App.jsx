@@ -12,7 +12,7 @@ import { HomePage, Game, Winner, Lobby } from "./pages"
 import "./back2.styl"
 
 import { io } from "socket.io-client"
-import { changeState, updateScore, storeSocket } from "./actions"
+import { changeState, updateScore, storeSocket, setHost } from "./actions"
 
 const ENDPOINT = "http://localhost:3000"
 
@@ -39,6 +39,7 @@ function App() {
 			socket.leave(gameState.room)
 		})
 		newSocket.on("change state", (state) => changeState(state))
+		newSocket.on("make host", () => setHost())
 		dispatch(storeSocket(newSocket))
 		// setSocket(newSocket)
 		return () => {

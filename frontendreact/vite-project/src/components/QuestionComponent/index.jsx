@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react"
-import { useCallback } from "react"
+import { useDispatch, useCallback } from "react"
 
 const QComp = ({ data, onClose }) => {
 	const correct = { text: data.correctAnswer, isCorrect: true }
@@ -13,8 +13,9 @@ const QComp = ({ data, onClose }) => {
 		() => answers.sort(() => Math.random() - 0.5),
 		[data]
 	)
+	const [timeLeft, setTimeLeft] = useState(1)
 
-	const [timeLeft, setTimeLeft] = useState(20)
+	// const [timeLeft, setTimeLeft] = useState(10)
 	const [enabled, setEnabled] = useState(true)
 	const [beginTimestamp, setBeginTimestamp] = useState(0)
 
@@ -23,8 +24,8 @@ const QComp = ({ data, onClose }) => {
 	const handleClick = (ansObj) => {
 		console.log(ansObj)
 		// setEndTimestamp(ansObj.answerTime)
-		let timeDiff = endTimestamp - beginTimestamp
-		dispatch()
+		let timeDiff = ansObj.endTimestamp - beginTimestamp
+		// dispatch(timeDiff);
 		//user
 		//timeDiff
 		//ansObj
