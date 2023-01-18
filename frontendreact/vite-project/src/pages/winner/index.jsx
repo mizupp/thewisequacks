@@ -6,19 +6,19 @@ const Winner = () => {
 	// const data = useSelector((state) => state.gameState)
 	const data = [
 		{
-			userID: socket.id,
+			userID: '123',
 			name: "one",
 			isHost: true,
 			score: 100,
 		},
 		{
-			userID: socket.id,
+			userID: '456',
 			name: "two",
 			isHost: false,
 			score: 10,
 		},
 		{
-			userID: socket.id,
+			userID: '789',
 			name: "three",
 			isHost: false,
 			score: 500,
