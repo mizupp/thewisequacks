@@ -29,12 +29,10 @@ function App() {
 		newSocket.on("change state", (state) => {
 			dispatch(changeState(state))
 		})
-		newSocket.on("update opponents score", ({ user, score }) => {
-			dispatch(updateScore(user, score))
-		})
-		newSocket.on("update opponent completion", (user) => {
-			dispatch(setQuizAsComplete(user))
-		})
+		newSocket.on('disconnecting', () => {
+			socket.emit('leave room', {room: gameState.room, playerInfo: clientUser})
+			socket.leave(gameState.room)
+		}) 
 		dispatch(storeSocket(newSocket))
 		setSocket(newSocket)
 	}, [])

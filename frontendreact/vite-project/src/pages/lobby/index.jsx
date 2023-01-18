@@ -7,37 +7,14 @@ import PlayerListLobby from "../../components/PlayerListLobby";
 import MyModal from "../../components/Modal";
 
 import "./styles.css"
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Lobby = () => {
 	const [AvatarSelectionOpen, setAvatarSelectionOpen] = useState(true);
     const [host, setHost] = useState(true);
 	const [WaitingRoomOpen, setWaitingRoomOpen] = useState(true);
-	const users = [
-		{
-			name: "John",
-			avatar: "https://i.imgur.com/8Km9tLL.png",
-			ready: true,
-			host: true,
-		},
-		{
-			name: "Jane",
-			avatar: "https://i.imgur.com/8Km9tLL.png",
-			ready: false,
-			host: false,
-		},
-		{
-			name: "Joe",
-			avatar: "https://i.imgur.com/8Km9tLL.png",
-			ready: false,
-			host: false,
-		},
-		{
-			name: "Jill",
-			avatar: "https://i.imgur.com/8Km9tLL.png",
-			ready: false,
-			host: false,
-		}
-	]
+	const data = useSelector(state => state.gameState);
 
 	return (
 		<div className="lobby-container">
@@ -45,10 +22,10 @@ const Lobby = () => {
 				<AvatarSelection />
 			</div>
 			<div className="PlayerLobbyList">
-				<PlayerListLobby users={users} />
+				{data && <PlayerListLobby users={data.users} />}
 			</div>
 			<div className="WaitingRoom">
-				<WaitingRoom />
+				<WaitingRoom data={data} />
 			</div>
 			{/* <PlayerCard className=""/> */}
 		</div>

@@ -31,6 +31,7 @@ const StartGame = () => {
 		console.log(playerInfo)
 		socket.emit("create game", playerInfo)
 		dispatch(addUser(playerInfo))
+		navigate('/lobby')
 	}
 
 	const handleJoin = () => {
@@ -42,6 +43,7 @@ const StartGame = () => {
 		}
 		socket.emit("join game", { room, playerInfo })
 		dispatch(addUser(playerInfo))
+		navigate('/lobby')
 	}
 
 	return (
