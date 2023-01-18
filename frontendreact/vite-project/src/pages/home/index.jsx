@@ -35,7 +35,6 @@ const HomePage = () => {
 	}
 
 	return (
-<<<<<<< HEAD
 	<>
 	{/* <JoinGame /> */}
 	<StartGame />
@@ -51,35 +50,9 @@ const HomePage = () => {
 			</button>
 			<MyModal onClose={() => setInstructionsOpen(false)} Component={<Instructions/>} setOpen={instructionsOpen} />
 			<MyModal onClose={() => setHighScoreListOpen(false)} Component={<HighScoreList/>} setOpen={highScoreListOpen} />
-=======
-		<div className="flex flex-col items-center">
-			{/* <JoinGame /> */}
 
-			<StartGame />
-			{/* <Timerbar />	 */}
-			<h1 className="text-4xl">Home Page</h1>
-			<div>
-				<button type="button" onClick={openInstructionsModal}>
-					Instructions
-				</button>
-
-				<button type="button" onClick={openHighScoreListModal}>
-					High Score
-				</button>
-
-				<MyModal
-					onClose={() => setInstructionsOpen(false)}
-					Component={<Instructions />}
-					setOpen={instructionsOpen}
-				/>
-				<MyModal
-					onClose={() => setHighScoreListOpen(false)}
-					Component={<HighScoreList />}
-					setOpen={highScoreListOpen}
-				/>
->>>>>>> eb608c32bbbc0cec3722e95b5bd7f57c30904c51
 			</div>
-		</div>
+		</>
 	)
 }
 

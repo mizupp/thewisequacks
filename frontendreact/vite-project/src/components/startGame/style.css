@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 .start-game{
     display: flex;
     flex-direction: column;
@@ -81,7 +81,7 @@
     padding-left:20px;
     color: #ffffff;
 }
-=======
+
 .joincreate {
 	background-color: #4caf50; /* Green */
 	border: none;
@@ -104,4 +104,3 @@
 	padding: 50px 100px;
 	margin: 100px 100px;
 }
->>>>>>> eb608c32bbbc0cec3722e95b5bd7f57c30904c51
