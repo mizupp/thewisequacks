@@ -2,7 +2,6 @@ import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { Navigate } from "react-router-dom"
 import { startGame } from "../../actions"
-import { getState } from "../../actions"
 import "./style.css"
 
 const WaitingRoom = ({data}) => {

@@ -21,9 +21,9 @@ const storeUser = (user) => {
     }
 }
 
-const addUser = (user) => {
+const updateLocalUser = (user) => {
     return {
-        type: 'ADD_USER',
+        type: 'UPDATE_USER',
         payload: user
     }
 }
@@ -63,11 +63,6 @@ const incrementQuestionNumber = () => {
     }
 }
 
-const resetQuestionNumber = () => {
-    return {
-        type: "REST_QUESTION_NUMBER"
-    }
-}
 
 const setQuizAsComplete = (user) => {
     return {
@@ -85,8 +80,18 @@ const updateUser = () => {
     socket.emit('update user', (playerInfo, room))
 }
 
+const loadData = (data) => {
+    return {
+        type: "LOAD_DATA",
+        payload: data
+    }
+}
+
+const clearData = (data) => {
+    return {
+        type: "LOAD_DATA",
+    }
+}
 
 
-
-
-export {  storeSocket, changeState, storeUser, addUser, updateScore, setCompleted, setIcon, startGame, incrementQuestionNumber, resetQuestionNumber,  setQuizAsComplete, getState, updateUser }
+export {  storeSocket, changeState, storeUser, updateUser,updateLocalUser, updateScore, setCompleted, setIcon, startGame, incrementQuestionNumber,  setQuizAsComplete, getState, updateUser,loadData,clearData }

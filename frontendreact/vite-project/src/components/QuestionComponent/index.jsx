@@ -34,7 +34,7 @@ const QComp = ({data, onClose}) => {
             <h2 className='text-xl'>{data.question}</h2>
             {timeLeft <= 15 ? null : <h1 className="text-[10rem] font-bold text-gray-800">{timeLeft - 15}</h1>}
             <div className='flex flex-col'>
-              {timeLeft <= 15 && shuffledAnswers.map((a, i) => <AnswerComp onClick={handleClick} isEndTimer={timeLeft <=5} enabled={enabled} answer={a} key={i}></AnswerComp>)}
+                {timeLeft <= 15 && shuffledAnswers.map((a, i) => <AnswerComp onClick={handleClick} isEndTimer={timeLeft <=5} enabled={enabled} answer={a} key={i}></AnswerComp>)}
             </div>
             {/* <button onClick={onClose}>Close</button> */}
         </>
@@ -44,24 +44,24 @@ const QComp = ({data, onClose}) => {
 export default QComp
 
 const AnswerComp = ({answer, enabled, isEndTimer, onClick}) => {
-  const [isAnswered, setIsAnswered] = useState(false)
+    const [isAnswered, setIsAnswered] = useState(false)
   //function to handle onlclick -- need backend squad
-  const {isCorrect} = answer
+    const {isCorrect} = answer
 
-  const clickHandler = () => {
-    setIsAnswered(true)
-    onClick()
-  }
+    const clickHandler = () => {
+        setIsAnswered(true)
+        onClick()
+    }
 
-  return (
-    <button 
-      className={`border-indigo-600 opacity-100 rounded-sm border p-2 ${isEndTimer && (isCorrect ? 'bg-green-600' : 'bg-red-600')} 
-      ${!enabled && (!enabled && isAnswered ? 'opacity-100' : 'opacity-50')}`}  
-      disabled={!enabled} 
-      onClick={clickHandler}
-      >
-        {answer.text}
-    </button>
+    return (
+        <button 
+        className={`border-indigo-600 opacity-100 rounded-sm border p-2 ${isEndTimer && (isCorrect ? 'bg-green-600' : 'bg-red-600')} 
+        ${!enabled && (!enabled && isAnswered ? 'opacity-100' : 'opacity-50')}`}  
+        disabled={!enabled} 
+        onClick={clickHandler}
+        >
+            {answer.text}
+        </button>
   )
 }
 

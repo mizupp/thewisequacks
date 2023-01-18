@@ -9,7 +9,7 @@ import Chat from './components/Chat';
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { HomePage, Game, Winner, Lobby } from './pages'
 
-import './back.styl';
+import './back2.styl';
 
 import {io} from "socket.io-client";
 import { changeState, updateScore, storeSocket } from './actions'
@@ -21,11 +21,11 @@ export const SocketContext = createContext(socketend)
 
 function App() {
 
-	const [socket, setSocket] = useState()
+	// const [socket, setSocket] = useState()
 	const dispatch = useDispatch()
 	const clientUser = useSelector((state) => state.user)
 	const host = useSelector((state) => state.gameState.host)
-	const gameState = useSelector((state) => state.gameState)
+	// const gameState = useSelector((state) => state.gameState)
 
 	useEffect(() => {
 		const newSocket = io(ENDPOINT)
@@ -36,26 +36,27 @@ function App() {
 			socket.emit('leave room', {room: gameState.room, playerInfo: clientUser})
 			socket.leave(gameState.room)
 		}) 
+    newSocket.on('change state', (state) => changeState(state))
 		dispatch(storeSocket(newSocket))
-		setSocket(newSocket)
+		// setSocket(newSocket)
 	}, [])
 
-  useEffect(() => {
-    if (socket) {
-      socket.on("user joining waiting room", (user) => {
-        if (clientUser === host) {
-          dispatch(addUser(user));
-          let newGameState = { ...gameState };
-          newGameState.users.push({
-            name: user,
-            score: 0,
-            hasCompletedQuiz: false,
-          });
-          socket.emit("send state to players", newGameState);
-        }
-      });
-    }
-  }, [socket, clientUser, host]);
+  // useEffect(() => {
+  //   if (socket) {
+  //     socket.on("user joining waiting room", (user) => {
+  //       if (clientUser === host) {
+  //         dispatch(addUser(user));
+  //         let newGameState = { ...gameState };
+  //         newGameState.users.push({
+  //           name: user,
+  //           score: 0,
+  //           hasCompletedQuiz: false,
+  //         });
+  //         socket.emit("send state to players", newGameState);
+  //       }
+  //     });
+  //   }
+  // }, [socket, clientUser, host]);
 
 
   return (

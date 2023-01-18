@@ -21,23 +21,14 @@ import {
 	image18,
 	image19,
 	image20,
+	image21,
+	image22, 
+	image23
 } from "../../img"
+import { setIcon } from "../../actions"
 //instead of Avatar selection maybe make this the playercard file
 //so will contain the avatar and the username
 const AvatarSelection = () => {
-	// const [images, setImages] = useState([
-	//     { title: 'Title1', src: Image1, open: false },
-	//     { title: 'Title2', src: Image2, open: false },
-	//     { title: 'Title3', src: Image3, open: false },
-	//     { title: 'Title4', src: Image4, open: false },
-	//     { title: 'Title5', src: Image5, open: false },
-	//     { title: 'Title6', src: Image6, open: false },
-	//     { title: 'Title7', src: Image7, open: false },
-	//     { title: 'Title8', src: Image8, open: false },
-	//     { title: 'Title9', src: Image9, open: false },
-	//     { title: 'Title10', src: Image10, open: false },
-	//   ]);
-
 	const [avatars, setAvatars] = useState([
 		image1,
 		image2,
@@ -59,13 +50,18 @@ const AvatarSelection = () => {
 		image18,
 		image19,
 		image20,
+		image21,
+		image22, 
+		image23
 	])
-	// console.log(avatars)
 
 	const [selectedAvatar, setSelectedAvatar] = useState("")
-
+	const icon = useSelector(state => state.icon)
+		
 	const onSelect = (a) => {
 		setSelectedAvatar(a)
+		setIcon(a)
+		
 	}
 
 	return (
