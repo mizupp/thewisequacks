@@ -21,3 +21,7 @@ export { default as image20 } from "./20-min.png"
 export { default as image21 } from "./21-min.png"
 export { default as image22 } from "./22-min.png"
 export { default as image23 } from "./23-min.png"
+export { default as logo } from "./logo.png"
+export { default as logowb } from "./logonwb.png"
+export { default as logonb } from "./logonb.png"
+

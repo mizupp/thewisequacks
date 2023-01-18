@@ -1,0 +1,70 @@
+/* #root {
+    margin: 0 auto;
+    text-align: center;
+  } */
+  .headmy{
+    background-color:#890b0b42;
+    width: 100px;
+    align-self:flex-end;
+    border: 3px dashed rgb(211, 214, 0);
+  }
+
+  .logo {
+    /* margin-top: 200px; */
+    /* margin-left: 50vh; */
+    left: 0 !important;
+    position: absolute;
+    height: 8em;
+    padding: 0em;
+    margin: 2em;
+    margin-top: 8em;
+    
+    /* will-change: filter; */
+  }
+  .logo:hover {
+    filter: drop-shadow(0 0 0.5em #007419aa);
+    animation-name: logo-spin;
+    animation-duration: 2s;
+}
+  
+  @keyframes logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    a:nth-of-type(2) .logo {
+      animation: logo-spin infinite 20s linear;
+    }
+  }
+  
+  .card {
+    padding: 2em;
+    
+  }
+  
+  /* .read-the-docs {
+    color: #888;
+  }
+   */
+
+
+   .wormy{
+    width: 100px;
+    margin: 0;
+    margin-bottom: 0;
+}
+
+.dark {
+  /* filter: drop-shadow(16px 16px 20px rgb(237, 237, 0)) grayscale(100%); */
+  filter: grayscale(90%);
+}
+
+.light {
+filter: contrast(100%)
+
+}
