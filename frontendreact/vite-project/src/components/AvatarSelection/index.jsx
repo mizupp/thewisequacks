@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import React, { useContext, useEffect, useState } from "react"
+import { useSelector, useDispatch } from "react-redux"
 import {
 	image1,
 	image2,
@@ -21,23 +21,21 @@ import {
 	image18,
 	image19,
 	image20,
+	image21,
+	image22, 
+	image23
 } from "../../img"
+import { setIcon, updateLocalUser } from "../../actions/index"
+// import {updateUser} from "../../actions/socketActions"
+// import { SocketContext } from '../../App';
+
 //instead of Avatar selection maybe make this the playercard file
 //so will contain the avatar and the username
-const AvatarSelection = () => {
-	// const [images, setImages] = useState([
-	//     { title: 'Title1', src: Image1, open: false },
-	//     { title: 'Title2', src: Image2, open: false },
-	//     { title: 'Title3', src: Image3, open: false },
-	//     { title: 'Title4', src: Image4, open: false },
-	//     { title: 'Title5', src: Image5, open: false },
-	//     { title: 'Title6', src: Image6, open: false },
-	//     { title: 'Title7', src: Image7, open: false },
-	//     { title: 'Title8', src: Image8, open: false },
-	//     { title: 'Title9', src: Image9, open: false },
-	//     { title: 'Title10', src: Image10, open: false },
-	//   ]);
 
+const AvatarSelection = ({user, room}) => {
+	const socket = useSelector(state => state.socket);
+
+	const dispatch = useDispatch()
 	const [avatars, setAvatars] = useState([
 		image1,
 		image2,
@@ -59,14 +57,48 @@ const AvatarSelection = () => {
 		image18,
 		image19,
 		image20,
+		image21,
+		image22, 
+		image23
 	])
-	// console.log(avatars)
 
-	const [selectedAvatar, setSelectedAvatar] = useState("")
-
+	const [selectedAvatar, setSelectedAvatar] = useState({image1});
+	// const socket = useSelector(state => state.socket)
 	const onSelect = (a) => {
 		setSelectedAvatar(a)
+		console.log(selectedAvatar)
+		updateAvatar(a)
+		
 	}
+
+	const updateAvatar = (a) => {
+		const playerInfo = user;
+		playerInfo.icon = a;
+		// dispatch(setIcon(selectedAvatar))
+		dispatch(updateLocalUser(playerInfo))
+		// updateUser(socket, playerInfo, room);
+		socket.emit('update player', {playerInfo, room})
+		console.log(updateLocalUser(playerInfo));
+	}
+
+// 	useEffect(() => {
+//   const timer = setTimeout(() => {
+// 	updateAvatar()
+//     console.log('This will run after 1 second!')
+//   }, 1000);
+//   return () => clearTimeout(timer);
+// }, [selectedAvatar]);
+
+
+	// useEffect(() => {
+	// 	updateAvatar();
+	// }, [selectedAvatar])
+
+	// const [isLoading, setIsLoading] = useState(true);
+	// function onLoad() {
+	// 	setTimeout(() => setIsLoading(false), 1000);
+		
+	//   }
 
 	return (
 		<div className="flex flex-col items-center justify-stretch gap-4 w-full h-full bg-gray-800 rounded-lg p-4 border-2 border-solid border-black drop-shadow-lg text-white">
@@ -74,9 +106,11 @@ const AvatarSelection = () => {
 			<div className="grid  grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 text-6xl">
 				{avatars.map((a, i) => (
 					<img
+					// onLoad={onLoad}
 						src={a}
 						id={a}
 						key={i}
+						placeholder={image2}
 						className={`h-20 w-20 ${
 							a == selectedAvatar ? "opacity-20" : "opacity-100"
 						}`}
@@ -88,4 +122,4 @@ const AvatarSelection = () => {
 	)
 }
 
-export default AvatarSelection
+export default AvatarSelection;

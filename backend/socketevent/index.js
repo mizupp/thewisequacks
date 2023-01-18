@@ -1,5 +1,6 @@
 const { GameState } = require("../models/GameState")
 const { io } = require("../initialiseServer")
+const { on } = require("nodemon")
 
 const games = []
 const rooms = []
@@ -32,18 +33,20 @@ function initialise(socket) {
 
 		if (roomName) {
 			const state = games[getIndex(roomName)]
-			state.removePlayer(id)
+			const response = state.removePlayer(id)
+			if (response === "Host Removed") {
+				io.to(state.users[0].userID).emit('make host')
+			}
 			socket.to(roomName).emit('change state', state)
 			console.log('Player left room')
 		}
-	
 	})
 
 	// listen for new game creation
 	socket.on("create game", (playerInfo) => {
 		try {
 			const room = codeGenerator()
-			const state = new GameState(room)
+			const state = new GameState(room, socket.id)
 			state.addPlayer(playerInfo)
 			games.push(state)
 			socket.join(room)
@@ -80,12 +83,15 @@ function initialise(socket) {
 	socket.on("update player", ({ playerInfo, room }) => {
 		// get room gamestate
 		const state = games[getIndex(room)]
-
+		console.log("current state obj: ", state)
 		//update server gamestate
 		state.updatePlayer(playerInfo)
 		//send new game state
-		socket.to(room).emit("change state", state)
+		console.log('new state obj: ', state)
+		io.to(room).emit("change state", state)
 	})
+
+
 
 	socket.on("update player score", ({ room, user, score }) => {
 		socket.to(room).emit("update opponents score", { user, score })
@@ -119,6 +125,27 @@ function initialise(socket) {
 		}
 	})
 
+	socket.on("leave-session", (room) => {
+		console.log("left room"+ room)
+		const state = games[getIndex(room)]
+			const response = state.removePlayer(socket.id)
+			if (response === "Host Removed") {
+				io.to(state.users[0].userID).emit('make host')
+			}
+			socket.leave(room)
+			socket.to(room).emit('change state', state)
+			console.log('Player left room')
+	})
+
+	socket.on("start-game", (room) => {
+		console.log(room)
+		const state = games[getIndex(room)]
+		state.startGame();
+		console.log('Game is started')
+		io.to(room).emit('change state', state)
+		// socket.to(room).emit("started-game")
+		
+	})
 	// const adapter = io.sockets.adapter
 	// // const userid = userID => adapter.ids.get(userID);
 	// const getRoom = roomID => adapter.rooms.get(roomID)
