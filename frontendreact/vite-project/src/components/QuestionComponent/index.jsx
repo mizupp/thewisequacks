@@ -28,10 +28,9 @@ const QComp = ({ data, onClose }) => {
 		console.log(ansObj.answerTime)
 		console.log(beginTimestamp)
 		console.log(timeDiff);
-		//dispatch(
-		//user
-		//timeDiff
-		//answer)
+		const score = score(timeDiff, ansObj.answer);
+		// SEND SCORE TO USER!!!!
+		
 		setEnabled(false)
 	}
 
@@ -89,9 +88,9 @@ const AnswerComp = ({ answer, enabled, isEndTimer, onClick }) => {
 		onClick({ answerTime: new Date().getTime(), answer: answer })
 	}
 
-	const score = (time, correct) =>{
+	const score = (time, answer) =>{
 		let scorenum = 0;
-		if (correct) {
+		if (answer.isCorrect) {
 			return Math.ceil((10000 - time)/100)
 		} else {
 			return scorenum = 0;
