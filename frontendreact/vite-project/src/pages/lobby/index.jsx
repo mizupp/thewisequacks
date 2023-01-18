@@ -15,14 +15,16 @@ const Lobby = () => {
     const [host, setHost] = useState(true);
 	const [WaitingRoomOpen, setWaitingRoomOpen] = useState(true);
 	const data = useSelector(state => state.gameState);
-
+	const icon = useSelector(state => state.icon);
+	const user = useSelector(state => state.user);
+	
 	return (
 		<div className="lobby-container">
 			<div className="AvatarSelection">
-				<AvatarSelection />
+				{(user) && <AvatarSelection user={user} room={data.room}/>}
 			</div>
 			<div className="PlayerLobbyList">
-				{data && <PlayerListLobby users={data.users} />}
+				{data && <PlayerListLobby users={data.users} icon={icon} />}
 			</div>
 			<div className="WaitingRoom">
 				<WaitingRoom data={data} />

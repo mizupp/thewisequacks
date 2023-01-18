@@ -1,4 +1,3 @@
-import { Socket } from "socket.io-client"
 
 const storeSocket = (socket) => {
     return {
@@ -76,9 +75,6 @@ const getState = (socket) => {
 }
 
 
-const updateUser = () => {
-    socket.emit('update user', (playerInfo, room))
-}
 
 const loadData = (data) => {
     return {
@@ -94,4 +90,4 @@ const clearData = (data) => {
 }
 
 
-export {  storeSocket, changeState, storeUser, updateUser,updateLocalUser, updateScore, setCompleted, setIcon, startGame, incrementQuestionNumber,  setQuizAsComplete, getState, updateUser,loadData,clearData }
+export {  storeSocket, changeState, storeUser,updateLocalUser, updateScore, setCompleted, setIcon, startGame, incrementQuestionNumber,  setQuizAsComplete, getState,loadData,clearData }

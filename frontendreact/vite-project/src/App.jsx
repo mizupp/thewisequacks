@@ -41,24 +41,6 @@ function App() {
 		// setSocket(newSocket)
 	}, [])
 
-  // useEffect(() => {
-  //   if (socket) {
-  //     socket.on("user joining waiting room", (user) => {
-  //       if (clientUser === host) {
-  //         dispatch(addUser(user));
-  //         let newGameState = { ...gameState };
-  //         newGameState.users.push({
-  //           name: user,
-  //           score: 0,
-  //           hasCompletedQuiz: false,
-  //         });
-  //         socket.emit("send state to players", newGameState);
-  //       }
-  //     });
-  //   }
-  // }, [socket, clientUser, host]);
-
-
   return (
     <>
   

@@ -23,7 +23,7 @@ class GameState{
     updatePlayer(playerInfo) {
         return new Promise(async (resolve, reject) => {
             try {
-                const user = this.users.findIndex((p) => p.userID === playerInfo.userId);
+                const user = this.users.findIndex((p) => p.userID === playerInfo.userID);
                 this.users[user] = playerInfo
                 resolve("Player Updated")
             } catch (error) {

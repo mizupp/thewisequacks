@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { storeSocket, changeState, storeUser, addUser, updateScore, setCompleted } from "../../actions";
+import { storeSocket, changeState, storeUser, updateLocalUser, updateScore, setCompleted } from "../../actions";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom"; 
@@ -22,10 +22,11 @@ const StartGame = () => {
 			name: username,
 			isHost: true,
 			score: 0,
+			icon: ""
 		}
 		console.log(playerInfo)
 		socket.emit("create game", playerInfo)
-		dispatch(addUser(playerInfo))
+		dispatch(updateLocalUser(playerInfo))
 		navigate('/lobby')
 	}
 
@@ -35,9 +36,10 @@ const StartGame = () => {
 			name: username,
 			isHost: false,
 			score: 0,
+			icon: ""
 		}
 		socket.emit("join game", { room, playerInfo })
-		dispatch(addUser(playerInfo))
+		dispatch(updateLocalUser(playerInfo))
 		navigate('/lobby')
 	}
 

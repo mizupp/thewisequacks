@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import React, { useContext, useEffect, useState } from "react"
+import { useSelector, useDispatch } from "react-redux"
 import {
 	image1,
 	image2,
@@ -25,10 +25,17 @@ import {
 	image22, 
 	image23
 } from "../../img"
-import { setIcon } from "../../actions"
+import { setIcon, updateLocalUser } from "../../actions/index"
+// import {updateUser} from "../../actions/socketActions"
+// import { SocketContext } from '../../App';
+
 //instead of Avatar selection maybe make this the playercard file
 //so will contain the avatar and the username
-const AvatarSelection = () => {
+
+const AvatarSelection = ({user, room}) => {
+	const socket = useSelector(state => state.socket);
+
+	const dispatch = useDispatch()
 	const [avatars, setAvatars] = useState([
 		image1,
 		image2,
@@ -56,12 +63,17 @@ const AvatarSelection = () => {
 	])
 
 	const [selectedAvatar, setSelectedAvatar] = useState("")
-	const icon = useSelector(state => state.icon)
-		
+	// const socket = useSelector(state => state.socket)
 	const onSelect = (a) => {
+		const playerInfo = user;
 		setSelectedAvatar(a)
-		setIcon(a)
+		playerInfo.icon = selectedAvatar;
+		// dispatch(setIcon(selectedAvatar))
+		dispatch(updateLocalUser(playerInfo))
 		
+		// updateUser(socket, playerInfo, room);
+		socket.emit('update player', {playerInfo, room})
+		console.log(updateLocalUser(playerInfo));
 	}
 
 	return (
@@ -84,4 +96,4 @@ const AvatarSelection = () => {
 	)
 }
 
-export default AvatarSelection
+export default AvatarSelection;

@@ -79,8 +79,10 @@ function initialise(socket) {
 	// updates player information
 	socket.on("update player", ({ playerInfo, room }) => {
 		// get room gamestate
+		console.log(playerInfo)
+		console.log(room)
 		const state = games[getIndex(room)]
-
+		console.log(state)
 		//update server gamestate
 		state.updatePlayer(playerInfo)
 		//send new game state

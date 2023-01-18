@@ -8,7 +8,7 @@ const WaitingRoom = ({data}) => {
 	const isHost = useSelector((state) => state.user.isHost)
 	const socket = useSelector((state) => state.socket)
 	const dispatch = useDispatch()
-	console.log(data)
+	// console.log(data)
 
 
 
