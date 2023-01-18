@@ -4,8 +4,8 @@ import { useState } from "react"
 const Winner = () => {
 	//get users and scores from redux
 	// const data = useSelector((state) => state.gameState)
-	const data = [
-		{
+	const data = {
+		users: [{
 			userID: '123',
 			name: "one",
 			isHost: true,
@@ -22,12 +22,12 @@ const Winner = () => {
 			name: "three",
 			isHost: false,
 			score: 500,
-		},
-	]
+		}]
+	}
 	const [sortedUsers, setSortedUsers] = useState(() =>
 		data.users.sort(function (a, b) {
-			let x = a[score]
-			let y = b[score]
+			let x = a.score
+			let y = b.score
 			return x < y ? -1 : x > y ? 1 : 0
 		})
 	)

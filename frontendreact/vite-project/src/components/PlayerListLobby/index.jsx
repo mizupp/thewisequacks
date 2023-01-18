@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-
+import {image1} from  "../../img";
 
 // const PlayerListLobby = ({users}) => {
     
@@ -45,7 +45,7 @@ const PlayerListLobby = ({ users }) => {
 								key={index}
 							>
 								<td>
-									<img className="rounded-full h-10 w-10" src={user?.avatar} />
+									<img className="rounded-full h-10 w-10" src={user?.icon} />
 								</td>
 								<td>{user.name}</td>
 							</tr>

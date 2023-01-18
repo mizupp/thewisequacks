@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import GameGallery from "../../components/GameGallery";
 import ScoreBoard from "../../components/ScoreBoard";
@@ -9,7 +10,7 @@ const Game = () => {
 
     return (
         <>
-            <ScoreBoard users={data.users} />
+            {/* <ScoreBoard users={data.users} /> */}
             <GameGallery />
         </>
     )

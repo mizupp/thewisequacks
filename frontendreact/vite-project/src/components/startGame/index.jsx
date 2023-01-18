@@ -1,26 +1,10 @@
-
-
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { storeSocket, changeState, storeUser, updateLocalUser, updateScore, setCompleted } from "../../actions";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom"; 
-// =======
-// import React, { useState } from "react"
-// import { useSelector, useDispatch } from "react-redux"
-// import {
-// 	storeSocket,
-// 	changeState,
-// 	storeUser,
-// 	// addUser
-// 	updateScore,
-// 	setCompleted,
-// } from "../../actions"
-// import axios from "axios"
-// import { useNavigate } from "react-router-dom"
-// import { Link } from "react-router-dom"
-// >>>>>>> db9f0eaa6c5808975aad5d1fd8ca9276956428ed
+
 
 import "./style.css"
 const StartGame = () => {
@@ -38,7 +22,7 @@ const StartGame = () => {
 			name: username,
 			isHost: true,
 			score: 0,
-			icon: ""
+			icon: '/src/img/1-min.png'
 		}
 		console.log(playerInfo)
 		socket.emit("create game", playerInfo)
@@ -53,7 +37,7 @@ const StartGame = () => {
 			name: username,
 			isHost: false,
 			score: 0,
-			icon: ""
+			icon: '/src/img/1-min.png'
 		}
 		socket.emit("join game", { room, playerInfo })
 		dispatch(updateLocalUser(playerInfo))

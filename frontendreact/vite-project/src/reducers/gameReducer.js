@@ -6,13 +6,6 @@ const initState = {
 	error: null,
 }
 
-/* 
-users: {
-	
-}
-
-*/
-
 const gameReducer = (state = initState, action) => {
 	switch (action.type) {
 		case "LOAD_DATA":

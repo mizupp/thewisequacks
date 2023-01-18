@@ -11,7 +11,6 @@ const WaitingRoom = ({data}) => {
 	// console.log(data)
 
 
-
 	function handleButtonClick() {
 		dispatch(startGame())
 		let newState = {
@@ -21,6 +20,7 @@ const WaitingRoom = ({data}) => {
 
 		socket.emit("send state to players", newState)
 		console.log(data)
+
 	}
 
 	return (
@@ -36,6 +36,7 @@ const WaitingRoom = ({data}) => {
 						<span>{data.room}</span>
 					</div>
 				</div>}
+				{/* <br/> */}
 				{isHost && <button onClick={handleButtonClick} className="btn start-game">
 					START GAME
 				</button>}
