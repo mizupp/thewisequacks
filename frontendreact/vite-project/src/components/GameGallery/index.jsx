@@ -7,6 +7,7 @@ const GameGallery = () => {
 	const [medium, setMedium] = useState(null)
 	const [hard, setHard] = useState(null)
 
+	
 	useEffect(() => {
 		const getAllQuestions = async () =>
 			axios.all([

@@ -13,7 +13,7 @@ const QComp = ({ data, onClose }) => {
 		() => answers.sort(() => Math.random() - 0.5),
 		[data]
 	)
-	const [timeLeft, setTimeLeft] = useState(1)
+	const [timeLeft, setTimeLeft] = useState(10)
 
 	// const [timeLeft, setTimeLeft] = useState(10)
 	const [enabled, setEnabled] = useState(true)
@@ -25,6 +25,8 @@ const QComp = ({ data, onClose }) => {
 		console.log(ansObj)
 		// setEndTimestamp(ansObj.answerTime)
 		let timeDiff = ansObj.endTimestamp - beginTimestamp
+		console.log(ansObj.endTimestamp)
+		console.log(beginTimestamp)
 		// dispatch(timeDiff);
 		//user
 		//timeDiff
@@ -84,6 +86,30 @@ const AnswerComp = ({ answer, enabled, isEndTimer, onClick }) => {
 	const clickHandler = () => {
 		setIsAnswered(true)
 		onClick({ answerTime: new Date().getTime(), answer: answer })
+	}
+
+	const score = (time, correct) =>{
+		let scorenum = 0;
+		if (correct) {
+			switch (time) {
+				case time < 3:
+					return 
+						scorenum = 1
+				case time < 8 :
+					return 
+						scorenum = 10
+				case time < 10:
+					return
+						scorenum = 15
+					break;
+				default:
+					break;
+			}
+		} else {
+			return scorenum = 0;
+		}
+
+
 	}
 
 	return (
