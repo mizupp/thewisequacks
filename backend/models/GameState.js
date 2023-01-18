@@ -25,6 +25,7 @@ class GameState{
             try {
                 const user = this.users.findIndex((p) => p.userID === playerInfo.userID);
                 this.users[user] = playerInfo
+                console.log("updated player obj: ", playerInfo);
                 resolve("Player Updated")
             } catch (error) {
                 console.log(error);
