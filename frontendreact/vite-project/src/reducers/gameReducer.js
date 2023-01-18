@@ -3,6 +3,7 @@ const initState = {
 	user: {},
 	icon: "",
 	socket: {},
+	error: null
 }
 
 const gameReducer = (state = initState, action) => {
@@ -52,6 +53,11 @@ const gameReducer = (state = initState, action) => {
 					...state.gameState,
 					questionNumber: 1,
 				},
+			}
+		case "SET_ERROR":
+			return {
+				...state,
+				error: action.payload
 			}
 		default:
 			return state

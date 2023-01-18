@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 
 const PlayerListLobby = ({users}) => {
-    const [userList, setUserList] = useState(null);
-    // console.log(users)
+    
+    console.log(users)
 
     return (
         <div className="w-full h-full flex justify-center items-start m-0">
@@ -12,14 +12,14 @@ const PlayerListLobby = ({users}) => {
                         <th colSpan="2">Player</th>
                     </tr>
                 </thead>
-                <tbody>
+                {users && <tbody>
                     {users.map((user, index) => (
                          <tr className={`${index%2===1 ? 'bg-white' : 'bg-gray-200'}`} key={index}>
-                            <td><img className="rounded-full h-10 w-10" src={user.avatar}/></td>
+                            {/* <td><img className="rounded-full h-10 w-10" src={user.avatar}/></td> */}
                             <td>{user.name}</td>
                         </tr>
                     ))}
-                </tbody>
+                </tbody>}
             </table>
         </div>
     )
