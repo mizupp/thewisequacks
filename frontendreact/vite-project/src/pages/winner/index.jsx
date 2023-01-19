@@ -18,28 +18,6 @@ const Winner = () => {
 		<Winner />
 	}
 
-	// const data = {
-	// 	users: [{
-	// 		userID: '123',
-	// 		name: "one",
-	// 		icon: "src/img/1-min.png",
-	// 		score: 100,
-	// 	},
-	// 	{
-	// 		userID: '456',
-	// 		name: "two",
-	// 		icon: "src/img/1-min.png",
-	// 		score: 10,
-	// 	},
-	// 	{
-	// 		userID: '789',
-	// 		name: "three",
-	// 		icon: "src/img/1-min.png",
-	// 		score: 500,
-	// 	}
-	// ]
-	// }
-
 	const handleHome = () => {
 		socket.emit('leave-session', (data.room))
 		dispatch(leaveRoom())
@@ -51,6 +29,7 @@ const Winner = () => {
 		let x = a.score
 		let y = b.score
 		return x < y ? 1 : x > y ? -1 : 0
+		console.log(sortedUsers);
 	})
 )
 	// const winner = "Russell";
@@ -79,15 +58,15 @@ const Winner = () => {
 				<h1 className="winnerchickendinner">Winner is {nowinner} </h1>
 				<div className="container2 podium">
         			<div className="podiumbar">
-          				<p className="podiumuser">Miz</p>
+          				<p className="podiumuser">{sortedUsers[0].name}</p>
           				<div className="podiumrank second">2</div>
         			</div>
         			<div className="podiumbar">
-          				<p className="podiumuser">Russell</p>
+          				<p className="podiumuser">{sortedUsers[0].name}</p>
           				<div className="podiumrank first">1</div>
         			</div>
         			<div className="podiumbar">
-          				<p className="podiumuser">Tom</p>
+          				<p className="podiumuser">{sortedUsers[0].name}</p>
           				<div className="podiumrank third">3</div>
         			</div>
       			</div>

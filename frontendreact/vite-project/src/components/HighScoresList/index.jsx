@@ -2,7 +2,7 @@ import React from "react"
 import { useState, useEffect } from "react"
 import axios from "axios"
 
-const URL = "http://localhost:3000/highscores"
+const URL = "https://thewisequacks.onrender.com/highscores"
 
 
 const HighScoreList = () => {

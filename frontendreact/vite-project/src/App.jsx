@@ -19,7 +19,7 @@ import "./back3.styl"
 import { io } from "socket.io-client"
 import { changeState, updateScore, storeSocket, setHost, addMessage } from "./actions"
 
-const ENDPOINT = "http://localhost:3000"
+const ENDPOINT = "https://thewisequacks.onrender.com/"
 
 const socketend = io(ENDPOINT)
 export const SocketContext = createContext(socketend)
