@@ -1,5 +1,4 @@
 import React, {useState} from "react"
-import { useSelector } from "react-redux"
 import "./style.css"
 import { useSelector, useDispatch } from "react-redux"
 import { leaveRoom } from "../../actions"
@@ -9,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 const Winner = () => {
 	//get users and scores from redux
 
-	 const data = useSelector((state) => state.gameState)
+	//  const data = useSelector((state) => state.gameState)
 
 
 	// const [winner, setWinner] = useState("");
@@ -23,19 +22,19 @@ const Winner = () => {
 		users: [{
 			userID: '123',
 			name: "one",
-			isHost: true,
+			icon: "src/img/1-min.png",
 			score: 100,
 		},
 		{
 			userID: '456',
 			name: "two",
-			isHost: false,
+			icon: "src/img/1-min.png",
 			score: 10,
 		},
 		{
 			userID: '789',
 			name: "three",
-			isHost: false,
+			icon: "src/img/1-min.png",
 			score: 500,
 		}
 	]
@@ -110,6 +109,7 @@ const Winner = () => {
 				</tbody>
 			</table>
 			<button className="backHome" onClick={handleHome}>Back to Home</button>
+		</div>
 		</div>
 		</div>
 	)
