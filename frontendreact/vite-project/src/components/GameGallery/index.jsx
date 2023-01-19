@@ -22,16 +22,6 @@ const GameGallery = () => {
 				),
 			])
 
-
-
-    // return (
-    //     <div className="p-2 grid grid-cols-1 grid-rows-3 gap-2" >
-    //         <div className="grid gap-2 grid-cols-6">{easy && easy.slice(-6).map((q) => <QuestionCard key={q.id} QuestionData={q} Winner={false} />)}</div>
-    //         <div className="grid gap-2 grid-cols-6">{medium && medium.slice(-6).map((q) => <QuestionCard key={q.id}  QuestionData={q} Winner={false} />)}</div>
-    //         <div className="grid gap-2 grid-cols-6">{hard && hard.slice(-6).map((q) => <QuestionCard key={q.id}  QuestionData={q} Winner={false} />)}</div>
-    //     </div>
-    // )
-
 		getAllQuestions().then(
 			axios.spread(({ data: easyRes }, { data: medRes }, { data: hardRes }) => {
 				setEasy(easyRes)
@@ -40,6 +30,7 @@ const GameGallery = () => {
 			})
 		)
 	}, [])
+
 
 
 	const handleForm = async (e) => {
@@ -56,6 +47,7 @@ const GameGallery = () => {
 					easy
 						.slice(-6)
 						.map((q) => (
+
 							<QuestionCard key={q.id} QuestionData={q} Winner={false}  />
 						))}
 						{ console.log(easy) }
@@ -68,7 +60,8 @@ const GameGallery = () => {
 							<QuestionCard key={q.id} QuestionData={q} Winner={false} />
 						))}
 			</div>
-			<div className="grid grid-cols-6 ">
+
+			<div className="grid grid-cols-6">
 				{hard &&
 					hard
 						.slice(-6)
@@ -78,7 +71,6 @@ const GameGallery = () => {
 			</div>
 		</div>
 	)
-
 }
 
 export default GameGallery

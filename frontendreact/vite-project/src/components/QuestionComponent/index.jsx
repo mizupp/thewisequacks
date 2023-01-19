@@ -19,8 +19,6 @@ const QComp = ({ data, onClose }) => {
 	const [enabled, setEnabled] = useState(true)
 	const [beginTimestamp, setBeginTimestamp] = useState(0)
 
-	//dispatch(//beginTimestamp)
-
 	const handleClick = (ansObj) => {
 		console.log(ansObj)
 		let timeDiff = ansObj.answerTime - beginTimestamp
