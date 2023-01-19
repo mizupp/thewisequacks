@@ -49,3 +49,6 @@ dist-ssr
 *.sln
 *.sw?
 backend/package-lock.json
+
+# Local Netlify folder
+.netlify
