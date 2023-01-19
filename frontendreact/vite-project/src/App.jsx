@@ -8,6 +8,7 @@ import ChatLayout from "./components/ChatLayout"
 import Chat from "./components/Chat"
 import { Routes, Route, Outlet, Link } from "react-router-dom"
 import { HomePage, Game, Winner, Lobby } from "./pages"
+import NotFound from "./pages/NotFound"
 
 import "./back2.styl"
 
@@ -32,6 +33,7 @@ function App() {
 			dispatch(changeState(state))
 		})
 		newSocket.on("disconnecting", () => {
+			console.log("on disconnect event triggered: ", socket)
 			socket.emit("leave room", {
 				room: gameState.room,
 				playerInfo: clientUser,
@@ -47,21 +49,22 @@ function App() {
 		}
 	}, [])
 
+
   return (
     <>
-  
-
-
     {/* <div className='h-screen flex flex-col justify-between'> */}
 
     <div className='h-screen flex flex-col justify-between'>
-      <Routes>
+	<div className="ribbon ribbon-top-left"><span>BETA</span></div>
+
+	  <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route element={<ChatLayout />}>
             <Route path="game" element={<Game />} />
             <Route path="lobby" element={<Lobby />} />
             <Route path="winner" element={<Winner />} />
+			<Route path="*" element={<NotFound />} />
           </Route>
         </Route>
       </Routes>    
@@ -69,8 +72,6 @@ function App() {
   
     </>
   )
-
-
 }
 
 export default App

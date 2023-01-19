@@ -4,7 +4,6 @@ import { setHost, updateLocalUser } from "../../actions";
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom"; 
 
-
 import "./style.css"
 const StartGame = () => {
 	const navigate = useNavigate()
@@ -27,8 +26,7 @@ const StartGame = () => {
 		dispatch(setHost())
 		socket.emit("create game", playerInfo)
 		dispatch(updateLocalUser(playerInfo))
-		navigate('/lobby')
-
+		navigate("/lobby")
 	}
 
 	const handleJoin = () => {
@@ -41,12 +39,11 @@ const StartGame = () => {
 		}
 		socket.emit("join game", { room, playerInfo })
 		dispatch(updateLocalUser(playerInfo))
-		navigate('/lobby')
-
+		navigate("/lobby")
 	}
 
 	return (
-		<div className="start-game">
+		<div role="StartGame" className="start-game">
 			<input
 				className="usernameinput"
 				type="text"
@@ -73,7 +70,6 @@ const StartGame = () => {
 			</div>
 		</div>
 	)
-	
 }
 
 export default StartGame

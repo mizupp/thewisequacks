@@ -80,7 +80,7 @@ const AvatarSelection = ({user, room}) => {
 	}
 
 	return (
-		<div className="flex flex-col items-center justify-stretch gap-4 w-full h-full bg-gray-800 rounded-lg p-4 border-2 border-solid border-black drop-shadow-lg text-white">
+		<div className="flex flex-col items-center justify-stretch gap-2 w-full h-max bg-amber-400 rounded-lg p-4 border-2 border-solid border-black border-4 drop-shadow-lg text-white">
 			<div>Player choose your avatar:</div>
 			<div className="grid  grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 text-6xl">
 				{avatars.map((a, i) => (

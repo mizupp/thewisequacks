@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react"
+import React, { useState, useEffect, useMemo, useReducer } from "react"
 import { useDispatch, useCallback } from "react"
 
 const QComp = ({ data, onClose }) => {
@@ -13,26 +13,28 @@ const QComp = ({ data, onClose }) => {
 		() => answers.sort(() => Math.random() - 0.5),
 		[data]
 	)
+
 	const [timeLeft, setTimeLeft] = useState(20)
 
-	// const [timeLeft, setTimeLeft] = useState(10)
+
+	// const [timeLeft, setTimeLeft] = useState(20)
 	const [enabled, setEnabled] = useState(true)
 	const [beginTimestamp, setBeginTimestamp] = useState(0)
 
-	//dispatch(//beginTimestamp)
-
 	const handleClick = (ansObj) => {
 		console.log(ansObj)
-		// setEndTimestamp(ansObj.answerTime)
 		let timeDiff = ansObj.answerTime - beginTimestamp
 		console.log(ansObj.answerTime)
 		console.log(beginTimestamp)
 		console.log(timeDiff);
-		const score = score(timeDiff, ansObj.answer);
+		const score = calculatescore(timeDiff, ansObj.answer);
 		// SEND SCORE TO USER!!!!
-		
+		console.log("userscore"+score)
 		setEnabled(false)
+
+		
 	}
+
 
 	useEffect(() => {
 		setBeginTimestamp(new Date().getTime())
@@ -78,6 +80,19 @@ const QComp = ({ data, onClose }) => {
 
 export default QComp
 
+const calculatescore = (time, answer) =>{
+	let scorenum = 0;
+	if (answer.isCorrect) {
+		return Math.ceil((10000 - time)/100)
+	} else {
+		return scorenum = 0;
+	}
+}
+
+// const calculateifclicked = (handleClick, calculatescore) => {
+// 	if (handleClick!=null )
+// }
+
 const AnswerComp = ({ answer, enabled, isEndTimer, onClick }) => {
 	const [isAnswered, setIsAnswered] = useState(false)
 	//function to handle onlclick -- need backend squad
@@ -86,15 +101,6 @@ const AnswerComp = ({ answer, enabled, isEndTimer, onClick }) => {
 	const clickHandler = () => {
 		setIsAnswered(true)
 		onClick({ answerTime: new Date().getTime(), answer: answer })
-	}
-
-	const score = (time, answer) =>{
-		let scorenum = 0;
-		if (answer.isCorrect) {
-			return Math.ceil((10000 - time)/100)
-		} else {
-			return scorenum = 0;
-		}
 	}
 
 	return (
