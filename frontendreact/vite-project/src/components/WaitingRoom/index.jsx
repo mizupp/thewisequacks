@@ -15,14 +15,8 @@ const WaitingRoom = ({data}) => {
 
 
 	function handleButtonClick() {
-		// dispatch(startGame())
-		let newState = {
-			...data,
-			isGameStarted: true,
-		}
-		socket.emit("send state to players", newState)
-		console.log(data)
-		startGameHandler();
+		socket.emit("start-game", data.room);
+		navigate('/game')
 	}
 
 	function leaveJoin() {
@@ -31,14 +25,7 @@ const WaitingRoom = ({data}) => {
 		navigate('/')
 	}
 
-	function startGameHandler(){
-		console.log(data.room)
-		const newState = data
-		console.log(data);
-		newState.isGameStarted = true
-		socket.emit("start-game", data.room);
-		navigate('/game')
-	}
+	
 
 	return (
 		<>

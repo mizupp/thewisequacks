@@ -1,40 +1,25 @@
-import React from "react"
-import { useState } from "react"
+import React, {useState} from "react"
+import { useSelector } from "react-redux"
 
 const Winner = () => {
 	//get users and scores from redux
-	// const data = useSelector((state) => state.gameState)
-	const data = {
-		users: [{
-			userID: '123',
-			name: "one",
-			isHost: true,
-			score: 100,
-		},
-		{
-			userID: '456',
-			name: "two",
-			isHost: false,
-			score: 10,
-		},
-		{
-			userID: '789',
-			name: "three",
-			isHost: false,
-			score: 500,
-		}]
-	}
+	 const data = useSelector((state) => state.gameState)
+
 	const [sortedUsers, setSortedUsers] = useState(() =>
 		data.users.sort(function (a, b) {
 			let x = a.score
 			let y = b.score
-			return x < y ? -1 : x > y ? 1 : 0
+			return x < y ? 1 : x > y ? -1 : 0
 		})
 	)
 
 	return (
 		<div>
-			<h1>Winner is Person </h1>
+			<div className="winner">
+				<h1>Winner</h1>
+				<img src={sortedUsers[0].icon} width='200px'alt="winner" />
+				<h1>{sortedUsers[0].name} </h1>
+			</div>
 			<table>
 				<thead>
 					<tr>
@@ -51,7 +36,7 @@ const Winner = () => {
 						>
 							<td>{index + 1}</td>
 							<td>
-								<img className="rounded-full h-10 w-10" src={user?.avatar} />
+								<img className="rounded-full h-10 w-10" src={user?.icon} />
 							</td>
 							<td>{user.name}</td>
 							<td>{user.score}</td>
