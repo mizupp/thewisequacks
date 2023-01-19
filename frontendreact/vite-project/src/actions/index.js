@@ -21,11 +21,11 @@ const updateLocalUser = (user) => {
 }
 
 const updateScore = (user, score) => {
-	return {
-		type: "UPDATE_SCORE",
-		user: user,
-		score: score,
-	}
+    return {
+        type: 'UPDATE_SCORE',
+        "user": user,
+        "score": score
+    }
 }
 
 const setCompleted = (user) => {

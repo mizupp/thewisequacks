@@ -4,6 +4,7 @@ import axios from "axios"
 
 const URL = "http://localhost:3000/highscores"
 
+
 const HighScoreList = () => {
 	const [scores, setScores] = useState(null)
 

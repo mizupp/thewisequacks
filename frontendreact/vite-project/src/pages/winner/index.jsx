@@ -1,88 +1,96 @@
 import React, {useState} from "react"
-import { useSelector } from "react-redux"
 import "./style.css"
 import { useSelector, useDispatch } from "react-redux"
-import { leaveRoom } from "../../actions"
+import { leaveRoom, updateLocalUser } from "../../actions"
 import { useNavigate } from 'react-router-dom';
-
+import WinnerSong from "../../components/Music/winnersong";
 
 const Winner = () => {
-	//get users and scores from redux
-
-	 const data = useSelector((state) => state.gameState)
-
-
-	// const [winner, setWinner] = useState("");
-	// setWinner("Russell");
+	const user = useSelector(state => state.user);
+	const room = useSelector(state => state.gameState.room)
+	const socket = useSelector(state => state.socket)
+	const [nowinner, setWinner] = useState("No Winner");
+	const data = useSelector(state => state.gameState)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
-	const socket = useSelector((state) => state.socket)
 
-	const winner = "Russell";
-	const data = {
-		users: [{
-			userID: '123',
-			name: "one",
-			isHost: true,
-			score: 100,
-		},
-		{
-			userID: '456',
-			name: "two",
-			isHost: false,
-			score: 10,
-		},
-		{
-			userID: '789',
-			name: "three",
-			isHost: false,
-			score: 500,
-		}
-	]
+	const handleWinnerSound = () => {
+		<Winner />
 	}
 
-	const [sortedUsers, setSortedUsers] = useState(() =>
-		data.users.sort(function (a, b) {
-			let x = a.score
-			let y = b.score
-			return x < y ? 1 : x > y ? -1 : 0
-		})
-	)
+	// const data = {
+	// 	users: [{
+	// 		userID: '123',
+	// 		name: "one",
+	// 		icon: "src/img/1-min.png",
+	// 		score: 100,
+	// 	},
+	// 	{
+	// 		userID: '456',
+	// 		name: "two",
+	// 		icon: "src/img/1-min.png",
+	// 		score: 10,
+	// 	},
+	// 	{
+	// 		userID: '789',
+	// 		name: "three",
+	// 		icon: "src/img/1-min.png",
+	// 		score: 500,
+	// 	}
+	// ]
+	// }
 
 	const handleHome = () => {
 		socket.emit('leave-session', (data.room))
 		dispatch(leaveRoom())
 		navigate('/')
 	}
+	
+	const [sortedUsers, setSortedUsers] = useState(() =>
+	data.users.sort(function (a, b) {
+		let x = a.score
+		let y = b.score
+		return x < y ? 1 : x > y ? -1 : 0
+	})
+)
+	// const winner = "Russell";
+	// const handleWinner = () => {
+	// 	// const playerInfo = user;
+	// 	// console.log(user);
+	// 	// dispatch(updateScore(user));
+	// 	// console.log(updateScore());
+	// 	// playerInfo.score
+	// }
+
+	
 
 	return (
 
 		<div>
 			<div className="winner">
+			<WinnerSong />
 				<h1>Winner</h1>
 				<img src={sortedUsers[0].icon} width='200px'alt="winner" />
 				<h1>{sortedUsers[0].name} </h1>
 			</div>
 
 		<div className="wrapwinner">
-		<div className="winnerpage flex flex-col">
-
-			<h1 className="winnerchickendinner">Winner is {winner} </h1>
-
-			<div className="container2 podium">
-        <div className="podiumbar">
-          <p className="podiumuser">Miz</p>
-          <div className="podiumrank second">2</div>
-        </div>
-        <div className="podiumbar">
-          <p className="podiumuser">Russell</p>
-          <div className="podiumrank first">1</div>
-        </div>
-        <div className="podiumbar">
-          <p className="podiumuser">Tom</p>
-          <div className="podiumrank third">3</div>
-        </div>
-      </div>
+			<div className="winnerpage flex flex-col">
+				<h1 className="winnerchickendinner">Winner is {nowinner} </h1>
+				<div className="container2 podium">
+        			<div className="podiumbar">
+          				<p className="podiumuser">Miz</p>
+          				<div className="podiumrank second">2</div>
+        			</div>
+        			<div className="podiumbar">
+          				<p className="podiumuser">Russell</p>
+          				<div className="podiumrank first">1</div>
+        			</div>
+        			<div className="podiumbar">
+          				<p className="podiumuser">Tom</p>
+          				<div className="podiumrank third">3</div>
+        			</div>
+      			</div>
       
       
 			<table>
@@ -110,6 +118,7 @@ const Winner = () => {
 				</tbody>
 			</table>
 			<button className="backHome" onClick={handleHome}>Back to Home</button>
+		</div>
 		</div>
 		</div>
 	)

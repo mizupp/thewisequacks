@@ -24,7 +24,7 @@ const MyModal = ({
 								</div>
 							) : (
 								dismissable && (
-									<div className="modal-footer">
+									<div className="modal-footer closebuttonmodal1">
 										<button onClick={closeModal}>Close</button>
 									</div>
 								)

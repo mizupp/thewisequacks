@@ -20,7 +20,8 @@ const StartGame = () => {
 			name: username,
 			isHost: true,
 			score: 0,
-			icon: '/src/img/1-min.png'
+			icon: '/src/img/1-min.png',
+			questionNo: 1
 		}
 		
 		dispatch(setHost())
@@ -35,7 +36,8 @@ const StartGame = () => {
 			name: username,
 			isHost: false,
 			score: 0,
-			icon: '/src/img/1-min.png'
+			icon: '/src/img/1-min.png',
+			questionNo: 1
 		}
 		socket.emit("join game", { room, playerInfo })
 		dispatch(updateLocalUser(playerInfo))

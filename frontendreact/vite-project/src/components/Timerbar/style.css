@@ -4,7 +4,7 @@
 }
 
 .round-time-bar{
-    width: 40%;
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
     /* background-color: red; */
@@ -25,4 +25,8 @@
 .TL{
     margin: 0;
     padding: 0;
+}
+
+.textContainer{
+background: #000000;
 }

@@ -48,7 +48,7 @@
   
   
   .podium .first {
-    min-height: 48vh;
+    min-height: 38vh;
     background: rgb(247, 169, 0);
       background: 
         linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%)

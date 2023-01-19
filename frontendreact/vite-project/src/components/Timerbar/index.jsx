@@ -1,76 +1,51 @@
-// import ProgressTimer from 'react-progress-bar-timer';
-// //https://socket.dev/npm/package/react-progress-bar-timer#demo
-
-// const Timerbar = () => {
-// const ExampleComponent = () => (
-// //   <ProgressTimer started label="Something" duration={3} onFinish={finished()} />
-// <ProgressTimer label="Something" duration={3} onFinish={finished} />
-
-// );
-
-// const finished = () => {
-//     console.log("done");
-// }
-  
-
-// return (
-//     <>
-
-    
-//     <br />
-//     <p> Here is the progress bar </p>
-//     <ExampleComponent />
-//     </>
-// );
-// }
-
-// export default Timerbar;
-
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { useSelector } from 'react-redux';
 import './style.css'
 
 export default function Timerbar() {
-  const [time, setTime] = useState();
-  const [timeGuess, setTimeGuess] = useState();
+  const time = useRef(30);
+  const endGame = useRef(1);
+  const [timeTime, setTimeTime] = useState(30)
+  const room = useSelector(state => state.gameState.room)
+  const socket = useSelector(state => state.socket)
+  const isHost = useSelector(state => state.isHost)
+  const hasGameEnded = useSelector(state => state.gameState.hasGameEnded)
 
-var TL = 8;
+//   useEffect(()=>{
+//     if (hasGameEnded) {
+//       socket.emit('end game', (room));
+//     }
+// }, [])
+
   useEffect(()=>{
-    setTime(8)
-    let qT = setInterval(function(){
-      setTime(prev => prev-1);
-      TL -= 1
-      // console.log(TL)
-      if(TL=== 0){
-        setTime(8)
-        TL = 8
-        console.log("Alright next question")
+    let qT = setInterval( function(){
+      if(time.current <= 0 ){
+        if (isHost && endGame.current === 1) {
+          endGame.current = 0;
+          socket.emit('end game', (room));
+        }
+      }
+      else if (time.current > 0){
+        time.current -= 1;
+        setTimeTime(time.current)
+      }
+      else{
+        return
       }
     }, 1000)
-    return () => clearInterval(qT)
-  },[])
+  }, [])
 
-var timeToGuess = 6
-  useEffect(()=>{
-    setTimeGuess(6)
-    let guessTimer = setInterval(function(){
-      timeToGuess -= 1
-      setTimeGuess(prev => prev-1)
-      if(timeToGuess===-2){
-        setTimeGuess(6)
-        timeToGuess = 6
-      }
-    }, 1000)
-    return () => clearInterval(guessTimer)
-  },[])
+
 
   return (
     <>
       <div className="round-time-bar">
         <div className='timerCounter'>
       <div className='TL'>
-          <progress id="countdown" value={timeGuess} max="5"></progress>
-          <h2>Time left: {time}</h2>
-
+          <progress id="countdown" value={timeTime} max="30"></progress>
+          {time.current > 0 && <h2>Time left: {timeTime}</h2>}
+          {time.current <= 0 && <h2>Game over!</h2> }
+          {/* {time <= 0 && isHost ? socket.emit('end game', (room)) : null} */}
         </div>
         </div>
 

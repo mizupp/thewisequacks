@@ -4,6 +4,37 @@
 
 .eh2{
     background-color: black;
+    /* border: 3px dashed black!important; */
+
     padding: 2px 2px;
 
+}
+
+.setAns{
+    
+    
+}
+
+.style1{
+background: rgb(255, 255, 255)!important;
+}
+.style2{
+    background: black;
+    /* background: rgb(198, 198, 198)!important; */
+    /* background: 
+    linear-gradient(to top left,
+        rgb(64, 0, 0) 0%,
+        rgba(147, 0, 0, 0) calc(50% - 3px),
+        rgb(229, 172, 0) 50%,
+        rgba(85, 0, 0, 0) calc(50% + 0.8px),
+        rgba(0, 113, 32, 0.977) 100%),
+    linear-gradient(to top right,
+        rgba(0,0,0,0) 0%,
+        rgba(245, 204, 0, 0) calc(50% - 3px),
+        rgb(214, 164, 0) 50%,
+        rgba(0,0,0,0) calc(50% + 0.8px),
+        rgba(252, 193, 0, 0) 100%);
+        padding: 10px; */
+        
+        
 }
