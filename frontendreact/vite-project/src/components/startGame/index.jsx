@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { storeSocket, changeState, storeUser, setHost, updateLocalUser, updateScore, setCompleted } from "../../actions";
-import axios from "axios";
+import { setHost, updateLocalUser } from "../../actions";
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom"; 
 
@@ -24,7 +23,7 @@ const StartGame = () => {
 			score: 0,
 			icon: '/src/img/1-min.png'
 		}
-		console.log(playerInfo)
+		
 		dispatch(setHost())
 		socket.emit("create game", playerInfo)
 		dispatch(updateLocalUser(playerInfo))
@@ -45,8 +44,6 @@ const StartGame = () => {
 		navigate('/lobby')
 
 	}
-
-
 
 	return (
 		<div className="start-game">
@@ -76,36 +73,7 @@ const StartGame = () => {
 			</div>
 		</div>
 	)
-	// =======
-	// 	return (
-	// 		<div className="flex flex-col">
-	// 			<input
-	// 				className="enterName"
-	// 				type="text"
-	// 				name="username"
-	// 				value={username}
-	// 				placeholder="name"
-	// 				onChange={(e) => setName(e.target.value)}
-	// 			/>
-	// 			<input
-	// 				type="text"
-	// 				name="room"
-	// 				value={room}
-	// 				placeholder="room code"
-	// 				onChange={(e) => setRoom(e.target.value)}
-	// 			/>
-
-	// 			<div>
-	// 				<button className="joincreate" onClick={handleJoin}>
-	// 					Join game
-	// 				</button>
-
-	// 				<button className="joincreate" onClick={handleCreate}>
-	// 					Create game
-	// 				</button>
-	// 			</div>
-	// 		</div>
-	// 	)
+	
 }
 
 export default StartGame

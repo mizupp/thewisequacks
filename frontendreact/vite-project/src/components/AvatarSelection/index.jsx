@@ -25,7 +25,7 @@ import {
 	image22, 
 	image23
 } from "../../img"
-import { setIcon, updateLocalUser } from "../../actions/index"
+import { updateLocalUser } from "../../actions/index"
 // import {updateUser} from "../../actions/socketActions"
 // import { SocketContext } from '../../App';
 
@@ -66,7 +66,6 @@ const AvatarSelection = ({user, room}) => {
 	// const socket = useSelector(state => state.socket)
 	const onSelect = (a) => {
 		setSelectedAvatar(a)
-		console.log(selectedAvatar)
 		updateAvatar(a)
 		
 	}
@@ -78,27 +77,7 @@ const AvatarSelection = ({user, room}) => {
 		dispatch(updateLocalUser(playerInfo))
 		// updateUser(socket, playerInfo, room);
 		socket.emit('update player', {playerInfo, room})
-		console.log(updateLocalUser(playerInfo));
 	}
-
-// 	useEffect(() => {
-//   const timer = setTimeout(() => {
-// 	updateAvatar()
-//     console.log('This will run after 1 second!')
-//   }, 1000);
-//   return () => clearTimeout(timer);
-// }, [selectedAvatar]);
-
-
-	// useEffect(() => {
-	// 	updateAvatar();
-	// }, [selectedAvatar])
-
-	// const [isLoading, setIsLoading] = useState(true);
-	// function onLoad() {
-	// 	setTimeout(() => setIsLoading(false), 1000);
-		
-	//   }
 
 	return (
 		<div className="flex flex-col items-center justify-stretch gap-4 w-full h-full bg-gray-800 rounded-lg p-4 border-2 border-solid border-black drop-shadow-lg text-white">

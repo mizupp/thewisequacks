@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { Navigate } from "react-router-dom"
-import { startGame, leaveRoom } from "../../actions"
+import { leaveRoom } from "../../actions"
 import "./style.css"
 import { useNavigate } from 'react-router-dom';
 
