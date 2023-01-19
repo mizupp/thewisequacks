@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { Navigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
 import GameGallery from "../../components/GameGallery";
@@ -11,7 +12,7 @@ const Game = () => {
     return (
         <>
             {/* <ScoreBoard users={data.users} /> */}
-            <GameGallery />
+            {data.hasGameEnded && <Navigate to="/winner" />}
         </>
     )
 

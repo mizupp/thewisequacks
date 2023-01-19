@@ -1,6 +1,5 @@
 const { GameState } = require("../models/GameState")
 const { io } = require("../initialiseServer")
-const { on } = require("nodemon")
 
 const games = []
 const rooms = []
@@ -36,9 +35,10 @@ function initialise(socket) {
 			const response = state.removePlayer(id)
 			if (response === "Host Removed") {
 				io.to(state.users[0].userID).emit('make host')
+				console.log(`New Host | ${state.users[0].name} in room ${roomName}`)
 			}
 			socket.to(roomName).emit('change state', state)
-			console.log('Player left room')
+			console.log(`Player left | Room ${roomName}`)
 		}
 	})
 
@@ -51,7 +51,7 @@ function initialise(socket) {
 			games.push(state)
 			socket.join(room)
 			rooms.push(room)
-			console.log(`Game created host: ${playerInfo.name} room: ${room}`)
+			console.log(`Game Created | host: ${playerInfo.name} room: ${room}`)
 			io.to(room).emit("change state", state) //this sends to everyone in room including sender
 		} catch (error) {
 			const errorMsg = "Could not create game"
@@ -71,9 +71,9 @@ function initialise(socket) {
 			
 			io.to(room).emit("change state", state)
 			
-			console.log(`${playerInfo.name} joined with the code ${room}`)
+			console.log(`Player Joined | ${playerInfo.name} in room ${room}`)
 		} else {
-			const errorMsg = "Room does not exist"
+			const errorMsg = "room does not exist"
 			console.log(errorMsg)
 			socket.to(socket.id).emit('send error', errorMsg)
 		}
@@ -83,25 +83,32 @@ function initialise(socket) {
 	socket.on("update player", ({ playerInfo, room }) => {
 		// get room gamestate
 		const state = games[getIndex(room)]
-		console.log("current state obj: ", state)
+		
 		//update server gamestate
 		state.updatePlayer(playerInfo)
+		console.log(`Player Updated | ${playerInfo.name} in room ${room} `)
 		//send new game state
-		console.log('new state obj: ', state)
+		
 		io.to(room).emit("change state", state)
 	})
 
-
-
-	socket.on("update player score", ({ room, user, score }) => {
-		socket.to(room).emit("update opponents score", { user, score })
-		console.log(
-			`updating score of ${user} in room: ${room} with a score of ${score}`
-		)
+	socket.on("start-game", (room) => {
+		const state = games[getIndex(room)]
+		state.startGame();
+		console.log(`Game Started | room ${room}`)
+		io.to(room).emit('change state', state)
 	})
 
-	socket.on("complete quiz", ({ room, user }) => {
-		io.to(room).emit("update opponent completion", user)
+	socket.on('end game', (room) => {
+		console.log(room)
+		const state = games[getIndex(room)]
+		state.endGame();
+		console.log(`Game Ended | room ${room}`)
+		io.to(room).emit('change state', state)
+	})
+
+	socket.on('update questions', ({room, questions}) => {
+	console.log(`Questions Updated | room ${room}`)
 	})
 
 	//game message feature
@@ -115,10 +122,10 @@ function initialise(socket) {
 
 	//chat
 	socket.on("chat-message", ({ room, message }) => {
-		console.log("i wanna go home ")
+		
 		if (room) {
 			console.log(message + room)
-			io.emit("new-message", { user: socket.id, msg: message })
+			io.to(room).emit("new-message", { user: socket.id, msg: message })
 		} else {
 			console.log(room)
 			io.emit("new-message", { user: socket.id, msg: message })
@@ -134,49 +141,10 @@ function initialise(socket) {
 			}
 			socket.leave(room)
 			socket.to(room).emit('change state', state)
-			console.log('Player left room')
+			console.log(`Player Left | Room  ${room}`)
 	})
 
-	socket.on("start-game", (room) => {
-		console.log(room)
-		const state = games[getIndex(room)]
-		state.startGame();
-		console.log('Game is started')
-		io.to(room).emit('change state', state)
-		// socket.to(room).emit("started-game")
-		
-	})
-	// const adapter = io.sockets.adapter
-	// // const userid = userID => adapter.ids.get(userID);
-	// const getRoom = roomID => adapter.rooms.get(roomID)
-	// //create join delete
-	// socket.adapter.on('create-room', (room) => {
-
-	//     // if(adapter.ids.has(room))
-	//     // return
-	// console.log('Created new room', room)
-	// console.log('comparison', socket.id);
-	// })
-
-	// socket.adapter.on('join-room', (room, id) => {
-	//     if(id===room)
-	//         return
-
-	// const socket = getSocket(id);
-	// const users = [...getRoom]
-	// })
-	// socket.on('connection', (socket) => {
-	//     console.log('bun you fam')
-	//     socket.on('chat-message', ({ room, message }) => {
-	//         io.sockets.emit('new-message', {user: data, msg: message})
-
-	//         // if(room)
-	//         //     io.to(room).emit('new-message', {user: data, msg: message})
-
-	//         // else
-	//         //     io.emit('new-message', {user: data, msg: message})
-	//     })
-	// })
+	
 }
 
 module.exports = { initialise }
