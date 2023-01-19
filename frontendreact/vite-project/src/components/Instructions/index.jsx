@@ -4,28 +4,26 @@ const Instructions = () => {
 	return (
 		<div role="Instructions">
 			<h1>Instructions</h1>
-			<p>You will be shown x number of tiles with questions behind them.</p>
 			<p>
-				The tiles will be arranged in 5 rows and 4 columns. The rows represent
-				difficulty level and the columns show the categories.
+				You will be shown 18 tiles with questions behind them. You want to answer as many questions in the time limit, you can 
+				see how much time is left by looking at the progress bar at the top of the screen.
 			</p>
 			<p>
-				Click on a tile to reveal the question. You will have 5 seconds to read
+				The tiles will be arranged in 3 rows and 6 columns. The cards will show what category and difficulty the question is.
+			</p>
+			<p>
+				Click on a tile to reveal the question. You will have 3 seconds to read
 				the question before the answers appear.
 			</p>
 			<p>
-				You will have x seconds to click on the correct answer but remember this
-				is a game of speed to try and click the correct answer as quickly as
-				possible.
+				You want to select the correct answer as quickly as possible. If you want to get the most points! 
+				However if you select the wrong answer or take too long to answer the question, you will recieve zero points.
 			</p>
 			<p>
-				The person who chooses the correct answer first will recieve all the
-				points, second will recieve 50%, third will recieve 20% and 4th will
-				recieve 10%. SO BE QUICK!
+				You can see how many points you have by looking at the score at the top of the screen.
 			</p>
 			<p>
-				Once all the tiles have been revealed the game will end and the scores
-				will be displayed.
+				The person with the most points at the end of the game will be the winner.
 			</p>
 		</div>
 	)
