@@ -43,11 +43,11 @@ MongoClient.connect(url, function(err, db) {
             score: 100,
         },
       ];
-      // dbo.collection("highscores").drop(function(err, delOK) {
-      //   if (err) throw err;
-      //   if (delOK) console.log("Collection deleted");
-      //   db.close();
-      // });
+    //   dbo.collection("highscores").drop(function(err, delOK) {
+    //     if (err) throw err;
+    //     if (delOK) console.log("Collection deleted");
+    //     db.close();
+    //   });
       dbo.collection("highscores").insertMany(myobj, function(err, res) {
         if (err) throw err;
         console.log("Number of documents inserted: " + res.insertedCount);
