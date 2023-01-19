@@ -13,13 +13,6 @@ const changeState = (data) => {
 	}
 }
 
-const storeUser = (user) => {
-	return {
-		type: "STORE_USER",
-		payload: user,
-	}
-}
-
 const updateLocalUser = (user) => {
 	return {
 		type: "UPDATE_USER",
@@ -42,18 +35,6 @@ const setCompleted = (user) => {
 	}
 }
 
-const setIcon = (icon) => {
-	return {
-		type: "SET_ICON",
-		payload: icon,
-	}
-}
-
-const startGame = () => {
-	return {
-		type: "START_GAME",
-	}
-}
 
 const incrementQuestionNumber = () => {
 	return {
@@ -66,10 +47,6 @@ const setQuizAsComplete = (user) => {
 		type: "COMPLETE_QUIZ",
 		payload: user,
 	}
-}
-
-const getState = (socket) => {
-	socket.on("change state", (state) => changeState(state))
 }
 
 
@@ -98,22 +75,4 @@ const leaveRoom = () => {
 		type: "LEAVE_ROOM",
 	}
 }
-export {  leaveRoom, storeSocket, changeState, storeUser,updateLocalUser, updateScore, setCompleted, setIcon, startGame, incrementQuestionNumber,  setQuizAsComplete, getState,loadData,clearData, setHost }
-// =======
-// export {
-// 	storeSocket,
-// 	changeState,
-// 	storeUser,
-// 	updateUser,
-// 	updateLocalUser,
-// 	updateScore,
-// 	setCompleted,
-// 	setIcon,
-// 	startGame,
-// 	incrementQuestionNumber,
-// 	setQuizAsComplete,
-// 	getState,
-// 	loadData,
-// 	clearData,
-// 	// addUser,
-// }
+export {  leaveRoom, storeSocket, changeState ,updateLocalUser, updateScore, setCompleted, incrementQuestionNumber,  setQuizAsComplete, loadData,clearData, setHost }

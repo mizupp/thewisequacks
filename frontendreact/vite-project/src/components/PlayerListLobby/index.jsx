@@ -1,10 +1,6 @@
 import React, { useState } from "react"
 
-
-import {image1} from  "../../img";
-
 const PlayerListLobby = ({ users }) => {
-	console.log(users)
 
 	return (
 		<div className="w-full h-full flex justify-center items-start m-0">

@@ -21,14 +21,6 @@ const gameReducer = (state = initState, action) => {
 			return { ...state, gameState: action.payload }
 		case "UPDATE_USER":
 			return { ...state, user: action.payload }
-		// case "START_GAME":
-		// 	return {
-		// 		...state,
-		// 		gameState: {
-		// 			...state.gameState,
-		// 			isGameStarted: true,
-		// 		},
-		// 	}
 		case "INCREMENT_QUESTION":
 			let newQuestionNumber = state.gameState.questionNumber + 1
 			return {

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { storeSocket, changeState, storeUser, setHost, updateLocalUser, updateScore, setCompleted } from "../../actions";
-import axios from "axios";
+import { setHost, updateLocalUser } from "../../actions";
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom"; 
 
@@ -23,7 +22,7 @@ const StartGame = () => {
 			score: 0,
 			icon: '/src/img/1-min.png'
 		}
-		console.log(playerInfo)
+		
 		dispatch(setHost())
 		socket.emit("create game", playerInfo)
 		dispatch(updateLocalUser(playerInfo))
@@ -42,8 +41,6 @@ const StartGame = () => {
 		dispatch(updateLocalUser(playerInfo))
 		navigate("/lobby")
 	}
-
-
 
 	return (
 		<div role="StartGame" className="start-game">
