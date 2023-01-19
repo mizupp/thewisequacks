@@ -52,9 +52,6 @@ function App() {
 
   return (
     <>
-  
-
-
     {/* <div className='h-screen flex flex-col justify-between'> */}
 
     <div className='h-screen flex flex-col justify-between'>
@@ -75,21 +72,6 @@ function App() {
   
     </>
   )
-
-			<div className="h-screen flex flex-col justify-between">
-				<Routes>
-					<Route path="/" element={<Layout />}>
-						<Route index element={<HomePage />} />
-						<Route element={<ChatLayout />}>
-							<Route path="game" element={<Game />} />
-							<Route path="lobby" element={<Lobby />} />
-							<Route path="winner" element={<Winner />} />
-						</Route>
-					</Route>
-				</Routes>
-			</div>
-		</>
-	)
 }
 
 export default App
