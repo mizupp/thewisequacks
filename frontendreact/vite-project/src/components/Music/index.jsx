@@ -1,15 +1,6 @@
 import { useState, useRef } from "react"
 import { BirdSong } from "./Sound"
 
-// function MusicP() {
-//     const audio = new Audio(BirdSong)
-//     audio.volume = 0.1
-//     // audio.play()
-
-// }
-
-// export default MusicP;
-
 function MusicP() {
 	const [playing, setPlaying] = useState(false)
 

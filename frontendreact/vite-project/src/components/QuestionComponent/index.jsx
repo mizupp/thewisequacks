@@ -2,6 +2,8 @@ import React, { useState, useEffect, useMemo, useReducer } from "react"
 import { useCallback } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { updateScore, updateLocalUser, leaveRoom } from "../../actions"
+import Victory from '../Music/Sound/cardshuffle.mp3'
+
 
 const QComp = ({ data, onClose }) => {
 	const user = useSelector(state => state.user);
@@ -15,10 +17,16 @@ const QComp = ({ data, onClose }) => {
 
 	
 
-	const [timeLeft, setTimeLeft] = useState(20)
+	const [timeLeft, setTimeLeft] = useState(18)
 
 	const [enabled, setEnabled] = useState(true)
 	const [beginTimestamp, setBeginTimestamp] = useState(0)
+
+	const handleAnswerSound = () => {
+		const answeringsound = new Audio(Victory)
+		answeringsound.volume = 1
+		answeringsound.play()
+	}
 
 	const handleClick = (ansObj) => {
 		console.log(ansObj)
@@ -28,7 +36,9 @@ const QComp = ({ data, onClose }) => {
 		setScore(calculatescore(timeDiff, ansObj.answer));
 		// SEND SCORE TO USER!!!!
 		console.log("userscore", score)
-		setEnabled(false)
+		setEnabled(false);
+		setTimeLeft(2);
+		handleAnswerSound()
 	}
 
 	const handleScore = () => {
@@ -45,7 +55,7 @@ const QComp = ({ data, onClose }) => {
 		if (timeLeft < 4) {
 			handleScore()
 		}
-		if (timeLeft === 20){
+		if (timeLeft === 18){
 			setBeginTimestamp(new Date())
 		}
 		if (!timeLeft) {
@@ -96,7 +106,7 @@ const calculatescore = (time, answer) =>{
 	console.log(time-5000)
 	let scorenum = 0;
 	if (answer.isCorrect) {
-		return Math.ceil((10000 - (time - 5000))/1000)*10;
+		return Math.ceil((10000 - (time - 3000))/1000)*10;
 	} else {
 		return scorenum = 0;
 	}

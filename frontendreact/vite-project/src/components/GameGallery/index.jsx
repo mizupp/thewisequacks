@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import QuestionCard from "../QuestionCard"
 // import { updateLocalUser } from "../../actions"
+import PickCard from '../Music/Sound/pickcard.mp3'
+import CardShuffle from '../Music/Sound/cardshuffle.mp3'
 
 const GameGallery = ( {data}) => {
 
@@ -11,14 +13,18 @@ const GameGallery = ( {data}) => {
 	const hard = useSelector(state => state.gameState.questions.hard)
 
 	
-
+	// const [firstsound, secondsound] = useState(new Audio(PickCard))
 	const handleForm = async (e) => {
 		e.preventDefault();
-		
+		const answeringsound = new Audio(PickCard)
+		answeringsound.volume = 1
+		answeringsound.play()
 	}
 
+
+
 	return (
-		<div className="p-2 grid grid-cols-1 grid-rows-3">
+		<div onClick={handleForm} className="p-2 grid grid-cols-1 grid-rows-3">
 			<div className="grid grid-cols-6">
 				{easy &&
 					easy.map((q) => (

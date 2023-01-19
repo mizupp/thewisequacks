@@ -10,7 +10,11 @@ import { Routes, Route, Outlet, Link } from "react-router-dom"
 import { HomePage, Game, Winner, Lobby } from "./pages"
 import NotFound from "./pages/NotFound"
 
-import "./back2.styl"
+//darkmode
+// import "./back.styl"
+//lightmode
+import "./back3.styl"
+
 
 import { io } from "socket.io-client"
 import { changeState, updateScore, storeSocket, setHost } from "./actions"

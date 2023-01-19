@@ -3,7 +3,7 @@ import "./style.css"
 import { useSelector, useDispatch } from "react-redux"
 import { leaveRoom, updateLocalUser } from "../../actions"
 import { useNavigate } from 'react-router-dom';
-
+import WinnerSong from "../../components/Music/winnersong";
 
 const Winner = () => {
 	const user = useSelector(state => state.user);
@@ -13,6 +13,10 @@ const Winner = () => {
 
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
+
+	const handleWinnerSound = () => {
+		<Winner />
+	}
 
 	const data = {
 		users: [{
@@ -63,6 +67,7 @@ const Winner = () => {
 
 		<div>
 			<div className="winner">
+			<WinnerSong />
 				<h1>Winner</h1>
 				<img src={sortedUsers[0].icon} width='200px'alt="winner" />
 				<h1>{sortedUsers[0].name} </h1>

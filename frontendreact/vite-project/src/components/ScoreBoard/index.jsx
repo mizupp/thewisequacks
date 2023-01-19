@@ -27,7 +27,7 @@ const ScoreBoard = ({users}) => {
     }
 
     return (
-        <div className="w-full h-32 flex flex-start gap-x-2 px-4">
+        <div className="w-full h-32 flex flex-start gap-x-2 px-4 justify-center">
             {Users.map((user, index) => (
                 <div key={index} className="h-5/6 w-auto flex flex-col justify-center items-center">
                     <img src={user.icon} alt={user.name} className="h-full w-full rounded-full" />

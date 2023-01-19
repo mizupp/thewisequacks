@@ -7,6 +7,7 @@ const QuestionCard = ({QuestionData, Winner=false}) => {
     const [show, setShow] = useState(false);
     const [answered, setAnswered] = useState(false);
     const [mF, setMF] = useState(false);
+
     //   const toggleThemeCard = () => {
     //         if (theme1 === 'style1') {
     //           setTheme1('style2');
@@ -52,8 +53,9 @@ const QuestionCard = ({QuestionData, Winner=false}) => {
 
     return (
         // <div onClick={handleClick} className = "eh hover:cursor-pointer min-h-[10rem] max-w-[16rem] h-full p-2 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        // <div id="setAns" onClick={handleClick} className = "setAns active:text-blue-500 eh hover:cursor-pointer min-h-[10rem] max-w-[16rem] h-full p-2 bg-green-800 border border-green-400 rounded-lg shadow-md hover:bg-green-600 dark:bg-red-800 dark:border-yellow-700 dark:hover:bg-green-800">
 
-            <div id="setAns" onClick={handleClick} className = "setAns active:text-blue-500 eh hover:cursor-pointer min-h-[10rem] max-w-[16rem] h-full p-2 bg-green-800 border border-green-400 rounded-lg shadow-md hover:bg-green-600 dark:bg-red-800 dark:border-yellow-700 dark:hover:bg-green-800">
+             <div id="setAns" onClick={handleClick} className = "setAns active:text-blue-500 eh hover:cursor-pointer min-h-[10rem] max-w-[16rem] h-full p-2 bg-green-800 border border-green-400 rounded-lg shadow-md hover:bg-green-600 dark:bg-red-800 dark:border-yellow-700 dark:hover:bg-green-800">
                 {
                     <div className="h-full flex flex-col justify-between">
                         <div className="flex flex-col justify-between">
