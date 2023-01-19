@@ -11,6 +11,7 @@ export default function Chat() {
 	const user = useSelector(state => state.user);
 	const room = useSelector(state => state.gameState.room)
 	console.log(user)
+	console.log(room)
 	useEffect(() => {
 		//TODO get room id
 
@@ -26,12 +27,11 @@ export default function Chat() {
 	}, [])
 
 	function sendChatMessage(e) {
-		
 		e.preventDefault()
 		const data = Object.fromEntries(new FormData(e.target))
 		const { room , message } = data
 		// console.log({room, message})
-		socket.emit("chat-message", { room, message })
+		socket.emit("chat-message", { room, message, })
 	}
 
 	return (

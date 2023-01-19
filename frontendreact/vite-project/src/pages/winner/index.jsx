@@ -10,7 +10,7 @@ const Winner = () => {
 	const room = useSelector(state => state.gameState.room)
 	const socket = useSelector(state => state.socket)
 	const [nowinner, setWinner] = useState("No Winner");
-
+	const data = useSelector(state => state.gameState)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
@@ -18,33 +18,34 @@ const Winner = () => {
 		<Winner />
 	}
 
-	const data = {
-		users: [{
-			userID: '123',
-			name: "one",
-			icon: "src/img/1-min.png",
-			score: 100,
-		},
-		{
-			userID: '456',
-			name: "two",
-			icon: "src/img/1-min.png",
-			score: 10,
-		},
-		{
-			userID: '789',
-			name: "three",
-			icon: "src/img/1-min.png",
-			score: 500,
-		}
-	]
-	}
+	// const data = {
+	// 	users: [{
+	// 		userID: '123',
+	// 		name: "one",
+	// 		icon: "src/img/1-min.png",
+	// 		score: 100,
+	// 	},
+	// 	{
+	// 		userID: '456',
+	// 		name: "two",
+	// 		icon: "src/img/1-min.png",
+	// 		score: 10,
+	// 	},
+	// 	{
+	// 		userID: '789',
+	// 		name: "three",
+	// 		icon: "src/img/1-min.png",
+	// 		score: 500,
+	// 	}
+	// ]
+	// }
 
 	const handleHome = () => {
 		socket.emit('leave-session', (data.room))
 		dispatch(leaveRoom())
 		navigate('/')
 	}
+	
 	const [sortedUsers, setSortedUsers] = useState(() =>
 	data.users.sort(function (a, b) {
 		let x = a.score
@@ -74,24 +75,22 @@ const Winner = () => {
 			</div>
 
 		<div className="wrapwinner">
-		<div className="winnerpage flex flex-col">
-
-			<h1 className="winnerchickendinner">Winner is {nowinner} </h1>
-
-			<div className="container2 podium">
-        <div className="podiumbar">
-          <p className="podiumuser">Miz</p>
-          <div className="podiumrank second">2</div>
-        </div>
-        <div className="podiumbar">
-          <p className="podiumuser">Russell</p>
-          <div className="podiumrank first">1</div>
-        </div>
-        <div className="podiumbar">
-          <p className="podiumuser">Tom</p>
-          <div className="podiumrank third">3</div>
-        </div>
-      </div>
+			<div className="winnerpage flex flex-col">
+				<h1 className="winnerchickendinner">Winner is {nowinner} </h1>
+				<div className="container2 podium">
+        			<div className="podiumbar">
+          				<p className="podiumuser">Miz</p>
+          				<div className="podiumrank second">2</div>
+        			</div>
+        			<div className="podiumbar">
+          				<p className="podiumuser">Russell</p>
+          				<div className="podiumrank first">1</div>
+        			</div>
+        			<div className="podiumbar">
+          				<p className="podiumuser">Tom</p>
+          				<div className="podiumrank third">3</div>
+        			</div>
+      			</div>
       
       
 			<table>
