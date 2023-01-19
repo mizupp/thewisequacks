@@ -6,8 +6,7 @@ const QuestionCard = ({QuestionData, Winner=false}) => {
 
     const [show, setShow] = useState(false);
     const [answered, setAnswered] = useState(false);
-    const [theme1, setTheme1] = useState(false);
-
+    const [mF, setMF] = useState(false);
     //   const toggleThemeCard = () => {
     //         if (theme1 === 'style1') {
     //           setTheme1('style2');
@@ -26,16 +25,20 @@ const QuestionCard = ({QuestionData, Winner=false}) => {
       }
 
     const handleClick = (event) => {
-
+        // if(event.target.classList.contains('setAns')){
+        //     event.target.classList.remove('style1');
+        //   } else { 
+        //     event.target.classList.add('style2');         
+        //   }
+    
+        // if(event.target.classList.contains('setAns')){
+        //     event.target.classList.remove('style1');
+        //   } else { 
+                     
+        //   }
         if (!answered) {
             setShow(true);
-
-            if(event.target.classList.contains('setAns')){
-                event.target.classList.remove('style1');
-              } else { 
-                event.target.classList.add('style2');         
-              }
-            
+            // event.target.classList.add('style2');
         }
         setAnswered(true);
         
@@ -58,10 +61,9 @@ const QuestionCard = ({QuestionData, Winner=false}) => {
                             <p className="font-normal text-gray-700 dark:text-gray-400">{Winner ? renderQuestion(QuestionData.correctAnswer) : QuestionData.difficulty}</p>
                         </div>
                         {answered ? 
-                        <p className="font-normal text-gray-700 dark:text-gray-400 ">Answered</p> 
+                        <p className="font-normal text-gray-700 bg-green-800 dark:text-gray-400 ">Answered</p> 
                         : 
                         null
-                        // <button onClick={HandleClick} className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Click to Reveal</button>
                         }
                     </div>
                 }

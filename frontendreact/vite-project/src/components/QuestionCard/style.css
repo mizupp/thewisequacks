@@ -17,6 +17,7 @@
 background: rgb(255, 255, 255)!important;
 }
 .style2{
+    background: black;
     /* background: rgb(198, 198, 198)!important; */
     /* background: 
     linear-gradient(to top left,
@@ -32,6 +33,6 @@ background: rgb(255, 255, 255)!important;
         rgba(0,0,0,0) calc(50% + 0.8px),
         rgba(252, 193, 0, 0) 100%);
         padding: 10px; */
-        background: black;
+        
         
 }
