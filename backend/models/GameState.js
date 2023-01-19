@@ -72,23 +72,42 @@ class GameState{
                 const getAllQuestions = async () =>
 			    await axios.all([
 				    axios.get(
-					    "https://the-trivia-api.com/api/questions?limit=20&difficulty=easy"
+					    "https://the-trivia-api.com/api/questions?limit=6&difficulty=easy"
 				    ),
 				    axios.get(
-					    "https://the-trivia-api.com/api/questions?limit=20&difficulty=medium"
+					    "https://the-trivia-api.com/api/questions?limit=6&difficulty=medium"
 				    ),
 				    axios.get(
-					    "https://the-trivia-api.com/api/questions?limit=20&difficulty=hard"
+					    "https://the-trivia-api.com/api/questions?limit=6&difficulty=hard"
 				    ),
 			    ])
 
 		        await getAllQuestions().then(
 			        axios.spread(({ data: easyRes }, { data: medRes }, { data: hardRes }) => {
-				        this.questions.easy = easyRes.slice(-6)
-                        this.questions.medium = medRes.slice(-6)
-                        this.questions.hard = hardRes.slice(-6)
+                        const addShuffled = (data) => {
+                            const shuffled = data.map((question) => {
+                                const incorrect = question.incorrectAnswers.map((a) => ({
+                                    text: a,
+                                    isCorrect: false,
+                                }))
+                                const correct = { text: question.correctAnswer, isCorrect: true }
+                                const answers = [...incorrect, correct]
+                                const shuffled = answers.sort(() => Math.random() - 0.5);
+                                return { ...question, answers: shuffled }
+                            })
+                            return shuffled
+                        }
+                        
+                        this.questions.easy = addShuffled(easyRes)
+                        this.questions.medium = addShuffled(medRes)
+                        this.questions.hard = addShuffled(hardRes)
+
+                        // console.log(this.questions.easy[0], "hi")
 			        })
 		        )
+                
+		        
+	
                 resolve('Added questions')
             } catch (error) {
                 console.log(error)

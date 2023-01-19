@@ -4,7 +4,7 @@ const initState = {
 	socket: {},
 	error: null,
 	isHost: false,
-
+	
 }
 
 const gameReducer = (state = initState, action) => {
@@ -27,20 +27,9 @@ const gameReducer = (state = initState, action) => {
 				...state,
 				gameState: { ...state.gameState, questionNumber: newQuestionNumber },
 			}
-		case "UPDATE_SCORE":
-			let newUsers = [...state.gameState.users]
-			let userIdx = newUsers.findIndex((item) => item.name === action.user)
-			newUsers[userIdx].score += action.score
-			return {
-				...state,
-				gameState: { ...state.gameState, users: newUsers },
-			}
 		case "SET_HOST":
 			return { ...state, isHost: action.payload }
 		case "COMPLETE_QUIZ":
-			let newUsersArr = [...state.gameState.users]
-			let idx = newUsersArr.findIndex((item) => item.name === action.payload)
-			newUsersArr[idx].hasCompletedQuiz = true
 			return {
 				...state,
 				gameState: { ...state.gameState, users: newUsersArr },
@@ -50,6 +39,14 @@ const gameReducer = (state = initState, action) => {
 				...state,
 				error: action.payload,
 			}
+		case 'UPDATE_SCORE':
+			let newUsers = [...state.gameState.users];
+			let userIdx = newUsers.findIndex(item => item.name === action.user);
+			newUsers[userIdx].score += action.score;
+			return {
+				...state,
+				gameState: {...state.gameState, users: newUsers}
+				};
 		default:
 			return state
 	}

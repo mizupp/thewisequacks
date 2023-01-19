@@ -9,17 +9,57 @@
     justify-content: center;
     align-items: center;
 }
+
+.closebuttonmodal {
+    position: absolute;
+    right: 32px;
+    top: 32px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+  }
+  .closebuttonmodal:hover {
+    opacity: 1;
+  }
+  .closebuttonmodal:before, .close:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: #333;
+  }
+  .closebuttonmodal:before {
+    transform: rotate(45deg);
+  }
+  .closebuttonmodal:after {
+    transform: rotate(-45deg);
+  }
+
+  
+/* .closebuttonmodal1{
+    display: flex;
+    position: relative;
+
+}
+.closebuttonmodal{
+    display: flex;
+    position: absolute;
+
+} */
 .modal-content{
     background: #fff;
     padding: 20px;
     border-radius: 5px;
-    width: 50%;
-    height: 50%;
+    min-height: 50%;
+    min-width: 50%;
+    max-width: 60%;
+    max-height: 60%;
     overflow: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    position: relative;
+
 }
 
 .modal-body{

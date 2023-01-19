@@ -1,23 +1,22 @@
 import React, { useState, useEffect, useMemo, useReducer } from "react"
-import { useDispatch, useCallback } from "react"
+import { useCallback } from "react"
+import { useSelector, useDispatch } from "react-redux";
+import { updateScore, updateLocalUser, leaveRoom } from "../../actions"
 
 const QComp = ({ data, onClose }) => {
-	const correct = { text: data.correctAnswer, isCorrect: true }
-	const incorrect = data.incorrectAnswers.map((a) => ({
-		text: a,
-		isCorrect: false,
-	}))
-	const answers = [...incorrect, correct]
-	// const shuffledAnswers = answers.sort(() => Math.random() - 0.5);
-	const shuffledAnswers = useMemo(
-		() => answers.sort(() => Math.random() - 0.5),
-		[data]
-	)
+	const user = useSelector(state => state.user);
+	const room = useSelector(state => state.gameState.room)
+	const socket = useSelector(state => state.socket)
+	const [isClicked, setClicked] = useState()
+	const [score, setScore] = useState(0)
+	
+	const shuffledAnswers = data.answers
+	const dispatch = useDispatch()
+
+	
 
 	const [timeLeft, setTimeLeft] = useState(20)
 
-
-	// const [timeLeft, setTimeLeft] = useState(20)
 	const [enabled, setEnabled] = useState(true)
 	const [beginTimestamp, setBeginTimestamp] = useState(0)
 
@@ -26,18 +25,29 @@ const QComp = ({ data, onClose }) => {
 		let timeDiff = ansObj.answerTime - beginTimestamp
 		console.log(ansObj.answerTime)
 		console.log(beginTimestamp)
-		console.log(timeDiff);
-		const score = calculatescore(timeDiff, ansObj.answer);
+		setScore(calculatescore(timeDiff, ansObj.answer));
 		// SEND SCORE TO USER!!!!
-		console.log("userscore"+score)
+		console.log("userscore", score)
 		setEnabled(false)
-
-		
 	}
 
+	const handleScore = () => {
+		const playerInfo = user
+		playerInfo.score += score
+		console.log(playerInfo)
+		dispatch(updateLocalUser(playerInfo))
+		setScore(0)
+		socket.emit('update player' , {playerInfo, room})
+	}
+	
 
 	useEffect(() => {
-		setBeginTimestamp(new Date().getTime())
+		if (timeLeft < 4) {
+			handleScore()
+		}
+		if (timeLeft === 20){
+			setBeginTimestamp(new Date())
+		}
 		if (!timeLeft) {
 			onClose()
 			return
@@ -45,7 +55,9 @@ const QComp = ({ data, onClose }) => {
 		const intervalId = setInterval(() => {
 			setTimeLeft(timeLeft - 1)
 		}, 1000)
-		return () => clearInterval(intervalId)
+		return () => {
+			clearInterval(intervalId)
+		}
 	}, [timeLeft])
 
 	return (
@@ -81,9 +93,10 @@ const QComp = ({ data, onClose }) => {
 export default QComp
 
 const calculatescore = (time, answer) =>{
+	console.log(time-5000)
 	let scorenum = 0;
 	if (answer.isCorrect) {
-		return Math.ceil((10000 - time)/100)
+		return Math.ceil((10000 - (time - 5000))/1000)*10;
 	} else {
 		return scorenum = 0;
 	}
@@ -100,7 +113,7 @@ const AnswerComp = ({ answer, enabled, isEndTimer, onClick }) => {
 
 	const clickHandler = () => {
 		setIsAnswered(true)
-		onClick({ answerTime: new Date().getTime(), answer: answer })
+		onClick({ answerTime: new Date(), answer: answer })
 	}
 
 	return (

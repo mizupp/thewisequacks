@@ -1,23 +1,19 @@
 import React, {useState} from "react"
 import "./style.css"
 import { useSelector, useDispatch } from "react-redux"
-import { leaveRoom } from "../../actions"
+import { leaveRoom, updateLocalUser } from "../../actions"
 import { useNavigate } from 'react-router-dom';
 
 
 const Winner = () => {
-	//get users and scores from redux
+	const user = useSelector(state => state.user);
+	const room = useSelector(state => state.gameState.room)
+	const socket = useSelector(state => state.socket)
+	const [nowinner, setWinner] = useState("No Winner");
 
-	//  const data = useSelector((state) => state.gameState)
-
-
-	// const [winner, setWinner] = useState("");
-	// setWinner("Russell");
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
-	const socket = useSelector((state) => state.socket)
 
-	const winner = "Russell";
 	const data = {
 		users: [{
 			userID: '123',
@@ -40,19 +36,28 @@ const Winner = () => {
 	]
 	}
 
-	const [sortedUsers, setSortedUsers] = useState(() =>
-		data.users.sort(function (a, b) {
-			let x = a.score
-			let y = b.score
-			return x < y ? 1 : x > y ? -1 : 0
-		})
-	)
-
 	const handleHome = () => {
 		socket.emit('leave-session', (data.room))
 		dispatch(leaveRoom())
 		navigate('/')
 	}
+	const [sortedUsers, setSortedUsers] = useState(() =>
+	data.users.sort(function (a, b) {
+		let x = a.score
+		let y = b.score
+		return x < y ? 1 : x > y ? -1 : 0
+	})
+)
+	// const winner = "Russell";
+	// const handleWinner = () => {
+	// 	// const playerInfo = user;
+	// 	// console.log(user);
+	// 	// dispatch(updateScore(user));
+	// 	// console.log(updateScore());
+	// 	// playerInfo.score
+	// }
+
+	
 
 	return (
 
@@ -66,7 +71,7 @@ const Winner = () => {
 		<div className="wrapwinner">
 		<div className="winnerpage flex flex-col">
 
-			<h1 className="winnerchickendinner">Winner is {winner} </h1>
+			<h1 className="winnerchickendinner">Winner is {nowinner} </h1>
 
 			<div className="container2 podium">
         <div className="podiumbar">
