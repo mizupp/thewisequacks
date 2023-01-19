@@ -12,7 +12,18 @@ const Header = () => {
 
 
     const [theme, setTheme] = useState('light');
-    const toggleTheme = () => {
+  //   const toggleTheme = () => {
+  //       if (theme === 'light') {
+  //         setTheme('dark');
+  //       } else {
+  //         setTheme('light');
+  //       }
+  //     };
+  //     useEffect(() => {
+  //       document.body.className = theme;
+  //     }, [theme]);
+
+      const toggleTheme = () => {
         if (theme === 'light') {
           setTheme('dark');
         } else {
@@ -22,7 +33,6 @@ const Header = () => {
       useEffect(() => {
         document.body.className = theme;
       }, [theme]);
-
     let activeStyle = {
         textDecoration: "underline",
       };
@@ -51,7 +61,6 @@ const Header = () => {
       
     return (
       <header className="headmy" aria-label="Site Header">
-              
             <div className='flex flex-col'>
           <Link className="block text-teal-600 flex flex-1 items-center justify-end md:justify-center" >
             {/* <span className="sr-only">Home</span> */}

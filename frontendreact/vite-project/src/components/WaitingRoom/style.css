@@ -1,3 +1,23 @@
 .waiting-message{
     grid-area: waiting;
 }
+
+.waiting{
+    display: flex;
+    margin-bottom: 5vh;
+    gap: 10px;
+    
+}
+.start-game-find{
+    background-color: #890b0b; 
+    border: none;
+    color: white;
+    padding: 22px 52px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 300px;
+    align-self: center;
+    border: 4px dashed rgb(211, 214, 0);
+}

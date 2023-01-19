@@ -2,6 +2,7 @@ import React , { useEffect } from "react"
 import { useState } from "react"
 import "./style.css"
 
+
 import { useSelector, useDispatch } from "react-redux"
 import { leaveRoom } from "../../actions"
 
@@ -52,6 +53,7 @@ const Winner = () => {
 	}
 
 	return (
+		<div className="wrapwinner">
 		<div className="winnerpage flex flex-col">
 
 			<h1 className="winnerchickendinner">Winner is {winner} </h1>
@@ -81,7 +83,7 @@ const Winner = () => {
 				<tbody>
 					{sortedUsers.map((user, index) => (
 						<tr
-							className={`${index % 2 === 1 ? "bg-white" : "bg-gray-200"}`}
+							className={`${index % 2 === 1 ? "bg-red" : "bg-white"}`}
 							key={index}
 						>
 							<td>{index + 1}</td>
@@ -94,7 +96,8 @@ const Winner = () => {
 					))}
 				</tbody>
 			</table>
-			<button onClick={handleHome}>Back to Home</button>
+			<button className="backHome" onClick={handleHome}>Back to Home</button>
+		</div>
 		</div>
 	)
 }

@@ -53,13 +53,13 @@ const WaitingRoom = ({data}) => {
 					</div>
 				</div>}
 				<br/>
-				{isHost && <button onClick={handleButtonClick} className="btn start-game">
+				{isHost && <button onClick={handleButtonClick} className="start-game-find btn start-game">
 					START GAME
 				</button>}
 
 				{data.isGameStarted && <Navigate to="/game" />}
 				<br/>
-				<button onClick={leaveJoin} className="btn start-game">
+				<button onClick={leaveJoin} className="btn start-game start-game-find">
 					LEAVE ROOM
 				</button>
 			</div>
