@@ -1,6 +1,6 @@
 const express = require("express")
 const { app, io, server } = require("./initialiseServer")
-const highScoreRoutes = require("./controller/highScore")
+const highScoreRoutes = require("./routes/highScoreRoutes")
 const cors = require("cors")
 const { initialise } = require("./socketevent")
 
