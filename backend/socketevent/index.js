@@ -92,8 +92,10 @@ function initialise(socket) {
 		io.to(room).emit("change state", state)
 	})
 
-	socket.on("start-game", (room) => {
+	socket.on("start-game", async (room) => {
 		const state = games[getIndex(room)]
+		const resp = await state.initQuestions()
+		
 		state.startGame();
 		console.log(`Game Started | room ${room}`)
 		io.to(room).emit('change state', state)

@@ -11,7 +11,8 @@ const Game = () => {
 
     return (
         <>
-            {/* <ScoreBoard users={data.users} /> */}
+            <ScoreBoard users={data.users} />
+            <GameGallery/>
             {data.hasGameEnded && <Navigate to="/winner" />}
         </>
     )

@@ -13,7 +13,7 @@ const QComp = ({ data, onClose }) => {
 		() => answers.sort(() => Math.random() - 0.5),
 		[data]
 	)
-	const [timeLeft, setTimeLeft] = useState(10)
+	const [timeLeft, setTimeLeft] = useState(20)
 
 	// const [timeLeft, setTimeLeft] = useState(10)
 	const [enabled, setEnabled] = useState(true)

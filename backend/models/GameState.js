@@ -1,12 +1,18 @@
+const axios = require('axios')
+
 class GameState{
     constructor(room, hostID){
         this.room = room;
         this.host = hostID;
         this.users = [];
         this.questionNumber = 1;
-        // this.questions = questions;
         this.isGameStarted = false;
         this.hasGameEnded = false;
+        this.questions = {
+            easy: [],
+            medium: [],
+            hard: []
+        };
     }
 
      addPlayer(playerInfo) {
@@ -56,6 +62,37 @@ class GameState{
             } catch (error) {
                 console.log(error);
                 reject("Could not update player")
+            }
+        })
+    }
+
+    async initQuestions() {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const getAllQuestions = async () =>
+			    await axios.all([
+				    axios.get(
+					    "https://the-trivia-api.com/api/questions?limit=20&difficulty=easy"
+				    ),
+				    axios.get(
+					    "https://the-trivia-api.com/api/questions?limit=20&difficulty=medium"
+				    ),
+				    axios.get(
+					    "https://the-trivia-api.com/api/questions?limit=20&difficulty=hard"
+				    ),
+			    ])
+
+		        await getAllQuestions().then(
+			        axios.spread(({ data: easyRes }, { data: medRes }, { data: hardRes }) => {
+				        this.questions.easy = easyRes.slice(-6)
+                        this.questions.medium = medRes.slice(-6)
+                        this.questions.hard = hardRes.slice(-6)
+			        })
+		        )
+                resolve('Added questions')
+            } catch (error) {
+                console.log(error)
+                reject('Could not add questions')
             }
         })
     }
