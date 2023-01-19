@@ -8,11 +8,12 @@ import ChatLayout from "./components/ChatLayout"
 import Chat from "./components/Chat"
 import { Routes, Route, Outlet, Link } from "react-router-dom"
 import { HomePage, Game, Winner, Lobby } from "./pages"
+import NotFound from "./pages/NotFound"
 
 import "./back2.styl"
 
 import { io } from "socket.io-client"
-import { changeState, updateScore, storeSocket } from "./actions"
+import { changeState, updateScore, storeSocket, setHost } from "./actions"
 
 const ENDPOINT = "http://localhost:3000"
 
@@ -40,6 +41,7 @@ function App() {
 			socket.leave(gameState.room)
 		})
 		newSocket.on("change state", (state) => changeState(state))
+		newSocket.on("make host", () => setHost())
 		dispatch(storeSocket(newSocket))
 		// setSocket(newSocket)
 		return () => {
@@ -47,9 +49,32 @@ function App() {
 		}
 	}, [])
 
-	return (
-		<>
-			{/* <div className='h-screen flex flex-col justify-between'> */}
+
+  return (
+    <>
+  
+
+
+    {/* <div className='h-screen flex flex-col justify-between'> */}
+
+    <div className='h-screen flex flex-col justify-between'>
+	<div className="ribbon ribbon-top-left"><span>BETA</span></div>
+
+	  <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route element={<ChatLayout />}>
+            <Route path="game" element={<Game />} />
+            <Route path="lobby" element={<Lobby />} />
+            <Route path="winner" element={<Winner />} />
+			<Route path="*" element={<NotFound />} />
+          </Route>
+        </Route>
+      </Routes>    
+    </div>
+  
+    </>
+  )
 
 			<div className="h-screen flex flex-col justify-between">
 				<Routes>

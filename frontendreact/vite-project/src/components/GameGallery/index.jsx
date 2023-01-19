@@ -7,6 +7,7 @@ const GameGallery = () => {
 	const [medium, setMedium] = useState(null)
 	const [hard, setHard] = useState(null)
 
+	
 	useEffect(() => {
 		const getAllQuestions = async () =>
 			axios.all([
@@ -30,17 +31,28 @@ const GameGallery = () => {
 		)
 	}, [])
 
+
+
+	const handleForm = async (e) => {
+		e.preventDefault();
+		
+	}
+
+	
+
 	return (
-		<div className="p-2 grid grid-cols-1 grid-rows-3 ">
+		<div className="p-2 grid grid-cols-1 grid-rows-3">
 			<div className="grid grid-cols-6">
 				{easy &&
 					easy
 						.slice(-6)
 						.map((q) => (
-							<QuestionCard key={q.id} QuestionData={q} Winner={false} />
+
+							<QuestionCard key={q.id} QuestionData={q} Winner={false}  />
 						))}
+						{ console.log(easy) }
 			</div>
-			<div className="grid grid-cols-6">
+			<div className="grid grid-cols-6 ">
 				{medium &&
 					medium
 						.slice(-6)
@@ -48,6 +60,7 @@ const GameGallery = () => {
 							<QuestionCard key={q.id} QuestionData={q} Winner={false} />
 						))}
 			</div>
+
 			<div className="grid grid-cols-6">
 				{hard &&
 					hard

@@ -86,7 +86,19 @@ const clearData = (data) => {
 	}
 }
 
-export {  storeSocket, changeState, storeUser,updateLocalUser, updateScore, setCompleted, setIcon, startGame, incrementQuestionNumber,  setQuizAsComplete, getState,loadData,clearData }
+const setHost = () => {
+	return {
+		type: "SET_HOST",
+		payload: true
+	}
+}
+
+const leaveRoom = () => {
+	return {
+		type: "LEAVE_ROOM",
+	}
+}
+export {  leaveRoom, storeSocket, changeState, storeUser,updateLocalUser, updateScore, setCompleted, setIcon, startGame, incrementQuestionNumber,  setQuizAsComplete, getState,loadData,clearData, setHost }
 // =======
 // export {
 // 	storeSocket,

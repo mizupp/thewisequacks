@@ -36,6 +36,7 @@ const HomePage = () => {
 
 	return (
 	<>
+	<p className="headingmain flex flex-col justify-between">EARLY BIRD</p>
 	{/* <JoinGame /> */}
 	<StartGame />
 		<div>
@@ -50,7 +51,6 @@ const HomePage = () => {
 			</button>
 			<MyModal onClose={() => setInstructionsOpen(false)} Component={<Instructions/>} setOpen={instructionsOpen} />
 			<MyModal onClose={() => setHighScoreListOpen(false)} Component={<HighScoreList/>} setOpen={highScoreListOpen} />
-
 			</div>
 		</>
 	)

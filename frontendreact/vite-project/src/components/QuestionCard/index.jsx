@@ -1,7 +1,7 @@
 import React from "react";
 import MyModal from "../Modal";
 import QComp from "../QuestionComponent";
-
+import "./style.css"
 const QuestionCard = ({QuestionData, Winner=false}) => {
 
     const [show, setShow] = React.useState(false);
@@ -15,12 +15,13 @@ const QuestionCard = ({QuestionData, Winner=false}) => {
     }
 
     return (
-        
-            <div onClick={handleClick} className = "hover:cursor-pointer min-h-[10rem] max-w-[16rem] h-full p-2 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        // <div onClick={handleClick} className = "eh hover:cursor-pointer min-h-[10rem] max-w-[16rem] h-full p-2 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
+            <div onClick={handleClick} className = "eh hover:cursor-pointer min-h-[10rem] max-w-[16rem] h-full p-2 bg-red border border-red-200 rounded-lg shadow-md hover:bg-red-200 dark:bg-red-800 dark:border-yellow-700 dark:hover:bg-green-800">
                 {
                     <div className="h-full flex flex-col justify-between">
                         <div className="flex flex-col justify-between">
-                            <h5 className="mb-1 text-md font-bold tracking-tight text-gray-900 dark:text-white">{Winner ? renderQuestion(QuestionData.question) : QuestionData.category}</h5>
+                            <h5 className="eh2 mb-1 text-md font-bold tracking-tight text-gray-900 dark:text-white">{Winner ? renderQuestion(QuestionData.question) : QuestionData.category}</h5>
                             <p className="font-normal text-gray-700 dark:text-gray-400">{Winner ? renderQuestion(QuestionData.correctAnswer) : QuestionData.difficulty}</p>
                         </div>
                         {Winner ? 

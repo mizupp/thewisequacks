@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 // const playerInfo = {
 //     userID: socket.id,
 //     name: username,
@@ -13,7 +13,7 @@ const ScoreBoard = ({users}) => {
     useEffect(() => {
         const sortedUsers = users.sort(function(a, b)
         {
-            let x = a[score]; let y = b[score];
+            let x = a["score"]; let y = b["score"];
             return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         });
         setUsers(sortedUsers);
@@ -24,7 +24,7 @@ const ScoreBoard = ({users}) => {
         <div className="w-full h-32 flex flex-start gap-x-2 px-4">
             {Users.map((user, index) => (
                 <div key={index} className="h-5/6 w-auto flex justify-center items-center">
-                    <img src={user.img} alt={user.name} className="h-full w-full rounded-full" />
+                    <img src={user.icon} alt={user.name} className="h-full w-full rounded-full" />
                 </div>
             ))}
         </div>

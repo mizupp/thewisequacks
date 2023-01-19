@@ -62,29 +62,55 @@ const AvatarSelection = ({user, room}) => {
 		image23
 	])
 
-	const [selectedAvatar, setSelectedAvatar] = useState("")
+	const [selectedAvatar, setSelectedAvatar] = useState({image1});
 	// const socket = useSelector(state => state.socket)
 	const onSelect = (a) => {
-		const playerInfo = user;
 		setSelectedAvatar(a)
-		playerInfo.icon = selectedAvatar;
+		console.log(selectedAvatar)
+		updateAvatar(a)
+		
+	}
+
+	const updateAvatar = (a) => {
+		const playerInfo = user;
+		playerInfo.icon = a;
 		// dispatch(setIcon(selectedAvatar))
 		dispatch(updateLocalUser(playerInfo))
-		
 		// updateUser(socket, playerInfo, room);
 		socket.emit('update player', {playerInfo, room})
 		console.log(updateLocalUser(playerInfo));
 	}
 
+// 	useEffect(() => {
+//   const timer = setTimeout(() => {
+// 	updateAvatar()
+//     console.log('This will run after 1 second!')
+//   }, 1000);
+//   return () => clearTimeout(timer);
+// }, [selectedAvatar]);
+
+
+	// useEffect(() => {
+	// 	updateAvatar();
+	// }, [selectedAvatar])
+
+	// const [isLoading, setIsLoading] = useState(true);
+	// function onLoad() {
+	// 	setTimeout(() => setIsLoading(false), 1000);
+		
+	//   }
+
 	return (
-		<div className="flex flex-col items-center justify-stretch gap-4 w-full h-full bg-gray-800 rounded-lg p-4 border-2 border-solid border-black drop-shadow-lg text-white">
+		<div className="flex flex-col items-center justify-stretch gap-2 w-full h-max bg-amber-400 rounded-lg p-4 border-2 border-solid border-black border-4 drop-shadow-lg text-white">
 			<div>Player choose your avatar:</div>
 			<div className="grid  grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 text-6xl">
 				{avatars.map((a, i) => (
 					<img
+					// onLoad={onLoad}
 						src={a}
 						id={a}
 						key={i}
+						placeholder={image2}
 						className={`h-20 w-20 ${
 							a == selectedAvatar ? "opacity-20" : "opacity-100"
 						}`}
