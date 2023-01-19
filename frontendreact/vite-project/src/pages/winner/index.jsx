@@ -58,7 +58,7 @@ const Winner = () => {
 
 			<h1 className="winnerchickendinner">Winner is {winner} </h1>
 
-			<div className="container podium">
+			<div className="container2 podium">
         <div className="podiumbar">
           <p className="podiumuser">Miz</p>
           <div className="podiumrank second">2</div>

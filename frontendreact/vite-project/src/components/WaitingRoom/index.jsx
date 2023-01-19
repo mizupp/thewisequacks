@@ -40,19 +40,23 @@ const WaitingRoom = ({data}) => {
 		navigate('/game')
 	}
 
+
+	function copyToClipBoard() {
+		navigator.clipboard.writeText(data.room);
+	  }
+
 	return (
 		<>
-			<div>
-				{data.users && <div>
+			<div className="flex flex-col">
+				{data.users && <div className="codestuff flex flex-col">
 					<div className="waiting-message">
 						<h1>This is {data.users.find((p) => p.isHost == true).name}'s room </h1>
-						<h2>Please wait for other players...</h2>
-					</div><p>Share room name to friends:</p>
-					<div>
-						<span>{data.room}</span>
-					</div>
+						<h2>Waiting for other players...</h2>
+					</div> 
+					<button className="codebtn" onClick={copyToClipBoard}>Copy Room Code: {data.room}</button>
 				</div>}
 				<br/>
+				<div className="flex flex-row">
 				{isHost && <button onClick={handleButtonClick} className="start-game-find btn start-game">
 					START GAME
 				</button>}
@@ -62,6 +66,7 @@ const WaitingRoom = ({data}) => {
 				<button onClick={leaveJoin} className="btn start-game start-game-find">
 					LEAVE ROOM
 				</button>
+				</div>
 			</div>
 		</>
 	)

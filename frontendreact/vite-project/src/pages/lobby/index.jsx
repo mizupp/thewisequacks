@@ -3,7 +3,7 @@ import PlayerCard from "../../components/PlayerCard";
 import AvatarSelection from "../../components/AvatarSelection";
 import WaitingRoom from "../../components/WaitingRoom";
 import PlayerListLobby from "../../components/PlayerListLobby";
-
+import { Navigate } from "react-router-dom"
 import MyModal from "../../components/Modal";
 
 import "./styles.css"
@@ -17,7 +17,7 @@ const Lobby = () => {
 	const data = useSelector(state => state.gameState);
 	const icon = useSelector(state => state.icon);
 	const user = useSelector(state => state.user);
-	
+
 	return (
 		<div className="lobby-container">
 			<div className="AvatarSelection">

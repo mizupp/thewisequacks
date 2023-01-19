@@ -4,7 +4,7 @@ import {logo, logonb, logowb} from "../../img";
 import l from "../../img/logo.png";
 import "./style.css"
 import MusicP from '../Music'
-
+import { useNavigate } from 'react-router-dom';
 import {BirdSong} from '../Music/Sound';
 
 import Worm from "../Worm"
@@ -57,14 +57,16 @@ const Header = () => {
 
       //   };
     
-
+const logolink = () => {
+  <Navigate to="/" />
+}
       
     return (
       <header className="headmy" aria-label="Site Header">
             <div className='flex flex-col'>
           <Link className="block text-teal-600 flex flex-1 items-center justify-end md:justify-center" >
             {/* <span className="sr-only">Home</span> */}
-            <img className="logo" src={logowb} ></img>
+            <img onClick={logolink} className="logo" src={logowb}  ></img>
           </Link>
           <div className='flex flex-col'>
           <div onClick={toggleTheme}className="wormy" ><Worm className="wormy" /></div>
