@@ -123,14 +123,13 @@ function initialise(socket) {
 	})
 
 	//chat
-	socket.on("chat-message", ({ room, message }) => {
-		
+	socket.on("chat-message", ({ room, message, name }) => {
+		console.log(room)
 		if (room) {
-			console.log(message + room)
-			io.to(room).emit("new-message", { user: socket.id, msg: message })
+			io.to(room).emit("new-message", { user: name, msg: message })
 		} else {
 			console.log(room)
-			io.emit("new-message", { user: socket.id, msg: message })
+			io.emit("new-message", { user: name, msg: message })
 		}
 	})
 
