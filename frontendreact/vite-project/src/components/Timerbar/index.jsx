@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import './style.css'
 
 export default function Timerbar() {
-  const time = useRef(30);
+  const time = useRef(120);
   const endGame = useRef(1);
-  const [timeTime, setTimeTime] = useState(30)
+  const [timeTime, setTimeTime] = useState(120)
   const room = useSelector(state => state.gameState.room)
   const socket = useSelector(state => state.socket)
   const isHost = useSelector(state => state.isHost)
@@ -42,7 +42,7 @@ export default function Timerbar() {
       <div className="round-time-bar">
         <div className='timerCounter'>
       <div className='TL'>
-          <progress id="countdown" value={timeTime} max="30"></progress>
+          <progress id="countdown" value={timeTime} max="120"></progress>
           {time.current > 0 && <h2>Time left: {timeTime}</h2>}
           {time.current <= 0 && <h2>Game Over!</h2> }
           {/* {time <= 0 && isHost ? socket.emit('end game', (room)) : null} */}
