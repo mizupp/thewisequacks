@@ -3,9 +3,10 @@
   flex-direction: row;
 }
 
+
 .winnerchickendinner{
-  font-size: 2em;
-  margin-bottom: 15vh;
+  font-size: 3em;
+  margin-bottom: 5vh;
   z-index:1;
   color: rgb(184, 1, 1);
   background-color: black;
@@ -23,9 +24,9 @@
 .container2 {
     display: flex;
     align-items: flex-end;
-    height: 6em;
-    margin-left:30px;
-    margin-right: 30px; 
+    height: 2em;
+    margin-left:300px;
+    margin-right: 300px; 
 
   }
   
@@ -48,22 +49,28 @@
   
   
   .podium .first {
-    min-height: 38vh;
+    min-height: 28vh;
     background: rgb(247, 169, 0);
       background: 
         linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%)
-        rgb(248, 211, 0);
+        rgb(0, 9, 105);
       background-size:300% 100%;
       animation: shine 2s infinite;
   }
-  
+  .winnerimage{
+    display: block;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+
+  }
 
   .podium .second {
     min-height: 18vh;
-    background: rgb(61, 122, 0);
+    background: rgb(33, 0, 178);
       background: 
         linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%)
-        #5d890b;
+        #274e00;
       background-size:300% 100%;
       animation: shine 2s infinite;
   }
@@ -73,7 +80,7 @@
     background: rgb(51, 33, 5);
       background: 
         linear-gradient(90deg,#0000 33%,rgba(255,255,255,0.3) 50%,#0000 66%)
-        rgb(32, 0, 160);
+        rgb(223, 215, 0);
       background-size:300% 100%;
       animation: shine 2s infinite;
   }
@@ -112,6 +119,8 @@ table{
   border: 4px dashed rgb(249, 191, 0) !important;
   color: rgb(8, 10, 113);
   background-color: rgb(184, 1, 1);
+  height: 20px;
+  overflow:visible; 
 }
 
 

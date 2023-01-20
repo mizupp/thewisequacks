@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import './style.css'
 
 export default function Timerbar() {
-  const time = useRef(30);
+  const time = useRef(5);
   const endGame = useRef(1);
   const [timeTime, setTimeTime] = useState(30)
   const room = useSelector(state => state.gameState.room)

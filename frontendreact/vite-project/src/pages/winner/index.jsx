@@ -1,21 +1,51 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import "./style.css"
 import { useSelector, useDispatch } from "react-redux"
 import { leaveRoom, updateLocalUser } from "../../actions"
 import { useNavigate } from 'react-router-dom';
 import WinnerSong from "../../components/Music/winnersong";
+import axios from "axios";
+
 
 const Winner = () => {
 	const user = useSelector(state => state.user);
 	const room = useSelector(state => state.gameState.room)
 	const socket = useSelector(state => state.socket)
-	const [nowinner, setWinner] = useState("No Winner");
+
+
 	const data = useSelector(state => state.gameState)
+
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
+	const [allScores, setAllScores] = useState([]);
+	
+	const handleScores = async () => {
+		try {
+		  const url = "https://thewisequacks.onrender.com/highscores";
+		  const payload = {
+			name: sortedUsers[0].name,
+			score: sortedUsers[0].score,
+		  };
+		  const headers = {
+			"Content-Type": "application/json",
+		  };
+		  const { data } = await axios.post(url, payload, { headers });
+		  console.log(data);
+		} catch (error) {
+		  console.log(error);
+		}
+	  };
+
+
+	  useEffect(() => {
+		handleScores()
+		console.log("top")
+	  }, [])
+
 	const handleWinnerSound = () => {
 		<Winner />
+		
 	}
 
 	const handleHome = () => {
@@ -29,48 +59,39 @@ const Winner = () => {
 		let x = a.score
 		let y = b.score
 		return x < y ? 1 : x > y ? -1 : 0
-		console.log(sortedUsers);
+		
 	})
 )
-	// const winner = "Russell";
-	// const handleWinner = () => {
-	// 	// const playerInfo = user;
-	// 	// console.log(user);
-	// 	// dispatch(updateScore(user));
-	// 	// console.log(updateScore());
-	// 	// playerInfo.score
-	// }
 
-	
 
 	return (
 
 		<div>
 			<div className="winner">
 			<WinnerSong />
-				<h1>Winner</h1>
-				<img src={sortedUsers[0].icon} width='200px'alt="winner" />
 				<h1>{sortedUsers[0].name} </h1>
 			</div>
-
+			
+		{console.log(sortedUsers)}
 		<div className="wrapwinner">
 			<div className="winnerpage flex flex-col">
-				<h1 className="winnerchickendinner">Winner is {nowinner} </h1>
+				<h1 className="winnerchickendinner">Winner is {sortedUsers[0].name} </h1>
+				<div className="outside flex flex-col justify-between">
 				<div className="container2 podium">
         			<div className="podiumbar">
-          				<p className="podiumuser">{sortedUsers[0].name}</p>
           				<div className="podiumrank second">2</div>
         			</div>
         			<div className="podiumbar">
-          				<p className="podiumuser">{sortedUsers[0].name}</p>
+					<img className="winnerimage" src={sortedUsers[0].icon} width='200px'alt="winner" />
+
           				<div className="podiumrank first">1</div>
+
         			</div>
         			<div className="podiumbar">
-          				<p className="podiumuser">{sortedUsers[0].name}</p>
           				<div className="podiumrank third">3</div>
         			</div>
       			</div>
-      
+				  </div>
       
 			<table>
 				<thead>
