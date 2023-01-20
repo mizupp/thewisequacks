@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import WinnerSong from "../../components/Music/winnersong";
 import axios from "axios";
 
-
 const Winner = () => {
 	const user = useSelector(state => state.user);
 	const room = useSelector(state => state.gameState.room)
