@@ -4,27 +4,27 @@ const Instructions = () => {
 	return (
 		<div role="Instructions">
 			<h1>Instructions</h1>
+			<br />
 			<p>
-				You will be shown 18 tiles with questions behind them. You want to answer as many questions in the time limit, you can 
-				see how much time is left by looking at the progress bar at the top of the screen.
+				There are 18 tiles with questions behind them. Answer as many questions in the time limit.
 			</p>
+			<br />
 			<p>
-				The tiles will be arranged in 3 rows and 6 columns. The cards will show what category and difficulty the question is.
+				The tiles show the question category and difficulty.
 			</p>
+			<br />
 			<p>
-				Click on a tile to reveal the question. You will have 3 seconds to read
-				the question before the answers appear.
+				Click on a tile to reveal the question. Harder questions are worth more points! 
 			</p>
+			<br />
 			<p>
-				You want to select the correct answer as quickly as possible. If you want to get the most points! 
-				However if you select the wrong answer or take too long to answer the question, you will recieve zero points.
+				Answer as quickly as possible to get the most points! If you choose wrong or take too long , you will get zero.
 			</p>
+			<br />
 			<p>
-				You can see how many points you have by looking at the score at the top of the screen.
+				Get as many points as you can. The player with the most points at the end of the game wins!
 			</p>
-			<p>
-				The person with the most points at the end of the game will be the winner.
-			</p>
+			<br />
 		</div>
 	)
 }

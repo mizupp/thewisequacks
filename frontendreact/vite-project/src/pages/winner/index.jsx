@@ -10,7 +10,7 @@ const Winner = () => {
 	const user = useSelector(state => state.user);
 	const room = useSelector(state => state.gameState.room)
 	const socket = useSelector(state => state.socket)
-
+	const isHost = useSelector(state => state.isHost)
 
 	const data = useSelector(state => state.gameState)
 
@@ -38,7 +38,9 @@ const Winner = () => {
 
 
 	  useEffect(() => {
-		handleScores()
+		if(isHost){
+			handleScores()
+		}
 		console.log("top")
 	  }, [])
 
