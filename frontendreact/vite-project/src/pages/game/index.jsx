@@ -8,13 +8,13 @@ import ScoreBoard from "../../components/ScoreBoard";
 const Game = () => {
 
     const data = useSelector(state => state.gameState);
-    const constant = 30
+ 
     return (
         <>
         
-            {/* <Timerbar /> */}
+           
 
-            <Timerbar constant={constant} />
+            <Timerbar  />
             <ScoreBoard users={data.users} />
             <GameGallery/>
             {data.hasGameEnded && <Navigate to="/winner" />}

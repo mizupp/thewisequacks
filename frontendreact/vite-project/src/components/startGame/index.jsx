@@ -24,7 +24,7 @@ const StartGame = () => {
 			name: username,
 			isHost: true,
 			score: 0,
-			icon: '/src/img/1-min.png',
+			icon: 'https://voluble-zabaione-2be1b6.netlify.app/assets/1-min-db57aa37.png',
 			questionNo: 1
 		}
 		
@@ -41,7 +41,7 @@ const StartGame = () => {
 			name: username,
 			isHost: false,
 			score: 0,
-			icon: '/src/img/1-min.png',
+			icon: 'https://voluble-zabaione-2be1b6.netlify.app/assets/1-min-db57aa37.png',
 			questionNo: 1
 		}
 		socket.emit("join game", { room, playerInfo })
@@ -52,6 +52,7 @@ const StartGame = () => {
 
 	return (
 		<div role="StartGame" className="start-game">
+			<label for="username" className='sr-only'></label>
 			<input
 				className="usernameinput"
 				type="text"
@@ -60,6 +61,7 @@ const StartGame = () => {
 				placeholder="name"
 				onChange={(e) => setName(e.target.value)}
 			/>
+			<label for="room" className='sr-only'></label>
 			<input
 				className="usernameinput"
 				type="text"

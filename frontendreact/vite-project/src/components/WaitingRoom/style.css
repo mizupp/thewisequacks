@@ -23,6 +23,7 @@
     width: 440px;
     align-self: center;
     border: 4px dashed rgb(211, 214, 0);
+    margin-top: 10px;
 }
 .start-game-find{
     background-color: #890b0b; 

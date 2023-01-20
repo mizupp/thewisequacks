@@ -12,7 +12,7 @@
   background-color: black;
 
   /* background-color: rgb(184, 1, 1); */
-  animation: blinker 1s linear 100;
+  animation: blinker 1s linear 5;
 }
 
 @keyframes blinker {
@@ -20,6 +20,7 @@
     opacity: 0;
   }
 }
+
 
 .container2 {
     display: flex;
@@ -103,8 +104,8 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 40%;
+  margin-right: 40%;
   margin-top: 30px;
 }
 .backHome:hover{
