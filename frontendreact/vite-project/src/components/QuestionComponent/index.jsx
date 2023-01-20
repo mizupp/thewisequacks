@@ -11,7 +11,7 @@ const QComp = ({ data, onClose }) => {
 	const socket = useSelector(state => state.socket)
 	const [isClicked, setClicked] = useState()
 	const [score, setScore] = useState(0)
-	
+	const difficulty = data.difficulty
 	const shuffledAnswers = data.answers
 	const dispatch = useDispatch()
 
@@ -33,7 +33,7 @@ const QComp = ({ data, onClose }) => {
 		let timeDiff = ansObj.answerTime - beginTimestamp
 		console.log(ansObj.answerTime)
 		console.log(beginTimestamp)
-		setScore(calculatescore(timeDiff, ansObj.answer));
+		setScore(calculatescore(timeDiff, ansObj.answer, difficulty));
 		// SEND SCORE TO USER!!!!
 		console.log("userscore", score)
 		setEnabled(false);
@@ -102,11 +102,24 @@ const QComp = ({ data, onClose }) => {
 
 export default QComp
 
-const calculatescore = (time, answer) =>{
+const multiplier = (difficulty) => {
+	switch (difficulty) {
+		case 'easy':
+			return 1
+		case 'medium':
+			return 2
+		case 'hard':
+			return 3
+		default:
+			break;
+	}
+}
+
+const calculatescore = (time, answer, difficulty) =>{
 	console.log(time-5000)
 	let scorenum = 0;
 	if (answer.isCorrect) {
-		return Math.ceil((10000 - (time - 3000))/1000)*10;
+		return (Math.ceil((10000 - (time - 3000))/1000)*10)*multiplier(difficulty);
 	} else {
 		return scorenum = 0;
 	}

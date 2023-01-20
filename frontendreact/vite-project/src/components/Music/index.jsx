@@ -1,10 +1,10 @@
 import { useState, useRef } from "react"
-import { BirdSong } from "./Sound"
+import { jFrench } from "./Sound"
 
 function MusicP() {
 	const [playing, setPlaying] = useState(false)
 
-	const audioRef = useRef(new Audio(BirdSong))
+	const audioRef = useRef(new Audio(jFrench))
 
 	const play = () => {
 		setPlaying(true)

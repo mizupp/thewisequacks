@@ -4,9 +4,15 @@
 }
 
 .round-time-bar{
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
+    position: fixed;
+    top: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    /* margin-left: auto;
+    margin-right: auto; */
     /* background-color: red; */
 }
 
@@ -29,4 +35,8 @@
 
 .textContainer{
 background: #000000;
+}
+
+#countdown {
+    width: 30%;
 }

@@ -10,7 +10,7 @@ const Winner = () => {
 	const user = useSelector(state => state.user);
 	const room = useSelector(state => state.gameState.room)
 	const socket = useSelector(state => state.socket)
-
+	const isHost = useSelector(state => state.isHost)
 
 	const data = useSelector(state => state.gameState)
 
@@ -38,7 +38,9 @@ const Winner = () => {
 
 
 	  useEffect(() => {
-		handleScores()
+		if(isHost){
+			handleScores()
+		}
 		console.log("top")
 	  }, [])
 
@@ -73,25 +75,31 @@ const Winner = () => {
 			
 		{console.log(sortedUsers)}
 		<div className="wrapwinner">
+
 			<div className="winnerpage flex flex-col">
-				<h1 className="winnerchickendinner">Winner is {sortedUsers[0].name} </h1>
+				<h1 className="winnerchickendinner">{sortedUsers[0]?.name} Wins!</h1>
 				<div className="outside flex flex-col justify-between">
 				<div className="container2 podium">
         			<div className="podiumbar">
+					<img className="winnerimage" src={sortedUsers[1]?.icon} width='200px'alt="winner" />
+					<p className="podiumuser">{sortedUsers[1]?.name}</p>
           				<div className="podiumrank second">2</div>
         			</div>
         			<div className="podiumbar">
-					<img className="winnerimage" src={sortedUsers[0].icon} width='200px'alt="winner" />
-
+					<img className="winnerimage" src={sortedUsers[0]?.icon} width='200px'alt="winner" />
+					<p className="podiumuser">{sortedUsers[0]?.name}</p>
           				<div className="podiumrank first">1</div>
 
         			</div>
         			<div className="podiumbar">
+					<img className="winnerimage" src={sortedUsers[2]?.icon} width='200px'alt="winner" />
+					<p className="podiumuser">{sortedUsers[2]?.name}</p>
           				<div className="podiumrank third">3</div>
         			</div>
       			</div>
 				  </div>
       
+
 			<table>
 				<thead>
 					<tr>
