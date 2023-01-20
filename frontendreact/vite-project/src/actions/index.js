@@ -75,4 +75,12 @@ const leaveRoom = () => {
 		type: "LEAVE_ROOM",
 	}
 }
-export {  leaveRoom, storeSocket, changeState ,updateLocalUser, updateScore, setCompleted, incrementQuestionNumber,  setQuizAsComplete, loadData,clearData, setHost }
+
+const addMessage = (message) => {
+	return {
+		type: "ADD_MSG",
+		payload: message
+	}
+}
+
+export {  leaveRoom, storeSocket, changeState ,updateLocalUser, updateScore, setCompleted, incrementQuestionNumber,  setQuizAsComplete, loadData,clearData, setHost, addMessage }

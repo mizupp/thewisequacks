@@ -3,9 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { setHost, updateLocalUser } from "../../actions";
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom"; 
-
+import Western from '../Music/Sound/western.mp3'
 import "./style.css"
 const StartGame = () => {
+	const answeringsound = new Audio(Western)
+	answeringsound.volume = 1
+	
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const socket = useSelector((state) => state.socket)
@@ -15,6 +18,7 @@ const StartGame = () => {
 	const data = useSelector((state) => state.gameState)
 
 	const handleCreate = () => {
+		answeringsound.play()
 		const playerInfo = {
 			userID: socket.id,
 			name: username,
@@ -31,6 +35,7 @@ const StartGame = () => {
 	}
 
 	const handleJoin = () => {
+		answeringsound.play()
 		const playerInfo = {
 			userID: socket.id,
 			name: username,
@@ -42,6 +47,7 @@ const StartGame = () => {
 		socket.emit("join game", { room, playerInfo })
 		dispatch(updateLocalUser(playerInfo))
 		navigate("/lobby")
+
 	}
 
 	return (

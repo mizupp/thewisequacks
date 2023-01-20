@@ -9,7 +9,7 @@ import {BirdSong} from '../Music/Sound';
 
 import Worm from "../Worm"
 const Header = () => {
-
+ const navigate = useNavigate();
 
     const [theme, setTheme] = useState('light');
   //   const toggleTheme = () => {
@@ -58,15 +58,15 @@ const Header = () => {
       //   };
     
 const logolink = () => {
-  <Navigate to="/" />
+  // <Navigate to="/" />
 }
       
     return (
       <header className="headmy" aria-label="Site Header">
             <div className='flex flex-col'>
-          <Link className="block text-teal-600 flex flex-1 items-center justify-end md:justify-center" >
+          <Link to="/" className="block text-teal-600 flex flex-1 items-center justify-end md:justify-center" >
             {/* <span className="sr-only">Home</span> */}
-            <img onClick={logolink} className="logo" src={logowb}  ></img>
+            <img  onClick={logolink} className="logo" src={logowb}  ></img>
           </Link>
           <div className='flex flex-col'>
           <div onClick={toggleTheme}className="wormy" ><Worm className="wormy" /></div>
