@@ -19,35 +19,35 @@ MongoClient.connect(url, function(err, db) {
             name: "Russell",
             category: "History",
             difficulty: 1,
-            score: 350,
+            score: 3500,
         },
         {
             _id: 2,
             name: "Mizna",
             category: "Geography",
             difficulty: 1,
-            score: 300,
+            score: 3000,
         },
         {
             _id: 3,
             name: "Adam",
             category: "Geography",
             difficulty: 1,
-            score: 250,
+            score: 2500,
         },
         {
             _id: 4,
             name: "Liam",
             category: "History",
             difficulty: 1,
-            score: 250,
+            score: 2500,
         },
       ];
-    //   dbo.collection("highscores").drop(function(err, delOK) {
-    //     if (err) throw err;
-    //     if (delOK) console.log("Collection deleted");
-    //     db.close();
-    //   });
+      // dbo.collection("highscores").drop(function(err, delOK) {
+      //   if (err) throw err;
+      //   if (delOK) console.log("Collection deleted");
+      //   db.close();
+      // });
       dbo.collection("highscores").insertMany(myobj, function(err, res) {
         if (err) throw err;
         console.log("Number of documents inserted: " + res.insertedCount);
